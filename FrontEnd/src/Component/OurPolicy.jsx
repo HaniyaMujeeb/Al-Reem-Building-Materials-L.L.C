@@ -16,7 +16,7 @@ const OurPolicy = () => {
       </div>
 
       <div className = 'item-quality'>
-        <a href="src/assets/policy.pdf" target="_blank" rel="noopener noreferrer">
+        <a href="./src/assets/policy.pdf" target="_blank" rel="noopener noreferrer">
             <img src={assets.quality_verified_icon} className='exchange-icon' alt='' />
         </a>
         <p className = 'quality-title'> 7 Days Return Policy </p>
