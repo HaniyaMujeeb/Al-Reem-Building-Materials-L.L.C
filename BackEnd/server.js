@@ -7,6 +7,7 @@ import userRouter from './Routes/UserRoute.js';
 import productRouter from './Routes/ProductRoute.js';
 import cartRouter from './Routes/CartRoute.js';
 import orderRouter from './Routes/OrderRoute.js';
+import serverless from 'serverless-http';
 
 
 
@@ -33,8 +34,8 @@ app.get('/', (req, res) => {
     res.send("API Working")
 })
 
-app.listen(port, ()=> console.log('Server started on PORT : ' + port ))
-
+// Export handler for Vercel
+export const handler = serverless(app);
 
 
 
