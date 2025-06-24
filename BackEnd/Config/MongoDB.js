@@ -1,14 +1,28 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
+const MONGODB_URI = `${process.env.MONGODB_URI}/alreembuildingmaterials`;
 
-    mongoose.connection.on('connected', () => {
-         console.log("Database Connected");
-    })
+let cached = global.mongoose;
 
-    await mongoose.connect(`${process.env.MONGODB_URI}/alreembuildingmaterials`)
-
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
+async function connectDB() {
+  if (cached.conn) {
+    // Use existing connection
+    return cached.conn;
+  }
+  
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
+      console.log("Database Connected");
+      return mongoose;
+    });
+  }
+  
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
 
 export default connectDB;
