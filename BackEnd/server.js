@@ -14,7 +14,7 @@ import serverless from 'serverless-http';
 // App Config 
 const app = express()
 const port = process.env.PORT || 4000
-connectDB()
+await connectDB();
 connectCloudinary()
 
 
