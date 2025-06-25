@@ -3,6 +3,9 @@
     padding-right: 10px;
 }
 
+html, body {
+  overflow-x: hidden;
+}
 
 
 /* Navigation Bar Navbar.jsx CSS */
