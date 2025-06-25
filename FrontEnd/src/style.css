@@ -39,7 +39,7 @@
     font-variant: small-caps;
     color: black;
     font-family: Koulen;
-    line-height: 15px;
+    line-height: 10px;
     margin-top: 10%;
     letter-spacing: 0.5px;
     text-shadow: 0.5px 0.5px 0 black;
@@ -52,7 +52,7 @@
     align-items: center;
     list-style: none;
     gap: 45px;
-    right: 550px;
+    right: 500px;
     font-family: 'Koulen';
     font-size: 26px;
     font-weight: bolder;
