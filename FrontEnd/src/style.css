@@ -3,8 +3,9 @@
     padding-right: 10px;
 }
 
-html, body {
-  overflow-x: hidden;
+html,
+body {
+    overflow-x: hidden;
 }
 
 
@@ -2462,9 +2463,11 @@ hr {
 }
 
 .about-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding-top: 2rem;
-
+    height: 100vh;
 }
 
 .about-header-line {
@@ -2660,7 +2663,7 @@ hr {
 /* Contact Button */
 .contact-btn-container {
     text-align: center;
-    display: flex;                
+    display: flex;
     justify-content: center;
     margin-top: 50px;
     gap: 20px;
