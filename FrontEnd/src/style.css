@@ -348,7 +348,7 @@ body {
     font-size: 14px;
     color: black;
     top: -40px;
-    margin-left: 1000px;
+    margin-left: 900px;
     text-align: center;
     position: relative;
     font-family: sans-serif;
@@ -362,7 +362,7 @@ body {
     height: 4px;
     position: absolute;
     background-color: #333333;
-    top: 745px;
+    top: 715px;
     left: 65%;
     transform: translateX(-50%);
     z-index: 1;
