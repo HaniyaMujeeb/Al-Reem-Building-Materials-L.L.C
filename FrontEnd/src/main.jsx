@@ -23,7 +23,7 @@ const RouteChangeHandler = () => {
 
   useEffect(() => {
     setLoading(true); // Show loader when route changes
-    const timer = setTimeout(() => setLoading(false), 2000); 
+    const timer = setTimeout(() => setLoading(false), 100); 
     return () => clearTimeout(timer); // Cleanup
   }, [location.pathname]); // Trigger on pathname change
 
