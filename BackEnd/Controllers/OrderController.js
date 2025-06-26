@@ -14,7 +14,7 @@ const generateInvoicePDF = (order, user) => {
     const doc = new PDFDocument({ margin: 40 });
     const buffers = [];
 
-   const base64Image = require('..longbase.js'); 
+   const baseImage64 = require('..longbase64.js'); 
 
 
     doc.on('data', buffers.push.bind(buffers));
@@ -26,7 +26,7 @@ const generateInvoicePDF = (order, user) => {
 
     // Header
     doc
-      .image(base64Image, 50, 45, { width: 80 }) 
+      .image(baseImage64, 50, 45, { width: 80 }) 
       .fontSize(20)
       .text("Al Reem Building Materials L.L.C", 150, 50)
       .fontSize(10)
