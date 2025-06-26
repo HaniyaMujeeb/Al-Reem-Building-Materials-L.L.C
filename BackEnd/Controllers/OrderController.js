@@ -14,7 +14,7 @@ const generateInvoicePDF = (order, user) => {
     const doc = new PDFDocument({ margin: 40 });
     const buffers = [];
 
-   const baseImage64 = require('..longbase64.js'); 
+   const baseImage64 = require('../longbase64.js'); 
 
 
     doc.on('data', buffers.push.bind(buffers));
