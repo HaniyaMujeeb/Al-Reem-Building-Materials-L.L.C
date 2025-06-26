@@ -27,7 +27,7 @@ const PlaceOrder = () => {
   const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData(data => ({ ...data, [name]: value }));
+    setFormData(data => ({ ...data, [name]: value })); // Update form data state
   };
 
   const onSubmitHandler = async (event) => {
