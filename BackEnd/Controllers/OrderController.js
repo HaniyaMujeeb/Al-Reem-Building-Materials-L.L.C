@@ -6,6 +6,7 @@ import counterModel from "../Models/CounterModel.js";
 import fs from 'fs';
 import path from 'path';
 import inlineBase64 from "nodemailer-plugin-inline-base64"
+import baseImage64 from "../longbase64.js";
 
 
 // Generate PDF Invoice
@@ -13,9 +14,6 @@ const generateInvoicePDF = (order, user) => {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ margin: 40 });
     const buffers = [];
-
-   const baseImage64 = require('../longbase64.js'); 
-
 
     doc.on('data', buffers.push.bind(buffers));
     doc.on('end', () => {
