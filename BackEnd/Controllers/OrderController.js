@@ -3,7 +3,6 @@ import orderModel from "../Models/OrderModel.js";
 import userModel from "../Models/UserModel.js";
 import PDFDocument from "pdfkit";
 import counterModel from "../Models/CounterModel.js";
-import fs from 'fs';
 import path from 'path';
 import inlineBase64 from "nodemailer-plugin-inline-base64"
 
