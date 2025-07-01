@@ -224,7 +224,7 @@ body {
         margin-right: auto;
         height: 40px;
         cursor: pointer;
-        padding-left: 55px;
+        padding-left: 30px;
 
     }
 
@@ -571,7 +571,7 @@ body {
     .title-line {
         width: 40px;
         height: 4px;
-        margin-top: 305px;
+        margin-top: 285px;
         margin-left: 100px;
     }
 }
