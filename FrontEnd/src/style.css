@@ -190,6 +190,90 @@ body {
     font-family: 'Outfit', sans-serif;
 }
 
+/* Mobile View 
+
+/* Hamburger icon (you must include this in your JSX) */
+.hamburger-icon {
+    display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .navbar-logo-container {
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-title {
+        font-size: 18px;
+        margin-top: 0;
+        line-height: normal;
+    }
+
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        position: static;
+        width: 100%;
+        gap: 20px;
+        background-color: #D0D7C5;
+        padding: 1rem 0;
+        display: none;
+        /* Hide by default */
+    }
+
+    .navbar-links.active {
+        display: flex;
+        /* Show when active */
+    }
+
+    .navbar-icons {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+
+    .navbar-user {
+        width: 35px;
+        height: 35px;
+        margin-top: 0;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        right: 0;
+        top: 45px;
+    }
+
+    .dropdown-content {
+        font-size: 18px;
+        height: auto;
+        line-height: 1.5;
+        padding: 1rem 0;
+    }
+
+    .cart-badge {
+        margin-top: -25px;
+        font-size: 0.8rem;
+    }
+}
+
+
 
 /* Banner.jsx CSS */
 

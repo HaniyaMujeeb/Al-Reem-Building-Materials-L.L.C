@@ -251,6 +251,7 @@ import mastercard_logo from './mastercard_logo.png';
 import show_password_icon from './eye.png';
 import hide_passsword_icon from './hidden.png';
 import shop_image from './Shop.png';
+import list_icon from './list.png';
 
 
 
@@ -276,7 +277,8 @@ export const assets =
     mastercard_logo,
     show_password_icon,
     hide_passsword_icon,
-    shop_image
+    shop_image,
+    list_icon
 };
 
 export const products =

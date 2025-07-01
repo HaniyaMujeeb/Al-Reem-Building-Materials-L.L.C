@@ -7,17 +7,16 @@ import { ShopContext } from '../Context/ShopContext';
 const Navbar = () => {
   const [menu, setMenu] = useState("selectedMenu");
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
 
-
   const logout = () => {
-    navigate('/login-register')
-    localStorage.removeItem('token')
-    setToken('')
-    setCartItems({})
-  }
-
+    navigate('/login-register');
+    localStorage.removeItem('token');
+    setToken('');
+    setCartItems({});
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -26,7 +25,6 @@ const Navbar = () => {
     }
   };
 
-  // Toggle dropdown on click
   const toggleDropdown = () => {
     if (!isOpen) {
       document.addEventListener("click", handleClickOutside);
@@ -34,52 +32,53 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-
-
   return (
     <div className="navbar">
-
       {/* Logo & Title */}
       <div className="navbar-logo-container">
-
         <NavLink to='./'>
-          <img src={assets.logo} alt="Logo" />
+          <img src={assets.logo} alt="Logo" className="navbar-logo" />
         </NavLink>
 
         <h1 className="navbar-title">
           AL Reem Building
           <p> Materials L.L.C </p>
         </h1>
+
+        {/* Hamburger Icon for Mobile */}
+        <img
+          src={assets.list_icon}
+          alt="Menu"
+          className="hamburger-icon"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        />
       </div>
 
       {/* Navigation Links */}
-      <ul className="navbar-links" >
-
-        <li onClick={() => { setMenu("home") }} >
+      <ul className={`navbar-links ${mobileMenuOpen ? 'active' : ''}`}>
+        <li onClick={() => { setMenu("home"); setMobileMenuOpen(false); }}>
           <Link to='/'> Home </Link>
         </li>
-
-        <li onClick={() => { setMenu("products") }} >
+        <li onClick={() => { setMenu("products"); setMobileMenuOpen(false); }}>
           <Link to='/products'> Products </Link>
         </li>
-
-        <li onClick={() => { setMenu("about") }}>
+        <li onClick={() => { setMenu("about"); setMobileMenuOpen(false); }}>
           <Link to='/about'> About Us </Link>
         </li>
-
-        <li onClick={() => { setMenu("contact") }}>
+        <li onClick={() => { setMenu("contact"); setMobileMenuOpen(false); }}>
           <Link to='/contact'> Contact Us </Link>
         </li>
-
       </ul>
 
       {/* Icons Section */}
-      <div className="navbar-icons" >
-        <img onClick={() => { setShowSearch(true); navigate('/products'); }} src={assets.search_icon} className="navbar-icon" alt="" />
+      <div className="navbar-icons">
+        <img onClick={() => { setShowSearch(true); navigate('/products'); }} src={assets.search_icon} className="navbar-icon" alt="Search" />
 
         {/* User Dropdown */}
         <div className="navbar-user-container" ref={dropdownRef}>
-          <img onClick={() => { if (!token) {
+          <img
+            onClick={() => {
+              if (!token) {
                 navigate('login-register');
               } else {
                 toggleDropdown();
@@ -87,30 +86,26 @@ const Navbar = () => {
             }}
             className="navbar-icon navbar-user"
             src={assets.user_icon}
-            alt=""
+            alt="User"
           />
 
-          {/* ----- DropDown Menu ----- */}
-          {token && 
-          <div className={`dropdown-menu ${isOpen ? 'show' : ''}`} >
-            <div className="dropdown-content">
-              <p className="dropdown-item"> My Profile </p>
-              <p onClick = {() => navigate('/orders')} className="dropdown-item"> Orders </p>
-              <p onClick={logout} className="dropdown-item"> Logout </p>
+          {token &&
+            <div className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
+              <div className="dropdown-content">
+                <p className="dropdown-item">My Profile</p>
+                <p onClick={() => navigate('/orders')} className="dropdown-item">Orders</p>
+                <p onClick={logout} className="dropdown-item">Logout</p>
+              </div>
             </div>
-          </div> 
           }
-
         </div>
 
         {/* Shopping Cart */}
         <Link to="/cart" className="navbar-cart">
           <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
-          <p className="cart-badge"> {getCartCount()} </p>
+          <p className="cart-badge">{getCartCount()}</p>
         </Link>
-
       </div>
-
     </div>
   );
 };
