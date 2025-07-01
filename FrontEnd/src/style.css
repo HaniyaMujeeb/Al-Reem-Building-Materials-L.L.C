@@ -225,7 +225,9 @@ body {
         height: 40px;
         cursor: pointer;
         padding-left: 20px;
-        margin-top: -85px;
+        padding-bottom: -40px;
+        margin-top: 125px;
+        margin-bottom: -10px;
 
     }
 
@@ -558,7 +560,7 @@ body {
         max-width: 450px;
         margin-right: -430px;
         margin-bottom: -30px;
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
         font-family: sans-serif;
         line-height: 1.6;
@@ -571,7 +573,7 @@ body {
     .title-line {
         width: 40px;
         height: 4px;
-        margin-top: 255px;
+        margin-top: 235px;
         margin-left: 100px;
     }
 }
