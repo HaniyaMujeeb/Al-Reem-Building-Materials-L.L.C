@@ -224,7 +224,8 @@ body {
         margin-right: auto;
         height: 40px;
         cursor: pointer;
-        padding-left: 30px;
+        padding-left: 20px;
+        margin-top: -85px;
 
     }
 
@@ -234,9 +235,8 @@ body {
         width: 100%;
         gap: 20px;
         background-color: #D0D7C5;
-        padding: 1rem 0;
+        padding:  0;
         display: none;
-        /* Hide by default */
     }
 
     .navbar-links.active {
@@ -571,7 +571,7 @@ body {
     .title-line {
         width: 40px;
         height: 4px;
-        margin-top: 285px;
+        margin-top: 255px;
         margin-left: 100px;
     }
 }
