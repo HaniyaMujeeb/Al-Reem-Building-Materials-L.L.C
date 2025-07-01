@@ -66,6 +66,15 @@ const Navbar = () => {
 
       {/* Icons Section */}
       <div className="navbar-icons">
+
+        {/* Hamburger Icon for Mobile */}
+        <img
+          src={assets.list_icon}
+          alt="Menu"
+          className="hamburger-icon"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        />
+
         <img onClick={() => { setShowSearch(true); navigate('/products'); }} src={assets.search_icon} className="navbar-icon" alt="Search" />
 
         {/* User Dropdown */}
@@ -99,14 +108,6 @@ const Navbar = () => {
           <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
           <p className="cart-badge">{getCartCount()}</p>
         </Link>
-
-         {/* Hamburger Icon for Mobile */}
-        <img
-          src={assets.list_icon}
-          alt="Menu"
-          className="hamburger-icon"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        />
 
       </div>
     </div>

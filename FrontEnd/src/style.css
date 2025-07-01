@@ -202,7 +202,7 @@ body {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
-        height: auto;
+        height: 200px;
         padding: 1rem;
     }
 
@@ -210,23 +210,23 @@ body {
         width: 100%;
         justify-content: space-between;
         display: flex;
+        margin-top: -20px;
         align-items: center;
     }
 
     .navbar-title {
         font-size: 28px;
         margin-top: 2;
-        margin-right: 90px;
+        margin-right: 130px;
     }
 
     .hamburger-icon {
         display: block;
-        width: 70px;
+        width: 50px;
         margin-right: auto;
         height: 45px;
         cursor: pointer;
         padding-left: 10px;
-        padding-bottom: -40px;
         margin-top: 1px;
     }
 
@@ -272,8 +272,13 @@ body {
     }
 
     .cart-badge {
-        margin-top: -40px;
+        margin-top: -50px;
         font-size: 0.8rem;
+    }
+    .navbar-cart {
+        width: 50px;
+        height: 50px;
+        margin-right: -200px;
     }
 }
 
@@ -571,9 +576,9 @@ body {
 
 
     .title-line {
-        width: 40px;
+        width: 30px;
         height: 4px;
-        margin-top: 240px;
+        margin-top: 235px;
         margin-left: 100px;
     }
 }
