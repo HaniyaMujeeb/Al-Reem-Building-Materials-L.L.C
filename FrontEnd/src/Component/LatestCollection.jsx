@@ -26,7 +26,8 @@ const LatestCollection = () => {
             <div className="latestcollectiontitle-container">
                 <Title text1="LATEST" text2="COLLECTIONS " />
                 <p className='text-paragraph'>
-                    Explore our latest collection of premium building materials, from durable wood to modern hardware <br></br>
+                    Explore our latest collection of premium building materials, from durable wood to modern hardware.
+                    <br />
                     Designed for strength and style, our new range ensures top-quality building materials  solutions.
                 </p>
 
