@@ -45,17 +45,11 @@ const Navbar = () => {
           <p> Materials L.L.C </p>
         </h1>
 
-        {/* Hamburger Icon for Mobile */}
-        <img
-          src={assets.list_icon}
-          alt="Menu"
-          className="hamburger-icon"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        />
       </div>
 
       {/* Navigation Links */}
       <ul className={`navbar-links ${mobileMenuOpen ? 'active' : ''}`}>
+
         <li onClick={() => { setMenu("home"); setMobileMenuOpen(false); }}>
           <Link to='/'> Home </Link>
         </li>
@@ -105,6 +99,15 @@ const Navbar = () => {
           <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
           <p className="cart-badge">{getCartCount()}</p>
         </Link>
+
+         {/* Hamburger Icon for Mobile */}
+        <img
+          src={assets.list_icon}
+          alt="Menu"
+          className="hamburger-icon"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        />
+
       </div>
     </div>
   );
