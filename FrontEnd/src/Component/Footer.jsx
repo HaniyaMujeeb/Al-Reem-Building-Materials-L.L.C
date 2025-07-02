@@ -21,7 +21,7 @@ const Footer = () => {
                 <p className = 'footer-section-title'> COMPANY </p>
                 <ul className = 'footer-list'>
 
-                <li> <Link to = "/home" >Home </Link> </li>
+                <li> <Link to = "/" >Home </Link> </li>
                 <li> <Link to = "/product" >Products </Link> </li>
                 <li> <Link to = "/about" >About Us </Link> </li>
                 <li> 
@@ -35,8 +35,8 @@ const Footer = () => {
             <div className = 'footer-contact'>
                 <p className = 'footer-contact-title'> CONTACT US </p>
                 <ul>
-                    <li> +971556795888 </li>
-                    <li> contact@alreembuildingmaterials.com</li>
+                    <li> 072288872 / +971554312001 / +971556478562 </li>
+                    <li> reembuilding@gmail.com</li>
                 </ul>
             </div>
 
@@ -45,6 +45,9 @@ const Footer = () => {
                 <div className='footer-social-icons'>
                     <a href="https://www.instagram.com/alreembuilding?igsh=MTVkeHJzbmNjeHV1aQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer">
                         <img src = {assets.instagram_icon} />
+                    </a>
+                    <a href="https://www.tiktok.com/@al.reem.buidling?_t=ZS-8xhL9X42XuT&_r=1" target="_blank" rel="noopener noreferrer">
+                        <img src = {assets.tiktok_icon} />
                     </a>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { assets } from '../assets/assets';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import '../style.css';
 import { ShopContext } from '../Context/ShopContext';
 
@@ -9,7 +9,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+  const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);
+  const navigate = useNavigate();
 
   const logout = () => {
     navigate('/login-register');
@@ -33,84 +34,83 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar">
-      {/* Logo & Title */}
-      <div className="navbar-logo-container">
-        <NavLink to='./'>
-          <img src={assets.logo} alt="Logo" className="navbar-logo" />
-        </NavLink>
+    <>
+      <div className="navbar">
+        {/* Logo & Title */}
+        <div className="navbar-logo-container">
+          <NavLink to='./'>
+            <img src={assets.logo} alt="Logo" className="navbar-logo" />
+          </NavLink>
+          <div className="navbar-title">
+            <h1> AL Reem Building </h1>
+            <h2> Materials L.L.C </h2>
+          </div>
+        </div>
 
-        <h1 className="navbar-title">
-          AL Reem Building
-          <p> Materials L.L.C </p>
-        </h1>
+        {/* Desktop Nav Links */}
+        <ul className="navbar-links desktop-only">
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/products'>Products</Link></li>
+          <li><Link to='/about'>About Us</Link></li>
+          <li><Link to='/contact'>Contact Us</Link></li>
+        </ul>
 
-      </div>
+        {/* Icons Section */}
+        <div className="navbar-icons">
+          <img onClick={() => { setShowSearch(true); navigate('/products'); }} src={assets.search_icon} className="navbar-icon" alt="Search" />
 
-      {/* Navigation Links */}
-      <ul className={`navbar-links ${mobileMenuOpen ? 'active' : ''}`}>
+          <div className="navbar-user-container" ref={dropdownRef}>
+            <img
+              onClick={() => {
+                if (!token) {
+                  navigate('login-register');
+                } else {
+                  toggleDropdown();
+                }
+              }}
+              className="navbar-icon navbar-user"
+              src={assets.user_icon}
+              alt="User"
+            />
+            {token &&
+              <div className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
+                <div className="dropdown-content">
+                  <p className="dropdown-item">My Profile</p>
+                  <p onClick={() => navigate('/orders')} className="dropdown-item">Orders</p>
+                  <p onClick={logout} className="dropdown-item">Logout</p>
+                </div>
+              </div>
+            }
+          </div>
 
-        <li onClick={() => { setMenu("home"); setMobileMenuOpen(false); }}>
-          <Link to='/'> Home </Link>
-        </li>
-        <li onClick={() => { setMenu("products"); setMobileMenuOpen(false); }}>
-          <Link to='/products'> Products </Link>
-        </li>
-        <li onClick={() => { setMenu("about"); setMobileMenuOpen(false); }}>
-          <Link to='/about'> About Us </Link>
-        </li>
-        <li onClick={() => { setMenu("contact"); setMobileMenuOpen(false); }}>
-          <Link to='/contact'> Contact Us </Link>
-        </li>
-      </ul>
-
-      {/* Icons Section */}
-      <div className="navbar-icons">
+          <Link to="/cart" className="navbar-cart">
+            <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
+            <p className="cart-badge">{getCartCount()}</p>
+          </Link>
+        </div>
 
         {/* Hamburger Icon for Mobile */}
         <img
           src={assets.list_icon}
           alt="Menu"
-          className="hamburger-icon"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="hamburger-icon mobile-only"
+          onClick={() => setMobileMenuOpen(true)}
         />
-
-        <img onClick={() => { setShowSearch(true); navigate('/products'); }} src={assets.search_icon} className="navbar-icon" alt="Search" />
-
-        {/* User Dropdown */}
-        <div className="navbar-user-container" ref={dropdownRef}>
-          <img
-            onClick={() => {
-              if (!token) {
-                navigate('login-register');
-              } else {
-                toggleDropdown();
-              }
-            }}
-            className="navbar-icon navbar-user"
-            src={assets.user_icon}
-            alt="User"
-          />
-
-          {token &&
-            <div className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
-              <div className="dropdown-content">
-                <p className="dropdown-item">My Profile</p>
-                <p onClick={() => navigate('/orders')} className="dropdown-item">Orders</p>
-                <p onClick={logout} className="dropdown-item">Logout</p>
-              </div>
-            </div>
-          }
-        </div>
-
-        {/* Shopping Cart */}
-        <Link to="/cart" className="navbar-cart">
-          <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
-          <p className="cart-badge">{getCartCount()}</p>
-        </Link>
-
       </div>
-    </div>
+
+      {/* Side Drawer for Mobile */}
+      <div className={`side-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <ul className="side-drawer-links">
+          <li onClick={() => { setMenu("home"); setMobileMenuOpen(false); }}><Link to="/">Home</Link></li>
+          <li onClick={() => { setMenu("products"); setMobileMenuOpen(false); }}><Link to="/products">Products</Link></li>
+          <li onClick={() => { setMenu("about"); setMobileMenuOpen(false); }}><Link to="/about">About Us</Link></li>
+          <li onClick={() => { setMenu("contact"); setMobileMenuOpen(false); }}><Link to="/contact">Contact Us</Link></li>
+        </ul>
+      </div>
+
+      {/* Backdrop to close side menu */}
+      {mobileMenuOpen && <div className="backdrop" onClick={() => setMobileMenuOpen(false)}></div>}
+    </>
   );
 };
 

@@ -252,6 +252,7 @@ import show_password_icon from './eye.png';
 import hide_passsword_icon from './hidden.png';
 import shop_image from './Shop.png';
 import list_icon from './list.png';
+import tiktok_icon from './tiktok.png';
 
 
 
@@ -278,7 +279,8 @@ export const assets =
     show_password_icon,
     hide_passsword_icon,
     shop_image,
-    list_icon
+    list_icon,
+    tiktok_icon
 };
 
 export const products =
