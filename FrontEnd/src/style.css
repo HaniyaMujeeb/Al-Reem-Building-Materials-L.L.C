@@ -56,7 +56,7 @@ body {
     align-items: center;
     list-style: none;
     gap: 45px;
-    right: 410px;
+    right: 490px;
     font-family: 'Koulen';
     font-size: 26px;
     font-weight: bolder;
@@ -203,7 +203,7 @@ body {
         flex-direction: column;
         align-items: flex-start;
         height: 200px;
-        padding: 1rem;
+        padding: 10px;
     }
 
     .navbar-logo-container {
@@ -215,7 +215,7 @@ body {
     }
 
     .navbar-title {
-        font-size: 28px;
+        font-size: 25px;
         margin-top: 2;
         margin-right: 130px;
     }
@@ -455,7 +455,7 @@ body {
     height: 4px;
     position: absolute;
     background-color: #333333;
-    top: 695px;
+    top: 795px;
     left: 65%;
     transform: translateX(-50%);
     z-index: 1;
@@ -542,7 +542,7 @@ body {
 
     .text,
     .highlight {
-        font-size: 25px;
+        font-size: 22px;
     }
 
     /* ---------- LATEST COLLECTION SECTION ---------- */
@@ -578,7 +578,7 @@ body {
     .title-line {
         width: 30px;
         height: 4px;
-        margin-top: 235px;
+        margin-top: 175px;
         margin-left: 100px;
     }
 }
