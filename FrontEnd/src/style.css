@@ -1,4 +1,4 @@
-.app-container {
+/*.app-container {
     padding-left: 16px;
     padding-right: 10px;
 }
@@ -8,7 +8,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Navbar Container */
+/* Navbar Container 
 .navbar {
     display: flex;
     align-items: center;
@@ -24,7 +24,7 @@ body {
     z-index: 999;
 }
 
-/* Logo and Title */
+/* Logo and Title 
 .navbar-logo-container {
     display: flex;
     align-items: center;
@@ -53,7 +53,7 @@ body {
     margin: 0;
 }
 
-/* Desktop Navigation Links */
+/* Desktop Navigation Links 
 .navbar-links {
     display: flex;
     position: absolute;
@@ -78,7 +78,7 @@ body {
     color: #B20000;
 }
 
-/* Icons (Search, User, Cart) */
+/* Icons (Search, User, Cart) 
 .navbar-icons {
     display: flex;
     justify-content: flex-end;
@@ -93,7 +93,7 @@ body {
     cursor: pointer;
 }
 
-/* Cart */
+/* Cart 
 .navbar-cart {
     position: relative;
     width: 45px;
@@ -116,7 +116,7 @@ body {
     font-family: 'Outfit', sans-serif;
 }
 
-/* User Dropdown */
+/* User Dropdown 
 .navbar-user-container {
     position: relative;
     display: flex;
@@ -166,12 +166,12 @@ body {
     display: block;
 }
 
-/* Hamburger Icon */
+/* Hamburger Icon 
 .hamburger-icon {
     display: none;
 }
 
-/* Responsive Styles */
+/* Responsive Styles 
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -268,7 +268,7 @@ body {
     }
 }
 
-/* Side Drawer */
+/* Side Drawer 
 .side-drawer {
     position: fixed;
     top: 0;
@@ -307,7 +307,7 @@ body {
     font-family: Raleway;
 }
 
-/* Backdrop */
+/* Backdrop 
 .backdrop {
     position: fixed;
     top: 0;
@@ -318,7 +318,7 @@ body {
     z-index: 999;
 }
 
-/* Visibility Helpers */
+/* Visibility Helpers 
 .desktop-only {
     display: flex;
 }
@@ -336,6 +336,314 @@ body {
         display: block;
     }
 }
+*/
+
+/* ------------------------------
+   Global Styles
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
+/* ------------------------------
+   Navbar
+------------------------------ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 150px; /* reduced from 100px */
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #D0D7C5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.navbar-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-logo {
+    width: 130px;
+    cursor: pointer;
+}
+
+.navbar-title {
+    font-size: 16px;
+    font-weight: 900;
+    font-variant: small-caps;
+    color: #000;
+    font-family: Koulen;
+    line-height: 1.5;
+    text-shadow: 0.5px 0.5px 0 black;
+}
+
+.navbar-title h1,
+.navbar-title h2 {
+    margin: 0;
+}
+
+/* Navbar Links */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 42px;
+    font-family: Koulen;
+    font-variant: small-caps;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: black;
+    transition: 0.3s ease;
+}
+
+.navbar-links a:hover {
+    color: #B20000;
+}
+
+/* Icons */
+.navbar-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar-icon,
+.navbar-user {
+    width: 39px;  /* reduced size */
+    height: 39px;
+    cursor: pointer;
+}
+
+.navbar-cart {
+    position: relative;
+    cursor: pointer;
+    width: 42px;  /* reduced size */
+    height: 42px; /* reduced size */
+}
+
+.cart-badge {
+    position: absolute;
+    top: -10px;
+    right: -9px;
+    width: 26px;
+    height: 26px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+}
+
+/* User Dropdown */
+.navbar-user-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    width: 160px;
+    background-color: black;
+    border-radius: 8px;
+    display: none;
+    z-index: 9999;
+}
+
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    line-height: 2;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    color: white;
+}
+
+.dropdown-item:hover {
+    color: gray;
+}
+
+.navbar-user-container:hover .dropdown-menu,
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Hamburger */
+.hamburger-icon {
+    display: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+/* Side Drawer */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 240px;
+    height: 100vh;
+    background-color: #D0D7C5;
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.side-drawer.open {
+    right: 0;
+}
+
+.side-drawer-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.side-drawer-links li {
+    margin: 18px 0;
+}
+
+.side-drawer-links a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+/* Backdrop */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.4);
+    z-index: 900;
+}
+
+/* Banner */
+.banner {
+    width: 100%;
+    height: 260px; /* reduced height */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+/* Device Visibility Helpers */
+.desktop-only {
+    display: flex;
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .navbar {
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem 1rem;
+    }
+
+    .navbar-logo {
+        width: 70px;
+    }
+
+    .navbar-title {
+        font-size: 18px;
+    }
+
+    .navbar-links {
+        display: none;
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .navbar-icons {
+        gap: 15px;
+    }
+
+    .navbar-icon,
+    .navbar-user,
+    .navbar-cart {
+        width: 25px;
+        height: 25px;
+    }
+
+    .cart-badge {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Banner.jsx CSS */
