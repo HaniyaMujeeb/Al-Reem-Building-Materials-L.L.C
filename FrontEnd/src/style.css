@@ -427,16 +427,16 @@ body, html {
 
 .navbar-icon,
 .navbar-user {
-    width: 39px;  /* reduced size */
-    height: 39px;
+    width: 35px;  /* reduced size */
+    height: 35px;
     cursor: pointer;
 }
 
 .navbar-cart {
     position: relative;
     cursor: pointer;
-    width: 42px;  /* reduced size */
-    height: 42px; /* reduced size */
+    width: 39px;  /* reduced size */
+    height: 39px; /* reduced size */
 }
 
 .cart-badge {
