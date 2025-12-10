@@ -1108,17 +1108,27 @@ body, html {
     text-align: center;
 }
 
-.latestcollectiontitle-container  {
-    font-size: 32px !important;
+.latestcollectiontitle-container {
+    font-size: 35px !important;                  /* increase font size */
+    font-family: 'Raleway', sans-serif !important; /* use Raleway */
     letter-spacing: 2px;
-    margin: -40px auto 0 -240px;
+    width: fit-content;                           /* shrink container to text width */
+    margin-left: -150px;                           /* move title left; adjust as needed */
+    text-align: left !important;    
+    margin-top: -50px;              /* stop internal centering */
+}
+
+/* Target immediate children to move text safely */
+.latestcollectiontitle-container > * {
+    margin-left: 0;      /* reset if necessary */
+    display: inline-block;
 }
 
 
 .text-paragraph {
     width: 70%;
-    margin: 5px auto 60px 370px;
-    font-size: 15px;
+    margin: 5px auto 60px 530px;
+    font-size: 13px;
     line-height: 1.6;
     font-family: sans-serif;
     color: black;
