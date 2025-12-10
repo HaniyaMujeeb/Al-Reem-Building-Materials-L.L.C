@@ -427,31 +427,31 @@ body, html {
 
 .navbar-icon,
 .navbar-user {
-    width: 35px;  /* reduced size */
-    height: 35px;
+    width: 33px;  /* reduced size */
+    height: 33px;
     cursor: pointer;
 }
 
 .navbar-cart {
     position: relative;
     cursor: pointer;
-    width: 39px;  /* reduced size */
-    height: 39px; /* reduced size */
+    width: 35px;  /* reduced size */
+    height: 35px; /* reduced size */
 }
 
 .cart-badge {
     position: absolute;
     top: -10px;
     right: -9px;
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 23px;
     background-color: red;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
     font-family: 'Outfit', sans-serif;
     font-weight: bold;
 }
@@ -596,12 +596,12 @@ body, html {
         align-items: center;
         gap: 20px;
         width: 100%;
-        margin-bottom: 20px; /* spacing to second line */
+        margin-bottom: 25px; /* spacing to second line */
         flex-shrink: 0;
     }
 
     .navbar-logo {
-        width: 100px;
+        width: 109px;
         height: auto;
     }
 
@@ -626,8 +626,8 @@ body, html {
     /* Hamburger icon - slightly lower on second line */
     .hamburger-icon {
         display: block !important;
-        width: 35px;
-        height: 35px;
+        width: 34px;
+        height: 34px;
         cursor: pointer;
         position: absolute;
         left: 1;                  /* left side */
@@ -648,14 +648,14 @@ body, html {
     .navbar-icon,
     .navbar-user,
     .navbar-cart {
-        width: 35px;
-        height: 35px;
+        width: 34px;
+        height: 34px;
     }
 
     .cart-badge {
         width: 20px;
-        height: 20px;
-        font-size: 12px;
+        height: 22px;
+        font-size: 13px;
         top: -9px;
         right: -8px;
     }
@@ -665,20 +665,6 @@ body, html {
         display: none;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
