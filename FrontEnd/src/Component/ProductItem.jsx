@@ -18,7 +18,7 @@ const ProductItem = ({ id, image, name, price }) => {
         <img className="product-image" src={getImageSrc()} alt={name} />
       </div>
       <p className="product-name">{name}</p>
-      <p className="product-price">{currency} {typeof price === 'number' ? price.toFixed(2) : '0'}</p>
+      {/* <p className="product-price">{currency} {typeof price === 'number' ? price.toFixed(2) : '0'}</p> */}
     </Link>
   );
 };
