@@ -1125,7 +1125,7 @@ body, html {
 
 .text-paragraph {
     width: 70%;
-    margin: 5px auto 60px 196px;
+    margin: 5px auto 60px 188px;
     font-size: 13px;
     line-height: 1.6;
     font-family: sans-serif;
@@ -1314,7 +1314,7 @@ body, html {
 
 /* Product Name */
 .product-item p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: black;
     margin: 10px 0;
