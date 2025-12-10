@@ -1109,7 +1109,7 @@ body, html {
 }
 
 .latestcollectiontitle-container  {
-    font-size: 35px !;
+    font-size: 32px !important;
     letter-spacing: 2px;
     margin: -40px auto 0 -240px;
 }
@@ -1118,7 +1118,7 @@ body, html {
 .text-paragraph {
     width: 70%;
     margin: 5px auto 60px 370px;
-    font-size: 10px;
+    font-size: 15px;
     line-height: 1.6;
     font-family: sans-serif;
     color: black;
