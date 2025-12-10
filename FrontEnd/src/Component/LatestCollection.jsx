@@ -30,8 +30,7 @@ const LatestCollection = () => {
                     <br />
                     Designed for strength and style, our new range ensures top-quality building materials  solutions.
                 </p>
-
-                <div className='title-line'> </div>
+                
             </div>
 
             { /* Calling Products */}
