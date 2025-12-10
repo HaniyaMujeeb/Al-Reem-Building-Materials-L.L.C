@@ -1113,7 +1113,7 @@ body, html {
     font-family: 'Raleway', sans-serif !important; 
     letter-spacing: 1px;
     width: fit-content;                           
-    margin-left: -100px;                           
+    margin-left: -140px;                           
     text-align: left !important;    
     margin-top: -50px;              
 }
@@ -1127,7 +1127,7 @@ body, html {
 
 .text-paragraph {
     width: 70%;
-    margin: 5px auto 60px 530px;
+    margin: 5px auto 60px 580px;
     font-size: 13px;
     line-height: 1.6;
     font-family: sans-serif;
