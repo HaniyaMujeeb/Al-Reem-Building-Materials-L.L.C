@@ -24,13 +24,13 @@ const LatestCollection = () => {
     return (
         <div className="latest-collection">
             <div className="latestcollectiontitle-container">
-                <Title text1="LATEST" text2="COLLECTIONS " />
+                <Title text1="LATEST" text2="COLLECTIONS: " />
                 <p className='text-paragraph'>
                     Explore our latest collection of premium building materials, from durable wood to modern hardware.
                     <br />
                     Designed for strength and style, our new range ensures top-quality building materials  solutions.
                 </p>
-                
+
             </div>
 
             { /* Calling Products */}

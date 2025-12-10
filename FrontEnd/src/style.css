@@ -1108,29 +1108,27 @@ body, html {
     text-align: center;
 }
 
-.latestcollectiontitle-container {
-    font-size: 30px;                  
-    font-family: 'Raleway', sans-serif !important; 
-    letter-spacing: 1px;
-    width: fit-content;                           
-    margin-left: -250px;                           
-    text-align: left !important;    
-    margin-top: -50px;              
+.latestcollectiontitle-container .latest-title-text {
+    font-size: 37px;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 2px;
+    margin-left: -250px;  /* move left */
+    text-align: left;
 }
 
-/* Target immediate children to move text safely */
-.latestcollectiontitle-container > * {
-    margin-left: 0;      /* reset if necessary */
-    display: inline-block;
+/* Make highlight same as parent */
+.latestcollectiontitle-container .latest-title-text .highlight {
+    font-size: 37px;      /* same as parent */
+    font-family: 'Raleway', sans-serif;
 }
 
 
 .text-paragraph {
     width: 70%;
-    margin: 5px auto 60px 580px;
+    margin: 5px auto 60px 196px;
     font-size: 13px;
     line-height: 1.6;
-    font-family: sans-serif;
+    font-family: Raleway;
     color: black;
 }
 
@@ -1231,17 +1229,38 @@ body, html {
 
     
     /* LATEST COLLECTION */
-    .latestcollectiontitle-container {
-        font-size: 20px;
+    .latestcollectiontitle-container .latest-title-text {
+        font-size: 30px;
+        margin-left: -1400px;
+        text-align: center;
+        font-family: Raleway;
+    }
+
+    .latestcollectiontitle-container .latest-title-text .highlight {
+        display: block;  
+        font-size: 30px;   /* match parent */
+        font-family: Raleway;
     }
 
     .text-paragraph {
         width: 90%;
-        font-size: 13px;
+        font-size: 12px !important;
+        margin: 10px auto;
+        text-align: center;
+        line-height: 1.5;
     }
 
     .title-line {
         width: 30px;
+        height: 4px;
+        margin: 10px auto;
+        background-color: #333;
+    }
+
+    .latest-collection {
+        width: 95%;
+        margin: 30px auto 0 auto;
+        text-align: center;
     }
 }
 
