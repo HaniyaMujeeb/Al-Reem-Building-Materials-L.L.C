@@ -1109,13 +1109,13 @@ body, html {
 }
 
 .latestcollectiontitle-container {
-    font-size: 35px !important;                  /* increase font size */
-    font-family: 'Raleway', sans-serif !important; /* use Raleway */
-    letter-spacing: 2px;
-    width: fit-content;                           /* shrink container to text width */
-    margin-left: -150px;                           /* move title left; adjust as needed */
+    font-size: 30px;                  
+    font-family: 'Raleway', sans-serif !important; 
+    letter-spacing: 1px;
+    width: fit-content;                           
+    margin-left: -50px;                           
     text-align: left !important;    
-    margin-top: -50px;              /* stop internal centering */
+    margin-top: -50px;              
 }
 
 /* Target immediate children to move text safely */
