@@ -1104,21 +1104,21 @@ body, html {
 
 .latest-collection {
     width: 90%;
-    margin: 100px auto 0 auto;
+    margin: 60px auto 0 auto;
     text-align: center;
 }
 
 .latestcollectiontitle-container .latest-title-text {
-    font-size: 37px;
+    font-size: 35px;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
-    margin-left: -250px;  /* move left */
+    margin-left: -290px;  /* move left */
     text-align: left;
 }
 
 /* Make highlight same as parent */
 .latestcollectiontitle-container .latest-title-text .highlight {
-    font-size: 37px;      /* same as parent */
+    font-size: 35px;      /* same as parent */
     font-family: 'Raleway', sans-serif;
 }
 
@@ -1128,7 +1128,7 @@ body, html {
     margin: 5px auto 60px 196px;
     font-size: 13px;
     line-height: 1.6;
-    font-family: Raleway;
+    font-family: sans-serif;
     color: black;
 }
 
@@ -1314,7 +1314,7 @@ body, html {
 
 /* Product Name */
 .product-item p {
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;
     color: black;
     margin: 10px 0;
