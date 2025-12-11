@@ -1286,7 +1286,7 @@ body, html {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     padding: 40px;
-    width: 90%;
+    width: 70%;
     top: -90px;
     position: relative;
 
@@ -1406,16 +1406,16 @@ body, html {
 
 /* Text Section */
 .text-section .latest-title-text {
-    font-size: 36px;                     /* main heading size */
+    font-size: 30px;                     /* main heading size */
     font-family: 'Raleway', sans-serif;
     letter-spacing: 1.1px;
-    margin-left: -130px;                   /* move left */
+    margin-left: -160px;                   /* move left */
     text-align: left;
 }
 
 /* Make highlight same as parent */
 .text-section .latest-title-text .highlight {
-    font-size: 36px;                     /* same as parent */
+    font-size: 30px;                     /* same as parent */
     font-family: 'Raleway', sans-serif;                      /* optional: put second word on next line */
 }
 
