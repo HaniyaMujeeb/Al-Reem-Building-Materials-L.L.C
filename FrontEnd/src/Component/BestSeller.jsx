@@ -23,8 +23,7 @@ const BestSeller = () => {
     return (
         <div className='best-sellers-container'>
             <div className='text-section'>
-                <Title text1="BEST" text2="SELLERS" />
-                <div className='bestseller-line'> </div>
+                <Title text1="BEST" text2="SELLERS:" />
             </div>
 
             <div className='description'>

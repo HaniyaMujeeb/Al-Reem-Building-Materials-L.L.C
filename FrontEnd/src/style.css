@@ -1128,6 +1128,7 @@ body, html {
     margin: 5px auto 60px 180px;
     font-size: 13px;
     line-height: 1.6;
+    letter-spacing: 1px;
     font-family: sans-serif;
     color: black;
 }
@@ -1246,6 +1247,7 @@ body, html {
         width: 90%;
         font-size: 12px !important;
         margin: 10px auto;
+        font-family: sans-serif;
         text-align: center;
         line-height: 1.5;
     }
@@ -1360,7 +1362,7 @@ body, html {
     text-align: center;
 }
 
-.text-section {
+/* .text-section {
     font-size: 36px;
     padding: 32px 0;
     font-family: Raleway;
@@ -1398,7 +1400,37 @@ body, html {
     transform: translateX(-50%);
     z-index: 1;
     display: block;
+} */
+
+
+/* Text Section */
+.text-section .latest-title-text {
+    font-size: 36px;                     /* main heading size */
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1.1px;
+    margin-left: -130px;                   /* move left */
+    text-align: left;
 }
+
+/* Make highlight same as parent */
+.text-section .latest-title-text .highlight {
+    font-size: 36px;                     /* same as parent */
+    font-family: 'Raleway', sans-serif;                      /* optional: put second word on next line */
+}
+
+/* Description */
+.description {
+    width: 75%;                           /* 3/4 of container width */
+    font-size: 13px;
+    margin-left: 140px;                    /* align with title */
+    font-family: sans-serif;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: 1px;
+    margin-top: 15px;                     /* spacing below title */
+    text-align: center;
+}
+
 
 .bestsellergrid-container {
     display: flex;
@@ -1445,7 +1477,7 @@ body, html {
 
 /* Product Name */
 .bestseller-item p {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
     color: black;
     margin: 10px 0;
@@ -1485,8 +1517,7 @@ body, html {
     color: inherit;
 }
 
-/* OurPolicy.jsx CSS */
-
+/* OurPolicy.jsx CSS 
 .ourpolicy-container {
     display: flex;
     justify-content: center;
@@ -1515,7 +1546,7 @@ body, html {
     margin-left: 50px;
 }
 
-/* Icon styles */
+/* Icon styles 
 .exchange-icon,
 .quality-icon,
 .customerservice-icon {
@@ -1523,7 +1554,7 @@ body, html {
     margin-bottom: 5px;
 }
 
-/* Titles */
+/* Titles 
 .exchange-title,
 .quality-title,
 .customerservice-title {
@@ -1534,7 +1565,7 @@ body, html {
     margin-bottom: 2px;
 }
 
-/* Description text */
+/* Description text 
 .exchange-text,
 .quality-text,
 .customerservice-text {
@@ -1542,9 +1573,64 @@ body, html {
     font-family: Raleway, sans-serif;
     font-size: 14px;
     max-width: 300px;
+} */
+
+
+/* OurPolicy.jsx */
+.ourpolicy-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 180px;                  /* balanced spacing between items */
+    text-align: center;
+    padding: 20px;
+    color: #4A4A4A;
+    margin-top: 400px;           /* reduced from 450px */
+    margin-bottom: 80px;
+    max-width: 100%;
 }
 
-/* Footer.jsx CSS */
+.exchange-item,
+.item-quality,
+.customer-support {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 280px;
+}
+
+/* Icons */
+.exchange-icon,
+.quality-icon,
+.customerservice-icon {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+/* Titles */
+.exchange-title,
+.quality-title,
+.customerservice-title {
+    font-weight: 700;
+    font-size: 15px;             /* slightly larger */
+    color: #333;
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 5px;
+}
+
+/* Description */
+.exchange-text,
+.quality-text,
+.customerservice-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    color: #474747;
+    max-width: 280px;
+    line-height: 1.4;
+}
+
+
+/* Footer.jsx CSS 
 
 .footer-container {
     display: flex;
@@ -1730,7 +1816,151 @@ body, html {
     margin-left: -300px;
     margin-top: 100px;
     font-family: Raleway;
+} */
+
+
+/* MAIN FOOTER CONTAINER */
+.footer-container {
+    width: 100%;
+    background-image: linear-gradient(180deg, #eeeeee 60%, #D0D7C5 90%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 70px 80px;
+    font-family: Raleway, sans-serif;
+    flex-wrap: wrap;
+    position: relative;
 }
+
+/* ----------------------------------------------------------- */
+/* LEFT COLUMN (Logo + Description) */
+/* ----------------------------------------------------------- */
+.footer-logo {
+    width: 32%;
+}
+
+.footer-logo-img {
+    width: 190px;
+    margin-bottom: 20px;
+    margin-left: 90px;
+}
+
+.footer-description {
+    font-size: 17px;
+    line-height: 30px;
+    text-align: justify;
+    color: #2c2c2c;
+    width: 90%;
+}
+
+/* ----------------------------------------------------------- */
+/* COMPANY LINKS */
+/* ----------------------------------------------------------- */
+.footer-links {
+    width: 20%;
+}
+
+.footer-section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    color: #000;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.footer-list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-list li a:hover {
+    color: #B20000;
+}
+
+/* ----------------------------------------------------------- */
+/* CONTACT COLUMN */
+/* ----------------------------------------------------------- */
+.footer-contact {
+    width: 20%;
+}
+
+.footer-contact-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    font-size: 18px;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-weight: 800;
+}
+
+/* ----------------------------------------------------------- */
+/* SOCIAL MEDIA COLUMN */
+/* ----------------------------------------------------------- */
+.footer-social {
+    width: 20%;
+}
+
+.footer-social-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    margin-top: auto;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-social-icons img {
+    width: 45px;
+    height: 45px;
+}
+
+/* ----------------------------------------------------------- */
+/* COPYRIGHT (BOTTOM SECTION) */
+/* ----------------------------------------------------------- */
+.footer-bottom {
+    width: 100%;
+    text-align: center;
+}
+
+.footer-bottom hr {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.footer-copyright {
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+}
+
 
 /* Mobile View */
 @media (max-width: 768px) {

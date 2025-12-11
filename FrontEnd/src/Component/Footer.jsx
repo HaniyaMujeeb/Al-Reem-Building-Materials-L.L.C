@@ -18,7 +18,7 @@ const Footer = () => {
             </div>
 
             <div className = 'footer-links'>
-                <p className = 'footer-section-title'> COMPANY </p>
+                <p className = 'footer-section-title'> COMPANY: </p>
                 <ul className = 'footer-list'>
 
                 <li> <Link to = "/" >Home </Link> </li>
@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
 
             <div className = 'footer-contact'>
-                <p className = 'footer-contact-title'> CONTACT US </p>
+                <p className = 'footer-contact-title'> CONTACT US: </p>
                 <ul>
                     <li> 072288872 / +971554312001 / +971556478562 </li>
                     <li> reembuilding@gmail.com</li>
