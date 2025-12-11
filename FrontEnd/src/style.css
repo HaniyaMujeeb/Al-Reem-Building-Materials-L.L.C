@@ -1277,7 +1277,7 @@ body, html {
     justify-content: center;
     align-items: start;
     top: 100px;
-    padding: 5px 5px;
+    padding: 10px 10px;
 
 }
 
@@ -1289,6 +1289,7 @@ body, html {
     width: 80%;
     top: -90px;
     position: relative;
+    margin-left: -50px;
 
 }
 
