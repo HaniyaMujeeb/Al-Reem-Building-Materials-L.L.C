@@ -11,14 +11,13 @@ const Footer = () => {
 
                 <img src = {assets.logo} className = 'footer-logo-img' alt='' />
                 <p className = 'footer-description'>
-                Al Reem Building Materials L.L.C., we are committed to providing high-quality building materials with exceptional 
-                service. With a wide range of products and a dedication to customer satisfaction, we strive to be your trusted partner 
-                for all your construction needs.
+                Al Reem Building Materials L.L.C., we are committed to providing high-quality building materials with exceptional service. 
+                With a wide range of products and a dedication to customer satisfaction, we strive to be your trusted partner for all your construction needs.
                 </p>
             </div>
 
             <div className = 'footer-links'>
-                <p className = 'footer-section-title'> COMPANY: </p>
+                <p className = 'footer-section-title'> COMPANY LINKS: </p>
                 <ul className = 'footer-list'>
 
                 <li> <Link to = "/" >Home </Link> </li>
@@ -56,7 +55,7 @@ const Footer = () => {
             <div className = 'footer-bottom'>
                 <hr />
                 <p className = 'footer-copyright'> 
-                    Copyright 2025@, Al Reem Building Materials L.L.C. | Quality You Can Trust, Service You Can Rely On 
+                    Copyright {new Date().getFullYear()}@, Al Reem Building Materials L.L.C. | Quality You Can Trust, Service You Can Rely On 
                     | All Right Reserved 
                 </p>
             </div>
