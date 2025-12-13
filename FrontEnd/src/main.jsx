@@ -4,6 +4,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import App from "./App.jsx";
 import ShopContextProvider from "./Context/ShopContext.jsx";
 import "./style.css";
+import "./mobile.css";
 
 // Custom Loader Component
 const Loader = () => (

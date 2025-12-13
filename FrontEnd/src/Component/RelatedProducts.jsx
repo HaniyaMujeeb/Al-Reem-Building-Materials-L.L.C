@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../Context/ShopContext';
 import Title from './Title';
 import '../style.css'
+import "../mobile.css";
 import ProductItem from './ProductItem';
 
 const RelatedProducts = ({ category, subCategory }) => {

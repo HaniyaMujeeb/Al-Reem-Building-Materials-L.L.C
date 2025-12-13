@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import { assets } from '../assets/assets';
 import '../style.css'; 
+import "../mobile.css";
 import { useLocation } from 'react-router-dom';
 
 const SearchBar = () => {

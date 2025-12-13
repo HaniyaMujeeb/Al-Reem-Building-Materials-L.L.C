@@ -1,6 +1,7 @@
 import React from 'react';
 import { assets } from '../assets/assets';
 import '../style.css';
+import "../mobile.css";
 import { Link } from 'react-router-dom';
 
 const Banner = () => {

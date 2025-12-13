@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { assets } from '../assets/assets';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import '../style.css';
+import "../mobile.css";
 import { ShopContext } from '../Context/ShopContext';
 
 const Navbar = () => {
