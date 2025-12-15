@@ -16,6 +16,8 @@ import SearchBar from './Component/SearchBar';
 import { ToastContainer, toast } from 'react-toastify';
 import CardPayment from './Pages/CardPayment';
 import OrderConfirmation from './Pages/OrderConfirmation';
+import Inquiry from './Pages/Inquiry';
+
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -47,6 +49,8 @@ const App = () => {
         <Route path = "/cart" element = {<Cart />} />
         <Route path = "/card-payment" element={<CardPayment />} />
         <Route path = "/order-confirmation" element={<OrderConfirmation />} />
+        <Route path = "/inquiry" element = {<Inquiry />} />
+
       </Routes>
       <Footer />
       

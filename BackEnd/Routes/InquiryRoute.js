@@ -1,0 +1,13 @@
+import express from "express";
+import { createInquiry, getAllInquiries } from "../Controllers/InquiryController.js";
+import adminAuth from '../Middleware/AdminAuth.js'
+
+const router = express.Router();
+
+// Public route for submitting inquiry
+router.post("/create", createInquiry);
+
+// Admin route to see all inquiries
+router.get("/", adminAuth, getAllInquiries);
+
+export default router;

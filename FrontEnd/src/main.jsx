@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import App from "./App.jsx";
 import ShopContextProvider from "./Context/ShopContext.jsx";
+import InquiryContextProvider from "./Context/InquiryContext.jsx";
 import "./style.css";
 import "./mobile.css";
 
@@ -36,8 +37,10 @@ const RootComponent = () => {
   return (
     <BrowserRouter>
       <ShopContextProvider>
-        <RouteChangeHandler />
+        <InquiryContextProvider>
+          <RouteChangeHandler />
         <App />
+        </InquiryContextProvider>
       </ShopContextProvider>
     </BrowserRouter>
   );

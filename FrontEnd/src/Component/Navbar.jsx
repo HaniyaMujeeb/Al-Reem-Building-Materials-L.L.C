@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
 import { assets } from '../assets/assets';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { InquiryContext } from '../Context/InquiryContext';
 import '../style.css';
 import "../mobile.css";
 import { ShopContext } from '../Context/ShopContext';
@@ -10,8 +11,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);
+  {/* const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);*/}
+  const{ token, setToken } = useContext(ShopContext);
   const navigate = useNavigate();
+  const { inquiryCount } = useContext(InquiryContext);
 
   const logout = () => {
     navigate('/login-register');
@@ -84,10 +87,23 @@ const Navbar = () => {
             }
           </div>
 
-          <Link to="/cart" className="navbar-cart">
+          {/* <Link to="/cart" className="navbar-cart">
             <img src={assets.shopping_cart} className="navbar-cart" alt="Cart" />
             <p className="cart-badge">{getCartCount()}</p>
+          </Link> */}
+
+          <Link to="/inquiry" className="navbar-cart">
+            <img
+              src={assets.shopping_cart}
+              className="navbar-cart"
+              alt="Inquiry Cart"
+            />
+
+            {inquiryCount > 0 && (
+              <p className="cart-badge">{inquiryCount}</p>
+            )}
           </Link>
+          
         </div>
 
         {/* Hamburger Icon for Mobile */}

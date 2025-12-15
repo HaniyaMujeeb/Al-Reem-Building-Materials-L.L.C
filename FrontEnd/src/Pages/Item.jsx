@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../Context/ShopContext';
+import { InquiryContext } from '../Context/InquiryContext.jsx';
 import { assets } from '../assets/assets';
 import ProductReviews from '../Component/ProductReview';
 import RelatedProducts from '../Component/RelatedProducts';
@@ -12,6 +13,8 @@ const Item = () => {
   const [image, setImage] = useState('');
   const [size, setSize] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
+  const { addToInquiry } = useContext(InquiryContext);
+  const navigate = useNavigate();
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -55,6 +58,23 @@ const Item = () => {
     return 'N/A';
   };
 
+
+
+  const handleInquiry = () => {
+    if (!productData) return;
+
+    const item = {
+      productId: productData._id,
+      productName: productData.name,
+      size: size || 'N/A',
+      quantity: 1,
+    };
+
+    addToInquiry(item);
+    navigate("/inquiry"); // Redirect to inquiry page
+  };
+
+
   return productData ? (
     <div className="item-container">
       {/* --- Product Data --- */}
@@ -91,7 +111,7 @@ const Item = () => {
             <p className="review-count">(122)</p>
           </div>
 
-          <p className='product-price'>
+          {/* <p className='product-price'>
             {currency}{' '}
             {Array.isArray(productData?.sizes) && productData.sizes.length > 0
               ? typeof size === 'string'
@@ -100,7 +120,7 @@ const Item = () => {
               : typeof productData?.price === 'number'
                 ? productData.price
                 : 'N/A'}
-          </p>
+          </p> */}
 
 
           <p className="product-description">{productData.description}</p>
@@ -127,11 +147,18 @@ const Item = () => {
           )}
 
           <button
+            onClick= {handleInquiry}
+            className="inquire-button"
+          >
+            INQUIRE
+          </button>
+
+          { /* <button
             onClick={() => addToCart(productData._id, size)}
             className="addtocart-button"
           >
             ADD TO CART
-          </button>
+          </button> */}
 
           <hr className="divider" />
 
