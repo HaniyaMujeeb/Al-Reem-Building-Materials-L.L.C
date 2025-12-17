@@ -2598,7 +2598,7 @@ hr {
 .password-form-input {
     width: 120%; /* will take full container width */
     max-width: 30rem; /* slightly longer than before */
-    padding: 15px 100px 16px 12px; /* extra right padding for icon in password input */
+    padding: 15px 10px 15px 12px; /* extra right padding for icon in password input */
     border: 1px solid black;
     font-family: Raleway;
     border-radius: 4px;
