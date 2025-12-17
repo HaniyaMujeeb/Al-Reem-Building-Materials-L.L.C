@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 const InquirySchema = new mongoose.Schema({
   userName: { type: String, required: true },
   userEmail: { type: String, required: true },
+  userPhone: { type: String, required: true },
+  userMessage: { type: String, required: true },
   items: [
     {
       productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
       productName: { type: String, required: true },
       quantity: { type: Number, default: 1 },
+      size: { type: String },
+      image: { type: String },
     },
   ],
 }, { timestamps: true });

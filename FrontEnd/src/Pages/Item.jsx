@@ -63,16 +63,23 @@ const Item = () => {
   const handleInquiry = () => {
     if (!productData) return;
 
-    const item = {
-      productId: productData._id,
-      productName: productData.name,
-      size: size || 'N/A',
-      quantity: 1,
-    };
+    // Add product to inquiry with proper types
+    addToInquiry({
+      productId: productData._id,        // MongoDB _id string
+      productName: productData.name,     // always pass name
+      size: size || null,
+      quantity: 1,                        // default quantity 1
+      productImage: productData.image[0]  // optional, for display
+    });
 
-    addToInquiry(item);
-    navigate("/inquiry"); // Redirect to inquiry page
+    toast.success("Item added to inquiry!", {
+      position: "top-right",
+      theme: "colored",
+    });
+
+    navigate("/inquiry");
   };
+
 
 
   return productData ? (
@@ -147,7 +154,7 @@ const Item = () => {
           )}
 
           <button
-            onClick= {handleInquiry}
+            onClick={handleInquiry}
             className="inquire-button"
           >
             INQUIRE

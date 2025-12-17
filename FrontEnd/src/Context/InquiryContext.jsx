@@ -1,29 +1,56 @@
-import React, { createContext, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
+import { ShopContext } from "./ShopContext.jsx";
 
 export const InquiryContext = createContext();
 
-const InquiryContextProvider = ({ children }) => {
-  const [inquiryItems, setInquiryItems] = useState([]);
+const InquiryProvider = ({ children }) => {
+  const { token: shopToken, backendUrl, navigate } = useContext(ShopContext);
 
-  // Add product to inquiry
-  const addToInquiry = (item) => {
+  const [token, setToken] = useState("");
+  const [inquiryItems, setInquiryItems] = useState(() => {
+    const stored = localStorage.getItem("inquiryItems");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  // Sync token
+  useEffect(() => {
+    if (shopToken) setToken(shopToken);
+  }, [shopToken]);
+
+  // Persist inquiry items
+  useEffect(() => {
+    localStorage.setItem("inquiryItems", JSON.stringify(inquiryItems));
+  }, [inquiryItems]);
+
+  // ➕ Add item
+  const addToInquiry = (product) => {
     setInquiryItems((prev) => {
-      const existingIndex = prev.findIndex(
-        (i) => i.productId === item.productId && i.size === item.size
+      const index = prev.findIndex(
+        (i) =>
+          i.productId === product.productId &&
+          i.size === product.size
       );
 
-      if (existingIndex >= 0) {
+      if (index !== -1) {
         const updated = [...prev];
-        updated[existingIndex].quantity += 1;
+        updated[index].quantity += 1;
         return updated;
-      } else {
-        return [...prev, { ...item, quantity: 1 }];
       }
+
+      return [...prev, { ...product, quantity: 1 }];
     });
+
+    toast.success("Added to inquiry");
   };
 
-  // Increase quantity
+  // ➕ Increase quantity
   const increaseQuantity = (productId, size) => {
     setInquiryItems((prev) =>
       prev.map((item) =>
@@ -34,7 +61,7 @@ const InquiryContextProvider = ({ children }) => {
     );
   };
 
-  // Decrease quantity
+  // ➖ Decrease quantity
   const decreaseQuantity = (productId, size) => {
     setInquiryItems((prev) =>
       prev
@@ -47,29 +74,91 @@ const InquiryContextProvider = ({ children }) => {
     );
   };
 
-  // Submit all inquiries
-  const submitInquiry = async (customerInfo) => {
+  // ❌ Remove item
+  const removeInquiryItem = (productId, size) => {
+    setInquiryItems((prev) =>
+      prev.filter(
+        (item) =>
+          !(item.productId === productId && item.size === size)
+      )
+    );
+  };
+
+  // 🧹 Clear inquiry
+  const clearInquiry = () => {
+    setInquiryItems([]);
+    localStorage.removeItem("inquiryItems");
+  };
+
+  // 📩 Submit inquiry
+  const submitInquiry = async ({ name, email, phone, message }) => {
+    if (!token) {
+      toast.error("Please login to submit inquiry");
+      navigate("/login-register");
+      return;
+    }
+
+    if (!name || !email || !phone || !message) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    if (inquiryItems.length === 0) {
+      toast.error("No inquiry items found");
+      return;
+    }
+
     try {
-      const response = await axios.post("/api/inquiry/create", {
-        ...customerInfo,
-        items: inquiryItems,
-      });
-      setInquiryItems([]); // Clear after submission
-      return response.data;
-    } catch (err) {
-      console.error("Inquiry submission failed:", err);
-      throw err;
+      const payload = {
+        userName: name,
+        userEmail: email,
+        userPhone: phone,
+        message,
+        items: inquiryItems.map((item) => ({
+          productId: item.productId,
+          productName: item.productName,
+          size: item.size || null,
+          quantity: item.quantity,
+          productImage: item.productImage || item.image,
+        })),
+      };
+
+      const res = await axios.post(
+        `${backendUrl}/api/inquiry/create`,
+        payload,
+        { headers: { token } }
+      );
+
+      if (res.data.success) {
+        toast.success("Inquiry submitted successfully");
+        clearInquiry();
+      } else {
+        toast.error(res.data.message || "Inquiry failed");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Server error. Try again.");
     }
   };
+
+
+  // 🔢 Get total inquiry count (sum of quantities)
+  const getInquiryCount = () => {
+    return inquiryItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
 
   return (
     <InquiryContext.Provider
       value={{
         inquiryItems,
         addToInquiry,
-        submitInquiry,
         increaseQuantity,
         decreaseQuantity,
+        removeInquiryItem,
+        clearInquiry,
+        submitInquiry,
+        getInquiryCount,
       }}
     >
       {children}
@@ -77,6 +166,5 @@ const InquiryContextProvider = ({ children }) => {
   );
 };
 
-export default InquiryContextProvider;
-
+export default InquiryProvider;
 

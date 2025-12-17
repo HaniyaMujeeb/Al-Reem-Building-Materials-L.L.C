@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import { InquiryContext } from "../Context/InquiryContext";
-import "../style.css";
-import "../mobile.css";
 
 const Inquiry = () => {
   const {
     inquiryItems,
-    submitInquiry,
     increaseQuantity,
     decreaseQuantity,
+    removeInquiryItem,
+    clearInquiry,
+    submitInquiry,
   } = useContext(InquiryContext);
 
   const [name, setName] = useState("");
@@ -17,80 +17,114 @@ const Inquiry = () => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
-    if (!name || !email || !phone || !message) {
-      alert("Please fill in all fields");
-      return;
-    }
+    await submitInquiry({
+      name,
+      email,
+      phone,
+      message,
+    });
 
-    try {
-      await submitInquiry({ name, email, phone, message });
-      alert("Inquiry sent successfully!");
-      setName("");
-      setEmail("");
-      setPhone("");
-      setMessage("");
-    } catch (err) {
-      alert("Failed to send inquiry. Try again.");
-    }
+    setName("");
+    setEmail("");
+    setPhone("");
+    setMessage("");
   };
 
   return (
-    <div className="inquiry-page" style={{ paddingTop: "80px" }}>
-      <h2>Inquiry Items</h2>
+    <div className="inquiry-page" style={{ paddingTop: "190px" }}>
+      <h2>Inquiry Items:</h2>
 
-      {inquiryItems.length === 0 && <p>No items added for inquiry</p>}
+      {inquiryItems.length === 0 && <h1>No inquiry items added</h1>}
 
-      <div className="inquiry-items-container">
-        {inquiryItems.map((item, index) => (
-          <div key={index} className="inquiry-item-card">
-            <img
-              src={item.productImage || item.image}
-              alt={item.productName}
-              className="inquiry-item-image"
-            />
-            <div className="inquiry-item-info">
-              <p><strong>{item.productName}</strong></p>
-              <p>Size: {item.size}</p>
-              <p>Quantity: {item.quantity}</p>
-              <div className="quantity-buttons">
-                <button onClick={() => decreaseQuantity(item.productId, item.size)}>-</button>
-                <button onClick={() => increaseQuantity(item.productId, item.size)}>+</button>
-              </div>
+      {inquiryItems.map((item, index) => (
+        <div key={index} className="inquiry-item-card">
+          <img
+            src={item.productImage || item.image}
+            alt={item.productName}
+          />
+
+          <div>
+            <p><strong>{item.productName}</strong></p>
+            <p>Size: {item.size || "N/A"}</p>
+
+            <div className="quantity-buttons">
+              <button
+                onClick={() =>
+                  decreaseQuantity(item.productId, item.size)
+                }
+              >
+                -
+              </button>
+
+              <span>{item.quantity}</span>
+
+              <button
+                onClick={() =>
+                  increaseQuantity(item.productId, item.size)
+                }
+              >
+                +
+              </button>
+            </div>
+
+
+            <div className="remove-button">
+              <button
+                onClick={() =>
+                  removeInquiryItem(item.productId, item.size)
+                }
+              >
+                Remove
+              </button>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
 
       {inquiryItems.length > 0 && (
         <div className="inquiry-form">
           <input
-            type="text"
             placeholder="Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+
           <input
-            type="email"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <input
-            type="tel"
-            placeholder="Phone Number"
+            placeholder="Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+
           <textarea
-            placeholder="Your Message / Inquiry"
+            placeholder="Your Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button onClick={handleSubmit}>Submit Inquiry</button>
+
+          {/* Button group */}
+          <div className="button-group">
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit Inquiry
+            </button>
+            <button className="clear-button" onClick={clearInquiry}>
+              Clear Inquiry
+            </button>
+          </div>
         </div>
       )}
+
     </div>
   );
 };
 
 export default Inquiry;
+
+
+
+{/* remember to add cart count badge and */}

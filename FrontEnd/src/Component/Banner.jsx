@@ -9,7 +9,7 @@ const Banner = () => {
     <div className="banner-container">
 
       {/* Left Side of the Banner */}
-      <div className="banner-left"> 
+      <div className="banner-left">
         <div className="banner-content">
           <div className="banner-header">
             <p className="banner-line"></p>
@@ -17,10 +17,32 @@ const Banner = () => {
           </div>
 
           <h1 className="banner-title">Latest Arrivals</h1>
-          
+
           <div className="banner-shop-container">
-            <Link style={{textDecoration: 'none'}} to = '/products'> <p className="banner-shop"> SHOP NOW </p> </Link> 
-            <p className="banner-divider"></p>
+            <Link style={{ textDecoration: 'none' }} to="/products">
+
+              <p className="banner-shop animate-main">
+                {["RETAIL OR BULK ORDER?", "Send us an inquiry :"].map((line, lineIndex) =>
+                  line.split(" ").map((word, index) => (
+                    <span
+                      key={`${lineIndex}-${index}`}
+                      style={{
+                        animationDelay: `${(index + lineIndex * 10) * 0.05}s`,
+                        fontSize: lineIndex === 1 ? "0.70em" : "1em", // smaller for second line
+                        display: "inline-block", // ensures each word animates properly
+                        marginRight: "0.3em",
+                      }}
+                    >
+                      {word}
+                    </span>
+                  )).concat(lineIndex === 0 ? <br key={`br-${lineIndex}`} /> : null)
+                )}
+              </p>
+
+
+
+            </Link>
+
           </div>
         </div>
       </div>

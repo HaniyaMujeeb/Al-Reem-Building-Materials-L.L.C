@@ -11,10 +11,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-  {/* const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);*/}
-  const{ token, setToken } = useContext(ShopContext);
+  {/* const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);*/ }
+  const { token, setToken } = useContext(ShopContext);
   const navigate = useNavigate();
-  const { inquiryCount } = useContext(InquiryContext);
+  const { inquiryItems, getInquiryCount } = useContext(InquiryContext);
+
 
   const logout = () => {
     navigate('/login-register');
@@ -99,11 +100,12 @@ const Navbar = () => {
               alt="Inquiry Cart"
             />
 
-            {inquiryCount > 0 && (
-              <p className="cart-badge">{inquiryCount}</p>
+            {getInquiryCount() > 0 && (
+              <p className="cart-badge">{getInquiryCount()}</p>
             )}
+
           </Link>
-          
+
         </div>
 
         {/* Hamburger Icon for Mobile */}
