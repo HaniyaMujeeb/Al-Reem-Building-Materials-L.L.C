@@ -2542,32 +2542,30 @@ hr {
 }
 
 
-/* LoginRegister CSS */
+/* LoginRegister CSS - Adjusted Sizes */
 .background-container {
-    width: 100vw;
+    width: 100%;
     height: 120vh;
     display: flex;
     background-size: cover;
     background-position: center;
-    margin-left: -24px;
+
     filter: brightness(1);
     background-repeat: no-repeat;
 }
-
-
 
 .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    max-width: 24rem;
-    background: rgba(255, 255, 255, 0.90);
-    border-radius: 30px;
-    padding: 80px;
+    width: 100%;
+    max-width: 26rem; /* slightly wider */
+    background: rgba(255, 255, 255, 0.95); /* a touch more opacity */
+    border-radius: 25px;
+    padding: 100px; /* slightly reduced padding */
     margin: auto;
-    margin-top: 260px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
+    margin-top: 300px; /* shifted slightly up */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.85);
     gap: 16px;
     color: black;
     position: relative;
@@ -2584,7 +2582,7 @@ hr {
 
 .form-title-text {
     font-family: Raleway;
-    font-size: 32px;
+    font-size: 28px; /* slightly smaller */
     letter-spacing: 1px;
     font-weight: 500;
 }
@@ -2592,63 +2590,67 @@ hr {
 .form-divider {
     border: none;
     height: 3px;
-    width: 2rem;
+    width: 1rem;
     background-color: #4a4a4a;
 }
 
-.form-input {
-    width: 100%;
-    padding: 15px 12px;
-    border: 1px solid black;
-    font-family: Raleway;
-    border-radius: 4px;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease-in-out;
-}
-
+.form-input,
 .password-form-input {
-    width: 100%;
-    padding: 15px 100px 15px 12px;
-    vertical-align: top;
+    width: 120%; /* will take full container width */
+    max-width: 30rem; /* slightly longer than before */
+    padding: 15px 100px 16px 12px; /* extra right padding for icon in password input */
     border: 1px solid black;
     font-family: Raleway;
-    text-align: left;
-    margin-left: 2px;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 0.95rem;
     outline: none;
+    text-align: left;
+    vertical-align: top;
     transition: border-color 0.3s ease-in-out;
-}
-
-
-.form-input:focus {
-    border-color: #000;
-}
-
-.forgot-password-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    justify-content: space-between;
-    font-size: 15px;
-    margin-top: -8px;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .password-input-container {
-    position: relative;
-    margin-left: -120px;
+    position: relative; /* container for input + icon */
+    width: 120%;
+    max-width: 30rem; /* same as input */
+    margin-right: 40px;
 }
 
 .toggle-password-img {
     position: absolute;
-    right: 15px;
+    right: 12px; /* stays inside input */
     top: 50%;
     transform: translateY(-50%);
     width: 22px;
     height: 22px;
     cursor: pointer;
 }
+
+
+.form-input:focus, .password-form-input:focus {
+    border-color: #000;
+}
+
+.forgot-password-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px; /* slightly smaller */
+    margin-top: 3px;
+}
+
+.password-input-container {
+    position: relative;
+    margin-left: 0; /* fixed alignment */
+}
+
+.password-input-container {
+    position: relative; /* container for input + icon */
+    width: 100%;
+}
+
 
 .forgot-password-text {
     cursor: pointer;
@@ -2662,10 +2664,9 @@ hr {
     color: red;
 }
 
-
 .toggle-text {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px; /* slightly smaller */
     color: #333;
     font-family: Raleway;
     font-weight: 500;
@@ -2682,14 +2683,14 @@ hr {
 .auth-button {
     background-color: black;
     color: white;
-    font-size: 18px;
+    font-size: 18px; /* slightly smaller */
     font-family: Raleway;
     letter-spacing: 1px;
-    font-weight: 300;
-    padding: 12px 32px;
-    margin-top: 2px;
+    font-weight: 400;
+    padding: 14px 30px; /* reduced size */
+    margin-top: 5px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
 }
@@ -2698,21 +2699,19 @@ hr {
     background-color: #333;
 }
 
-
 .password-conditions {
     list-style: none;
     padding: 0;
-    justify-items: left;
     font-family: Raleway;
     letter-spacing: 1px;
-    margin-right: 100px;
+    margin-right: 80px; /* slightly smaller spacing */
     margin-top: -10px;
-    line-height: 24px;
-    font-size: 16px;
+    line-height: 22px; /* smaller line height */
+    font-size: 14px; /* slightly smaller font */
 }
 
 .password-conditions li {
-    margin: 4px 0;
+    margin: 3px 0; /* slightly smaller spacing */
 }
 
 .valid {
@@ -2722,6 +2721,7 @@ hr {
 .invalid {
     color: red;
 }
+
 
 /* About Us CSS */
 .about-page {

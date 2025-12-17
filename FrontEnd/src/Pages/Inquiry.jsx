@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { InquiryContext } from "../Context/InquiryContext";
+import { ShopContext } from "../Context/ShopContext.jsx";
+import { toast } from "react-toastify";
 
 const Inquiry = () => {
   const {
@@ -11,12 +13,19 @@ const Inquiry = () => {
     submitInquiry,
   } = useContext(InquiryContext);
 
+  const { token } = useContext(ShopContext); // get login token
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
+    if (!token) {
+      toast.error("Please login to submit inquiry");
+      return; // block submission
+    }
+
     await submitInquiry({
       name,
       email,
@@ -66,7 +75,6 @@ const Inquiry = () => {
                 +
               </button>
             </div>
-
 
             <div className="remove-button">
               <button
@@ -118,12 +126,12 @@ const Inquiry = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };
 
 export default Inquiry;
+
 
 
 

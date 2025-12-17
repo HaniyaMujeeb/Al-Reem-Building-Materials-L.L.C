@@ -92,22 +92,15 @@ const InquiryProvider = ({ children }) => {
 
   // 📩 Submit inquiry
   const submitInquiry = async ({ name, email, phone, message }) => {
-    if (!token) {
+    const userToken = token || localStorage.getItem("token"); // fallback
+
+    if (!userToken) {
       toast.error("Please login to submit inquiry");
       navigate("/login-register");
       return;
     }
 
-    if (!name || !email || !phone || !message) {
-      toast.error("Please fill all fields");
-      return;
-    }
-
-    if (inquiryItems.length === 0) {
-      toast.error("No inquiry items found");
-      return;
-    }
-
+    // rest of your code uses userToken
     try {
       const payload = {
         userName: name,
@@ -126,7 +119,7 @@ const InquiryProvider = ({ children }) => {
       const res = await axios.post(
         `${backendUrl}/api/inquiry/create`,
         payload,
-        { headers: { token } }
+        { headers: { token: userToken } }
       );
 
       if (res.data.success) {
@@ -140,6 +133,7 @@ const InquiryProvider = ({ children }) => {
       toast.error("Server error. Try again.");
     }
   };
+
 
 
   // 🔢 Get total inquiry count (sum of quantities)
