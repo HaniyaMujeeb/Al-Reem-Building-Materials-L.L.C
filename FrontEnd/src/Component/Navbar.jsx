@@ -11,8 +11,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
-  {/* const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);*/ }
-  const { token, setToken } = useContext(ShopContext);
+  const { setShowSearch, getCartCount, token, setToken, setCartItems } = useContext(ShopContext);
   const navigate = useNavigate();
   const { inquiryItems, getInquiryCount } = useContext(InquiryContext);
 
@@ -20,8 +19,8 @@ const Navbar = () => {
   const logout = () => {
     navigate('/login-register');
     localStorage.removeItem('token');
+    localStorage.removeItem("cartItems");
     setToken('');
-    setCartItems({});
   };
 
   const handleClickOutside = (event) => {

@@ -1,12 +1,12 @@
-import React, { use, useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { ShopContext } from "../Context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const LoginRegister = () => {
+  const { token, setToken, navigate, backendUrl, mergeGuestCart } = useContext(ShopContext);
   const [currentState, setCurrentState] = useState("Login");
-  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -35,8 +35,8 @@ const LoginRegister = () => {
 
   const isPasswordValid = Object.values(passwordConditions).every(Boolean);
 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
 
     if (currentState === "Sign Up" && !isPasswordValid) {
       alert("Please enter a valid password.");
@@ -44,60 +44,48 @@ const LoginRegister = () => {
     }
 
     try {
+      let url;
+      let payload;
+
       if (currentState === "Sign Up") {
-        const response = await axios.post(`${backendUrl}/api/user/register`, { name, email, password });
-
-        if (response.data.success) {
-          toast.success("Registration successful! Please log in.");
-          setCurrentState("Login"); // Redirect to Login view
-          setName("");
-          setEmail("");
-          setPassword("");
-          setPasswordConditions({
-            minLength: false,
-            hasUpperCase: false,
-            hasLowerCase: false,
-            hasNumber: false,
-            hasSpecialChar: false,
-          });
-        } else {
-          toast.error(response.data.message);
-        }
-        
-
+        url = `${backendUrl}/api/user/register`;
+        payload = { name, email, password };
       } else {
-        const response = await axios.post(backendUrl + '/api/user/login', { email, password })
-        if (response.data.success) {
-          setToken(response.data.token)
-          localStorage.setItem('token', response.data.token)  
-
-        } else {
-          toast.error(response.data.message)
-        }
-
+        url = `${backendUrl}/api/user/login`;
+        payload = { email, password };
       }
 
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message)
 
+      const res = await axios.post(url, payload);
+
+
+      if (res.data.success) {
+        if (currentState === "Sign Up") {
+          toast.success("Registration successful! Please log in.");
+          setCurrentState("Login");
+          setName(""); setEmail(""); setPassword("");
+        } else {
+          const userToken = res.data.token;
+
+          // Merge guest cart BEFORE setting token
+          await mergeGuestCart(userToken);
+
+          // Set token in context + localStorage
+          setToken(userToken);
+          localStorage.setItem("token", userToken);
+
+          navigate("/");
+        }
+      } else {
+        toast.error(res.data.message || "Something went wrong");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || err.message || "Request failed");
     }
   };
 
-
-  useEffect(() => {
-    if (token) {
-      navigate('/')
-    }
-  }, [token])
-
-
-
   return (
-    <div
-      className="background-container"
-      style={{ backgroundImage: `url(${assets.banner})` }}
-    >
+    <div className="background-container" style={{ backgroundImage: `url(${assets.banner})` }}>
       <form onSubmit={onSubmitHandler} className="form-container">
         <div className="form-title-container">
           <p className="form-title-text">{currentState}</p>
@@ -106,13 +94,12 @@ const LoginRegister = () => {
 
         {currentState === "Sign Up" && (
           <input
-            onChange={(e) => setName(e.target.value)}
             type="text"
             className="form-input"
             placeholder="Name"
             required
             value={name}
-
+            onChange={(e) => setName(e.target.value)}
           />
         )}
 
@@ -125,8 +112,7 @@ const LoginRegister = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        {/* Password field with toggle */}
-        <div className="password-input-container" >
+        <div className="password-input-container">
           <input
             type={showPassword ? "text" : "password"}
             className="password-form-input"
@@ -141,69 +127,31 @@ const LoginRegister = () => {
             src={showPassword ? assets.show_password_icon : assets.hide_passsword_icon}
             alt="Toggle Password"
             onClick={() => setShowPassword((prev) => !prev)}
-            style={{
-              position: "absolute",
-              right: "-100px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              width: "22px",
-              height: "22px",
-              cursor: "pointer",
-            }}
+            style={{ position: "absolute", right: "-100px", top: "50%", transform: "translateY(-50%)", width: "22px", height: "22px", cursor: "pointer" }}
           />
         </div>
 
         <div className="forgot-password-container">
-          {currentState === "Login" && (
-            <p className="forgot-password-text">Forget Password?</p>
-          )}
+          {currentState === "Login" && <p className="forgot-password-text">Forget Password?</p>}
           <p
-            onClick={() =>
-              setCurrentState(currentState === "Login" ? "Sign Up" : "Login")
-            }
+            onClick={() => setCurrentState(currentState === "Login" ? "Sign Up" : "Login")}
             className="toggle-text"
           >
             {currentState === "Login" ? "Create Account" : "Login Here"}
           </p>
         </div>
 
-        {/* Password Strength Tips */}
         {currentState === "Sign Up" && passwordFocused && (
           <ul className="password-conditions">
-            <li className={passwordConditions.minLength ? "valid" : "invalid"}>
-              ✔ At least 8 characters
-            </li>
-            <li
-              className={
-                passwordConditions.hasUpperCase ? "valid" : "invalid"
-              }
-            >
-              ✔ One uppercase letter
-            </li>
-            <li
-              className={
-                passwordConditions.hasLowerCase ? "valid" : "invalid"
-              }
-            >
-              ✔ One lowercase letter
-            </li>
-            <li className={passwordConditions.hasNumber ? "valid" : "invalid"}>
-              ✔ One number
-            </li>
-            <li
-              className={
-                passwordConditions.hasSpecialChar ? "valid" : "invalid"
-              }
-            >
-              ✔ One special character (!@#$%^&*)
-            </li>
+            <li className={passwordConditions.minLength ? "valid" : "invalid"}>✔ At least 8 characters</li>
+            <li className={passwordConditions.hasUpperCase ? "valid" : "invalid"}>✔ One uppercase letter</li>
+            <li className={passwordConditions.hasLowerCase ? "valid" : "invalid"}>✔ One lowercase letter</li>
+            <li className={passwordConditions.hasNumber ? "valid" : "invalid"}>✔ One number</li>
+            <li className={passwordConditions.hasSpecialChar ? "valid" : "invalid"}>✔ One special character (!@#$%^&*)</li>
           </ul>
         )}
 
-        <button
-          className="auth-button"
-          disabled={currentState === "Sign Up" && !isPasswordValid}
-        >
+        <button className="auth-button" disabled={currentState === "Sign Up" && !isPasswordValid}>
           {currentState}
         </button>
       </form>
@@ -212,4 +160,3 @@ const LoginRegister = () => {
 };
 
 export default LoginRegister;
-
