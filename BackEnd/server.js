@@ -8,6 +8,7 @@ import productRouter from './Routes/ProductRoute.js';
 import cartRouter from './Routes/CartRoute.js';
 import orderRouter from './Routes/OrderRoute.js';
 import inquiryRouter from './Routes/InquiryRoute.js';
+import admininquiryRouter from './Routes/AdminInquiryRoute.js';
 import serverless from 'serverless-http';
 
 
@@ -30,6 +31,8 @@ app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/inquiry', inquiryRouter); 
+app.use("/api/admin/inquiries", admininquiryRouter);
+
 
 
 app.get('/', (req, res) => {

@@ -14,6 +14,18 @@ const InquirySchema = new mongoose.Schema({
       image: { type: String },
     },
   ],
+
+  adminReply: {
+    message: String,
+    repliedAt: Date,
+  },
+
+  status: {
+    type: String,
+    enum: ["pending", "replied"],
+    default: "pending",
+  },
+
 }, { timestamps: true });
 
 const Inquiry = mongoose.model("Inquiry", InquirySchema);

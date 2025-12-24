@@ -11,11 +11,14 @@ const List = ({ token }) => {
         try {
             const response = await axios.get(backendURL + '/api/product/list')
             if (response.data.success) {
-                setList(response.data.products)
+                // Ensure we set an array, fallback to empty array
+                setList(Array.isArray(response.data.data) ? response.data.products : [])
             } else {
+                setList([])
                 toast.error(response.data.message)
             }
         } catch (error) {
+            setList([])
             console.log(error)
             toast.error(error.message)
         }
@@ -56,15 +59,15 @@ const List = ({ token }) => {
                 </div>
 
                 {/* ----------- Product List ---------- */}
-                {list.map((item, index) => (
+                {Array.isArray(list) && list.map((item, index) => (
                     <div className='product-list-item' key={index}>
-                        <img className='product-image' src={item.image[0]} alt={item.name} />
+                        <img className='product-image' src={Array.isArray(item.image) ? item.image[0] : item.image || ''} alt={item.name} />
                         <p> {item.name} </p>
                         <p> {item.category} </p>
 
                         {/* ✅ Display Sizes & Prices or Single Price */}
                         <div className='size-price-container'>
-                            {item.sizes.length > 0 ? (
+                            {Array.isArray(item.sizes) && item.sizes.length > 0 ? (
                                 item.sizes.map((sizeObj, i) => (
                                     <p key={i} className='size-price'>
                                         {sizeObj.size}: {currency} {sizeObj.price}

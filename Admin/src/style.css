@@ -118,6 +118,23 @@
     }
 }
 
+.counterbadge {
+  display: inline-block;
+  background-color: red;
+  color: white;
+  padding: 5px 8px;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+
+
+.badge.pending { background: #e74c3c; }
+.badge.replied { background: #27ae60; }
+
+.actions button { margin-right: 8px; }
+
 
 /* Login CSS */
 
@@ -891,3 +908,262 @@ textarea {
 .announcements h2 {
     margin-bottom: 10px;
 }
+
+
+
+
+/* Inquiries Page CSS */
+
+/* Page Title */
+.inquiries-page h2 {
+    margin-bottom: 20px;
+    font-family: Raleway, sans-serif;
+    color: #000;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -5px;
+}
+
+/* Search Input */
+.search-input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Raleway, sans-serif;
+}
+
+/* Inquiry List Container */
+.inquiry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual Inquiry Card */
+.inquiry-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Raleway, sans-serif;
+}
+
+/* Inquiry Header */
+.inquiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inquiry-header h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+}
+
+.badge.pending {
+    background-color: orange;
+}
+
+.badge.completed {
+    background-color: green;
+}
+
+.badge.cancelled {
+    background-color: red;
+}
+
+/* Inquiry Details */
+.inquiry-card p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #000;
+}
+
+/* Inquiry Products Container */
+.inquiry-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* Each Product Item */
+.product-item {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    background-color: #fff;
+    gap: 5px;
+}
+
+.product-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Product Text */
+.product-item p {
+    font-size: 14px;
+    margin: 2px 0;
+    text-align: center;
+}
+
+/* Action Buttons */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.actions button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Raleway, sans-serif;
+}
+
+.actions button:hover {
+    opacity: 0.9;
+}
+
+.actions button:first-child {
+    background-color: #007bff;
+    color: white;
+}
+
+.actions button:nth-child(2) {
+    background-color: #dc3545;
+    color: white;
+}
+
+.actions button:last-child {
+    background-color: #28a745;
+    color: white;
+}
+
+/* No Inquiries Text */
+.inquiry-list p {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+}
+
+.reply-box {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reply-box textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+}
+
+.reply-box button {
+  align-self: flex-end;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.reply-box button:hover {
+  opacity: 0.9;
+}
+
+
+.add-product-box {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.add-product-box select,
+.add-product-box input {
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+}
+
+.add-product-box button {
+  align-self: flex-end;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.add-product-box button:hover {
+  opacity: 0.9;
+}
+
+.add-product-box img {
+  margin-top: 5px;
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.remove-product-btn {
+    margin-top: 6px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 4px 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qty-control button {
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+

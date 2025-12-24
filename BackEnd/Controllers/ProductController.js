@@ -65,7 +65,7 @@ const addProduct = async (req, res) => {
 const listProducts = async (req, res) => {
     try {
         const products = await productModel.find({});
-        res.json({ success: true, products });
+        res.json({ success: true, data: products });
     } catch (error) {
         console.error(error);
         res.json({ success: false, message: error.message });
