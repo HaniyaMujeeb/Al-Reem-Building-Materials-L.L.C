@@ -1211,9 +1211,13 @@ html {
     color: inherit;
 }
 
+
+
+
+
 /* Inquiry Page */
 .inquiry-page {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 190px 30px 90px;
     /* Adjusted for navbar and responsive padding */
@@ -1223,7 +1227,7 @@ html {
 
 .inquiry-page h2 {
     text-align: center;
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
     margin-bottom: 40px;
     color: black;
@@ -1236,7 +1240,7 @@ html {
     flex-wrap: wrap;
     align-items: center;
     border: 1px solid #eee;
-    padding: 15px;
+    padding: 16px;
     border-radius: 12px;
     line-height: 30px;
     background-color: #fff;
@@ -1273,7 +1277,7 @@ html {
 
 .inquiry-item-card strong {
     margin: 5px 0;
-    font-size: 18px;
+    font-size: 16px;
     font-family: Raleway;
 }
 
@@ -1291,7 +1295,7 @@ html {
 
 .quantity-buttons button {
     padding: 5px 12px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border: 1px solid black;
     border-radius: 6px;
@@ -1310,7 +1314,7 @@ html {
 .remove-button button {
     margin-top: 20px;
     padding: 6px 14px;
-    font-size: 14px;
+    font-size: 12px;
     border: none;
     border-radius: 6px;
     background-color: #e53e3e;
@@ -1340,7 +1344,7 @@ html {
     padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid #ccc;
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     transition: border 0.2s, box-shadow 0.2s;
 }
@@ -1371,14 +1375,14 @@ html {
 
 /* Buttons inside the group */
 .inquiry-form .button-group button {
-    padding: 20px 30px;
+    padding: 20px 20px;
     /* vertical 10px, horizontal 20px */
     min-width: 120px;
     /* smaller width */
     border-radius: 8px;
     border: none;
     font-family: Raleway;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
     cursor: pointer;
     transition: 0.3s;

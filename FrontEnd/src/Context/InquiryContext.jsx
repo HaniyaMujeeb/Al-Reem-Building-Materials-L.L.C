@@ -47,7 +47,6 @@ const InquiryProvider = ({ children }) => {
       return [...prev, { ...product, quantity: 1 }];
     });
 
-    toast.success("Added to inquiry");
   };
 
   // ➕ Increase quantity
