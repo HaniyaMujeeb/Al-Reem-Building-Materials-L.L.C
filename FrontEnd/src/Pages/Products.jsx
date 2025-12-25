@@ -4,7 +4,7 @@ import Title from '../Component/Title';
 import ProductItem from '../Component/ProductItem';
 
 const Products = () => {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products = [], search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(true);
   const [filterProducts, setFilterProducts] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState({});

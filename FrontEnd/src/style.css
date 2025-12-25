@@ -2965,3 +2965,12 @@ hr {
 .contact-btn[href*="wa.me"]:hover {
     background-color: #21BD5B;
 }
+
+
+
+
+.product-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

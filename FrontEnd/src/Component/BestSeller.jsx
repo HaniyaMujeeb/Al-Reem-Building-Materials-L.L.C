@@ -1,25 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import Title from './Title';
 import ProductItem from './ProductItem';
 import "../mobile.css";
 
 const BestSeller = () => {
-    const { products } = useContext(ShopContext);
-    const [bestSeller, setBestSeller] = useState([]);
+    const { products = [] } = useContext(ShopContext);
     const [selectedSizes, setSelectedSizes] = useState({});
 
     const handleSizeChange = (productId, newSize) => {
-        setSelectedSizes((prev) => ({
+        setSelectedSizes(prev => ({
             ...prev,
             [productId]: newSize
         }));
     };
 
-    useEffect(() => {
-        const bestProduct = products.filter((item) => item.bestseller);
-        setBestSeller(bestProduct.slice(0, 6));
-    }, [products]);
+    // Derived data — no useEffect needed
+    const bestSeller = Array.isArray(products) 
+        ? products.filter(item => item.bestseller).slice(0, 6) 
+        : [];
 
     return (
         <div className='best-sellers-container'>
@@ -37,26 +36,24 @@ const BestSeller = () => {
 
             <div className='bestsellergrid-container'>
                 <div className='best-seller-grid'>
-                    {bestSeller.map((item, index) => {
+                    {bestSeller.map((item) => {
                         const defaultSize = Array.isArray(item.sizes) && item.sizes.length > 0 ? item.sizes[0].size : null;
                         const selectedSize = selectedSizes[item._id] || defaultSize;
 
                         let price = 'N/A'; 
 
                         if (Array.isArray(item.sizes) && item.sizes.length > 0 && selectedSize) {
-                            
                             const selectedSizeObj = item.sizes.find(sizeObj => sizeObj.size === selectedSize);
                             price = selectedSizeObj ? selectedSizeObj.price : 'N/A';
                         } else if (typeof item.price === "number") {
-                            
                             price = item.price;
                         }
 
                         return (
-                            <div key={index} className='bestseller-item'>
+                            <div key={item._id} className='bestseller-item'>
                                 <ProductItem
                                     id={item._id}
-                                    image={item.image}
+                                    image={item.image}  // ProductItem handles array
                                     name={item.name}
                                     price={price}
                                 />

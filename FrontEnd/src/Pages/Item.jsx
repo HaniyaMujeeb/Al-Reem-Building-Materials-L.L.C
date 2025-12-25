@@ -36,14 +36,14 @@ const Item = () => {
 
 
   useEffect(() => {
-    const selectedProduct = products.find((item) => item._id === productID);
-
+    const selectedProduct = products.find(item => item._id === productID);
     if (selectedProduct) {
       setProductData(selectedProduct);
-      setImage(selectedProduct.image[0]);
-      setSize(null);
+      setImage(selectedProduct.image?.[0] || '/placeholder.jpg');
+      setSize(selectedProduct.sizes?.[0]?.size || null);
     }
   }, [productID, products]);
+
 
 
   const getPrice = () => {
