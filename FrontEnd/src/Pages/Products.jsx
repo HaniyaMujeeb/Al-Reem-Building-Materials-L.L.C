@@ -12,103 +12,85 @@ const Products = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relevant');
 
+
   // Toggle Category Selection
   const toggleCategory = (e) => {
     const value = e.target.value;
-    setCategory((prev) =>
-      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
-    );
+    setCategory(prev => prev.includes(value) ? prev.filter(c => c !== value) : [...prev, value]);
   };
 
   // Toggle Sub-Category Selection
   const toggleSubCategory = (e) => {
     const value = e.target.value;
-    setSubCategory((prev) =>
-      prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
-    );
+    setSubCategory(prev => prev.includes(value) ? prev.filter(c => c !== value) : [...prev, value]);
   };
 
-  // Apply Filtering Based on Selected Options
+  // Filter products based on search, category, subcategory
   const applyFilter = () => {
-    let filteredProducts = [...products];
+    let filtered = [...products];
 
     if (showSearch && search) {
-      filteredProducts = filteredProducts.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
-      );
+      filtered = filtered.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
     }
 
     if (category.length > 0) {
-      filteredProducts = filteredProducts.filter((item) => category.includes(item.category));
+      filtered = filtered.filter(item => category.includes(item.category));
     }
 
     if (subCategory.length > 0) {
-      filteredProducts = filteredProducts.filter((item) => subCategory.includes(item.subCategory));
+      filtered = filtered.filter(item => subCategory.includes(item.subCategory));
     }
 
-    setFilterProducts(filteredProducts);
+    setFilterProducts(filtered);
   };
 
-
+  // Get numeric price based on selected size
   const getNumericPrice = (item) => {
-    // Try to get price from sizes
-    if (Array.isArray(item.sizes) && item.sizes.length > 0) {
-      const selectedSize = selectedSizes[item._id] || item.sizes[0].size;
-      const sizeObj = item.sizes.find((s) => s.size === selectedSize);
-      if (sizeObj && typeof sizeObj.price === 'number') {
-        return sizeObj.price;
-      }
+    if (item.sizes?.length > 0) {
+      const selected = selectedSizes[item._id] || item.sizes[0].size;
+      const sizeObj = item.sizes.find(s => s.size === selected);
+      if (sizeObj?.price) return sizeObj.price;
     }
 
-    if (typeof item.price === 'number') {
-      return item.price;
-    }
+    if (typeof item.price === 'number') return item.price;
 
     return Infinity;
   };
 
+  // Sort products
+  const sortProducts = () => {
+    let sorted = [...filterProducts];
 
-  // Apply Sorting on Products
-  const sortProduct = () => {
-    let sortedProducts = [...filterProducts];
-  
     switch (sortType) {
       case 'low-high':
-        sortedProducts.sort((a, b) => getNumericPrice(a) - getNumericPrice(b));
+        sorted.sort((a, b) => getNumericPrice(a) - getNumericPrice(b));
         break;
       case 'high-low':
-        sortedProducts.sort((a, b) => getNumericPrice(b) - getNumericPrice(a));
+        sorted.sort((a, b) => getNumericPrice(b) - getNumericPrice(a));
         break;
       default:
         applyFilter();
         return;
     }
-  
-    setFilterProducts([...sortedProducts]);
-  };
-  
-  
 
-  // Handle Size Selection
+    setFilterProducts(sorted);
+  };
+
+  // Update selected size
   const handleSizeChange = (productId, newSize) => {
-    setSelectedSizes((prev) => ({
-      ...prev,
-      [productId]: newSize
-    }));
+    setSelectedSizes(prev => ({ ...prev, [productId]: newSize }));
   };
 
-
-  // Update Filtered Products on Changes
+  // Apply filter whenever products, search, or category/subCategory changes
   useEffect(() => {
-    if (products.length > 0) {
-      applyFilter();
-    }
-  }, [category, subCategory, search, showSearch, products]);
 
+    if (products?.length > 0) applyFilter();
 
-  // Update Sorting when Sort Type Changes
+  }, [products, search, showSearch, category, subCategory]);
+
+  // Apply sorting whenever sortType changes
   useEffect(() => {
-    sortProduct();
+    sortProducts();
   }, [sortType]);
 
   return (
@@ -119,32 +101,28 @@ const Products = () => {
           FILTER PRODUCTS :
         </p>
 
-        {/* Category Filter */}
         <div className={`filter-options ${showFilter ? 'show' : 'hide'}`}>
           <p className="filter-section">CATEGORIES :</p>
-
           <div className="filter-list">
-            {["MDF", "Plywood", "Aluminium Hardware", "Flooring", "Hardware"].map((cat) => (
+            {["MDF", "Plywood", "Aluminium Hardware", "Flooring", "Hardware"].map(cat => (
               <label key={cat} className="filter-option">
-                <input className="filter-checkbox" type="checkbox" value={cat} onChange={toggleCategory} />
+                <input type="checkbox" value={cat} onChange={toggleCategory} />
                 {cat}
               </label>
             ))}
           </div>
 
-          {/* Sub-Category Filter */}
           <div className={`filter-suboptions ${showFilter ? 'show' : 'hide'}`}>
             <p className="filter-subsection">TYPE:</p>
-
             <div className="filter-sublist">
               {[
                 "MDF Sheets", "PVC Panel", "Melamine MDF Sheets", "Door Handles", "Door Accessories",
                 "Hinges", "Plywood Sheets", "Commercial Plywood", "PVC High Glossy MDF Panel",
                 "PVC Soft Touch MDF Panel", "Chevron Flooring", "Wooden Floor Tile", "Door Locks",
                 "Door Closer", "Glass Door Accessories", "Silicone & Adhesives", "Other Hardware Accessories"
-              ].map((subCat) => (
+              ].map(subCat => (
                 <label key={subCat} className="filter-suboption">
-                  <input className="filter-checkbox" type="checkbox" value={subCat} onChange={toggleSubCategory} />
+                  <input type="checkbox" value={subCat} onChange={toggleSubCategory} />
                   {subCat}
                 </label>
               ))}
@@ -153,17 +131,14 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Right Side Content */}
+      {/* Product List */}
       <div className="content-container">
-        {/* Title & Sort Container */}
         <div className="sort-header-container">
           <div className="sort-title-container">
             <Title text1="ALL" text2="PRODUCTS :" />
           </div>
-
-          {/* Sort Dropdown */}
           <div className="sort-container">
-            <select onChange={(e) => setSortType(e.target.value)} className="sort-dropdown">
+            <select onChange={e => setSortType(e.target.value)} className="sort-dropdown">
               <option value="relevant">Sort by: Relevant</option>
               <option value="low-high">Sort by: Low to High</option>
               <option value="high-low">Sort by: High to Low</option>
@@ -171,46 +146,49 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div className="all-products-grid-container">
-          <div className="all-products-grid">
+        <div className="all-products-grid">
+          {filterProducts?.map((item) => {
+            // Determine the selected size
+            const defaultSize = item.sizes?.[0]?.size || null;
+            const selectedSize = selectedSizes[item._id] || defaultSize;
 
-            {filterProducts.map((item) => {
-              // Get the default size (if available)
-              const defaultSize = Array.isArray(item.sizes) && item.sizes.length > 0 ? item.sizes[0].size : null;
-              const selectedSize = selectedSizes[item._id] || defaultSize;
+            // Determine price
+            let price = 'N/A';
+            if (item.sizes?.length > 0 && selectedSize) {
+              const sizeObj = item.sizes.find((s) => s.size === selectedSize);
+              price = sizeObj?.price ?? 'N/A';
+            } else if (typeof item.price === 'number') {
+              price = item.price;
+            }
 
-              let price = 'N/A';
-
-              if (Array.isArray(item.sizes) && item.sizes.length > 0 && selectedSize) {
-
-                const selectedSizeObj = item.sizes.find(sizeObj => sizeObj.size === selectedSize);
-                price = selectedSizeObj ? selectedSizeObj.price : 'N/A';
-              } else if (typeof item.price === "number") {
-
-                price = item.price;
-              }
-
-              return (
-                <div key={item._id} className="all-products">
-                  <ProductItem
-                    id={item._id}
-                    image={item.image}
-                    name={item.name}
-                    price={price}
-                  />
-                </div>
-              );
-            })}
+            // Determine image URL
+            let imageUrl = '/placeholder.jpg'; // default
+            if (item.image && Array.isArray(item.image) && item.image.length > 0) {
+              imageUrl = item.image[0]; // first image
+            } else if (typeof item.image === 'string') {
+              imageUrl = item.image;
+            }
 
 
 
-          </div>
+            return (
+              <div key={item._id} className="all-products">
+                <ProductItem
+                  id={item._id}
+                  image={imageUrl}
+                  name={item.name}
+                  price={price}
+                />
+
+              </div>
+            );
+          })}
         </div>
+
+        
       </div>
     </div>
   );
 };
 
 export default Products;
-

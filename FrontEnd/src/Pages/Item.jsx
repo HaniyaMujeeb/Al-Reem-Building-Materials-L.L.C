@@ -5,37 +5,22 @@ import { InquiryContext } from '../Context/InquiryContext.jsx';
 import { assets } from '../assets/assets';
 import ProductReviews from '../Component/ProductReview';
 import RelatedProducts from '../Component/RelatedProducts';
+import { toast } from 'react-toastify';
 
 const Item = () => {
   const { productID } = useParams();
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const { products = [], currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(null);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('/placeholder.jpg');
   const [size, setSize] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
   const { addToInquiry } = useContext(InquiryContext);
   const navigate = useNavigate();
 
-  const fetchProductData = async () => {
-    products.map((item) => {
-      if (item._id === productID) {
-        setProductData(item);
-        setImage(item.image[0]);
-
-        // Set default size
-        if (item.sizes && item.sizes.length > 0) {
-          setSize(item.sizes[0]);
-        } else {
-          setSize(null); // Ensure size is not set if there are no sizes
-        }
-
-        return null;
-      }
-    })
-  }
-
-
+  // Update productData when products load
   useEffect(() => {
+    if (!products || products.length === 0) return;
+
     const selectedProduct = products.find(item => item._id === productID);
     if (selectedProduct) {
       setProductData(selectedProduct);
@@ -44,32 +29,26 @@ const Item = () => {
     }
   }, [productID, products]);
 
-
-
   const getPrice = () => {
-    if (productData && productData.price) {
+    if (!productData) return 'N/A';
 
-      if (typeof productData.price === 'object' && size) {
-        return productData.price[size] || Math.min(...Object.values(productData.price));
-      }
-
-      return typeof productData.price === 'number' ? productData.price : 'N/A';
+    if (Array.isArray(productData.sizes) && size) {
+      const selectedSizeObj = productData.sizes.find(s => s.size === size);
+      return selectedSizeObj?.price ?? 'N/A';
     }
-    return 'N/A';
+
+    return typeof productData.price === 'number' ? productData.price : 'N/A';
   };
-
-
 
   const handleInquiry = () => {
     if (!productData) return;
 
-    // Add product to inquiry with proper types
     addToInquiry({
-      productId: productData._id,        // MongoDB _id string
-      productName: productData.name,     // always pass name
+      productId: productData._id,
+      productName: productData.name,
       size: size || null,
-      quantity: 1,                        // default quantity 1
-      productImage: productData.image[0]  // optional, for display
+      quantity: 1,
+      productImage: productData.image?.[0] || '/placeholder.jpg'
     });
 
     toast.success("Item added to inquiry!", {
@@ -80,16 +59,16 @@ const Item = () => {
     navigate("/inquiry");
   };
 
+  if (!productData) {
+    return <div className="opacity-0">Loading product...</div>;
+  }
 
-
-  return productData ? (
+  return (
     <div className="item-container">
-      {/* --- Product Data --- */}
       <div className="product-content">
-        {/* --- Product Images --- */}
         <div className="product-images">
           <div className="thumbnail-container">
-            {productData.image.map((item, index) => (
+            {productData.image?.map((item, index) => (
               <img
                 onClick={() => setImage(item)}
                 src={item}
@@ -99,13 +78,11 @@ const Item = () => {
               />
             ))}
           </div>
-
           <div className="main-image-container">
-            <img className="main-image" src={image} alt="" />
+            <img className="main-image" src={image} alt={productData.name} />
           </div>
         </div>
 
-        {/* --- Product Info --- */}
         <div className="product-info">
           <h1 className="product-title">{productData.name}</h1>
 
@@ -118,27 +95,14 @@ const Item = () => {
             <p className="review-count">(122)</p>
           </div>
 
-          {/* <p className='product-price'>
-            {currency}{' '}
-            {Array.isArray(productData?.sizes) && productData.sizes.length > 0
-              ? typeof size === 'string'
-                ? productData.sizes.find(s => s.size === size)?.price ?? 'N/A'
-                : productData.sizes[0]?.price ?? 'N/A'
-              : typeof productData?.price === 'number'
-                ? productData.price
-                : 'N/A'}
-          </p> */}
-
-
           <p className="product-description">{productData.description}</p>
 
           {productData.sizes?.length > 0 && (
             <div className="size-container">
               <p>Select Size</p>
               <div className="size-options">
-
                 {productData.sizes.map((item, index) => {
-                  const sizeValue = typeof item === 'object' ? item.size : item;
+                  const sizeValue = item.size;
                   return (
                     <button
                       onClick={() => setSize(sizeValue)}
@@ -153,19 +117,9 @@ const Item = () => {
             </div>
           )}
 
-          <button
-            onClick={handleInquiry}
-            className="inquire-button"
-          >
+          <button onClick={handleInquiry} className="inquire-button">
             INQUIRE
           </button>
-
-          { /* <button
-            onClick={() => addToCart(productData._id, size)}
-            className="addtocart-button"
-          >
-            ADD TO CART
-          </button> */}
 
           <hr className="divider" />
 
@@ -177,7 +131,6 @@ const Item = () => {
         </div>
       </div>
 
-      {/* --- Description & Reviews --- */}
       <div className="description-reviews-container">
         <div className="tabs">
           <button
@@ -186,7 +139,6 @@ const Item = () => {
           >
             Description
           </button>
-
           <button
             className={activeTab === 'reviews' ? 'active' : ''}
             onClick={() => setActiveTab('reviews')}
@@ -198,10 +150,7 @@ const Item = () => {
         <div className="company-info">
           {activeTab === 'company-description' ? (
             <p>
-              Al Reem Building Materials L.L.C is a trusted supplier of high-quality construction materials, builders, and homeowners
-              across the region. The company offers a wide range of products, including steel, wood, plumbing, electrical fittings,
-              paints, and adhesives. With a strong commitment to quality and reliability, Al Reem Building Materials ensures that customers
-              receive durable and cost-effective materials for their construction and renovation needs.
+              Al Reem Building Materials L.L.C is a trusted supplier of high-quality construction materials...
             </p>
           ) : (
             <ProductReviews />
@@ -209,12 +158,10 @@ const Item = () => {
         </div>
       </div>
 
-      {/* --- Related Products --- */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
     </div>
-  ) : (
-    <div className="opacity-0"> </div>
   );
 };
 
 export default Item;
+

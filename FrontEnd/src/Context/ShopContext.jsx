@@ -21,15 +21,20 @@ const ShopContextProvider = (props) => {
 
 
   // Fetch products
+  // Fetch products
   const getProductData = async () => {
     try {
       const res = await axios.get(`${backendUrl}/api/product/list`);
-      if (res.data.success) setProducts(res.data.products);
+      if (res.data.success) {
+        setProducts(res.data.data || []); // <-- fixed here
+        console.log("Products fetched from backend:", res.data.data); // debug log
+      }
     } catch (err) {
       console.error(err);
       toast.error(err.message);
     }
   };
+
 
   // Get user cart from backend
   const getUserCart = async (userToken) => {
