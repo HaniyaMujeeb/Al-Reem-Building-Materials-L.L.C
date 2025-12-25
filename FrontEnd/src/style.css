@@ -880,7 +880,7 @@ html {
 .product-container {
     display: flex;
     align-items: flex-start;
-    gap: 30px;
+    gap: 20px;
     /* reduced */
     padding: 16px;
     /* reduced */
@@ -894,23 +894,17 @@ html {
 
 /* Filter Container - Sidebar */
 .filter-container {
-    position: sticky;
-    top: 180px;
-    /* reduced */
-    width: 220px;
-    /* reduced */
-    min-height: 100vh;
-    max-height: 100vh;
-    margin-left: 8px;
-    overflow-y: auto;
-    background: #f9f9f9;
-    border-radius: 8px;
-    /* reduced */
-    box-shadow: 1px 0 2px #F4F4F4;
-    padding: 16px;
-    /* reduced */
-    box-sizing: border-box;
-    flex-shrink: 0;
+  position: sticky;
+  top: 190px;
+  width: 220px;
+  max-height: calc(100vh - 190px); /* fit within viewport */
+  overflow-y: auto; /* scroll inside if too tall */
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-left: 10px;
+  box-shadow: 1px 0 2px #F4F4F4;
+  padding: 16px;
+  flex-shrink: 0;
 }
 
 .content-container {
