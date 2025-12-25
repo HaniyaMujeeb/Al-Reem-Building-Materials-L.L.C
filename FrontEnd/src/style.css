@@ -1070,17 +1070,17 @@ html {
 /* Sort title */
 .sort-title-container .latest-title-text {
     font-family: Raleway;
-    font-size: 25px;
+    font-size: 23px;
     /* reduced */
     letter-spacing: 1px;
     /* reduced */
-    margin-top: 120px;
+    margin-top: 100px;
     /* reduced */
-    margin-left: -700px;
+    margin-left: -710px;
 }
 
 .sort-title-container .highlight {
-    font-size: 25px;
+    font-size: 23px;
     /* same as parent */
     font-family: Raleway;
 }
