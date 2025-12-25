@@ -922,7 +922,7 @@ html {
 
 /* Filter Title */
 .filter-title {
-    font-size: 18px;
+    font-size: 16px;
     /* reduced */
     display: flex;
     gap: 6px;
@@ -939,7 +939,7 @@ html {
 .filter-option {
     width: 100%;
     border: 1px solid #f0f0f0;
-    padding: 14px;
+    padding: 12px;
     /* reduced */
     background-color: #eaeaea;
     font-family: Raleway;
@@ -963,7 +963,7 @@ html {
 .filter-section {
     margin-bottom: 20px;
     /* reduced */
-    font-size: 18px;
+    font-size: 16px;
     /* reduced */
     font-weight: 500;
     color: #B20000;
@@ -978,7 +978,7 @@ html {
     flex-direction: column;
     gap: 10px;
     /* reduced */
-    font-size: 18px;
+    font-size: 16px;
     /* reduced */
     font-weight: 300;
     color: black;
@@ -992,7 +992,7 @@ html {
     align-items: center;
     gap: 10px;
     /* reduced */
-    font-size: 15px;
+    font-size: 14px;
     /* reduced */
     font-family: Raleway;
 }
@@ -1038,7 +1038,7 @@ html {
 .filter-subsection {
     margin-bottom: 20px;
     /* reduced */
-    font-size: 20px;
+    font-size: 16px;
     /* reduced */
     font-weight: 500;
     color: #B20000;
@@ -1053,7 +1053,7 @@ html {
     align-items: center;
     gap: 15px;
     /* reduced */
-    font-size: 16px;
+    font-size: 14px;
     /* reduced */
     line-height: 28px;
     margin-bottom: 5px;
@@ -1076,7 +1076,7 @@ html {
 /* Sort title */
 .sort-title-container .latest-title-text {
     font-family: Raleway;
-    font-size: 30px;
+    font-size: 25px;
     /* reduced */
     letter-spacing: 1px;
     /* reduced */
@@ -1086,7 +1086,7 @@ html {
 }
 
 .sort-title-container .highlight {
-    font-size: 30px;
+    font-size: 25px;
     /* same as parent */
     font-family: Raleway;
 }
@@ -1171,7 +1171,7 @@ html {
 
 /* Product name */
 .all-products p {
-    font-size: 18px;
+    font-size: 16px;
     /* reduced */
     font-weight: 600;
     color: black;
