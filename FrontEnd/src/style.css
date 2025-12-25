@@ -1129,7 +1129,7 @@ html {
     display: grid;
     grid-template-columns: repeat(5, minmax(180px, 1fr));
     /* reduced */
-    gap: 30px;
+    gap: 23px;
     /* reduced */
     width: 100%;
 }
