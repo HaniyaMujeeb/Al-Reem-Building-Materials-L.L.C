@@ -1144,7 +1144,6 @@ html {
 .all-products {
     border: 2px solid #eeeeee;
     width: 100%;
-    margin-left: 60px;
     border-radius: 6px;
     /* reduced */
     min-height: 96%;
@@ -2966,11 +2965,3 @@ hr {
     background-color: #21BD5B;
 }
 
-
-
-
-.product-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
