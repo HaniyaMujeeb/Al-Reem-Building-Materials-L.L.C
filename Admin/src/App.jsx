@@ -1,35 +1,51 @@
-import React from 'react'
-import Navbar from './Components/Navbar'
-import Sidebar from './Components/Sidebar'
-import { Routes, Route } from 'react-router-dom'
-import Add from './Pages/Add'
-import List from './Pages/List'
-import Orders from './Pages/Orders'
-import Inquiries from './Pages/Inquiry'
-import { useState } from 'react'
-import Login from './Components/Login'
-import { ToastContainer  } from 'react-toastify';
-import { useEffect } from 'react'
-import AdminHome from './Pages/Home'
+import React, { useState, useEffect, useContext } from 'react';
+import Navbar from './Components/Navbar';
+import Sidebar from './Components/Sidebar';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Add from './Pages/Add';
+import List from './Pages/List';
+import Orders from './Pages/Orders';
+import Inquiries from './Pages/Inquiry';
+import Login from './Components/Login';
+import AdminHome from './Pages/Home';
+import { ToastContainer } from 'react-toastify';
+import { LoaderContext } from './Components/LoaderContext.jsx';
 
-export const backendURL = import.meta.env.VITE_BACKEND_URL
-export const currency = 'AED'
+export const backendURL = import.meta.env.VITE_BACKEND_URL;
+export const currency = 'AED';
 
 const App = () => {
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const { loading, setLoading } = useContext(LoaderContext);
+  const location = useLocation();
 
-  const [token, setToken] = useState(localStorage.getItem('token') ? localStorage.getItem('token') : '');
-
+  // Persist admin token
   useEffect(() => {
-    localStorage.setItem('admintoken', token)
-  }, [token])
+    localStorage.setItem('admintoken', token);
+  }, [token]);
+
+  // Loader for route changes
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 500); // show loader for 0.5s min
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   return (
     <div className='app-container'>
       <ToastContainer />
+
+      {/* Loader Overlay */}
+      {loading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>
+      )}
+
       {token === ""
-        ? <Login setToken = {setToken} />
+        ? <Login setToken={setToken} />
         : <>
-          <Navbar setToken = {setToken} />
+          <Navbar setToken={setToken} />
 
           <div className='app-content'>
             <Sidebar />
@@ -37,20 +53,18 @@ const App = () => {
             <div className='main-content'>
               <Routes>
                 <Route path='/' element={<AdminHome />} />
-                <Route path='/add' element={<Add token = {token} />} />
-                <Route path='/list' element={<List token = {token} />} />
-                <Route path='/orders' element={<Orders token = {token} />} />
+                <Route path='/add' element={<Add token={token} />} />
+                <Route path='/list' element={<List token={token} />} />
+                <Route path='/orders' element={<Orders token={token} />} />
                 <Route path="/inquiries" element={<Inquiries token={token} />} />
-
               </Routes>
             </div>
           </div>
         </>
-
       }
-
     </div>
   )
 }
 
-export default App
+export default App;
+

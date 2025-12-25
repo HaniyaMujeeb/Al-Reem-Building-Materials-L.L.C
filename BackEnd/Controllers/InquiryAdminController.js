@@ -51,7 +51,7 @@ export const replyToInquiry = async (req, res) => {
       <div style="font-family:Arial; max-width:700px; margin:auto; padding:20px; border:1px solid #ddd;">
         <div style="text-align:center;">
           <img src="cid:companylogo" style="height:60px;" />
-          <h2>Reply to Your Inquiry</h2>
+          <h2>Replied to Your Inquiry</h2>
         </div>
 
         <p>Dear <strong>${inquiry.userName}</strong>,</p>
@@ -74,7 +74,7 @@ export const replyToInquiry = async (req, res) => {
     await transporter.sendMail({
       from: `"Al Reem Building Materials" <${process.env.SENDER_EMAIL}>`,
       to: inquiry.userEmail,
-      subject: "Reply to Your Inquiry",
+      subject: "Replied to Your Inquiry",
       html: replyHTML,
       attachments: [logoAttachment],
     });

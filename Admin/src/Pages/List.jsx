@@ -10,9 +10,10 @@ const List = ({ token }) => {
     const fetchList = async () => {
         try {
             const response = await axios.get(backendURL + '/api/product/list')
+
             if (response.data.success) {
-                // Ensure we set an array, fallback to empty array
-                setList(Array.isArray(response.data.data) ? response.data.products : [])
+                // ✅ FIX IS HERE
+                setList(Array.isArray(response.data.data) ? response.data.data : [])
             } else {
                 setList([])
                 toast.error(response.data.message)
@@ -27,10 +28,15 @@ const List = ({ token }) => {
     // Remove Product Function
     const removeProduct = async (id) => {
         try {
-            const response = await axios.post(backendURL + '/api/product/remove', { id }, { headers: { token } })
+            const response = await axios.post(
+                backendURL + '/api/product/remove',
+                { id },
+                { headers: { token } }
+            )
+
             if (response.data.success) {
                 toast.success(response.data.message)
-                await fetchList() // Refresh list
+                fetchList() // refresh list
             } else {
                 toast.error(response.data.message)
             }
@@ -46,40 +52,52 @@ const List = ({ token }) => {
 
     return (
         <>
-            <p className='product-list-title'> All Products List :</p>
-            <div className='product-list-container'>
+            <p className='product-list-title'>All Products List :</p>
 
-                {/* ----------- Table Header ---------- */}
+            <div className='product-list-container'>
+                {/* Header */}
                 <div className='product-list-header'>
-                    <b className='text-center'>Image</b>
-                    <b className='text-center'>Name</b>
-                    <b className='text-center'>Category</b>
-                    <b className='text-center'>Sizes & Prices</b>
-                    <b className='text-center'>Action</b>
+                    <b>Image</b>
+                    <b>Name</b>
+                    <b>Category</b>
+                    <b>Sizes & Prices</b>
+                    <b>Action</b>
                 </div>
 
-                {/* ----------- Product List ---------- */}
-                {Array.isArray(list) && list.map((item, index) => (
-                    <div className='product-list-item' key={index}>
-                        <img className='product-image' src={Array.isArray(item.image) ? item.image[0] : item.image || ''} alt={item.name} />
-                        <p> {item.name} </p>
-                        <p> {item.category} </p>
+                {/* Products */}
+                {list.length === 0 && <p>No products found</p>}
 
-                        {/* ✅ Display Sizes & Prices or Single Price */}
+                {list.map((item) => (
+                    <div className='product-list-item' key={item._id}>
+                        <img
+                            className='product-image'
+                            src={Array.isArray(item.image) ? item.image[0] : item.image}
+                            alt={item.name}
+                            onError={(e) => (e.target.src = '/placeholder.jpg')}
+                        />
+
+                        <p>{item.name}</p>
+                        <p>{item.category}</p>
+
+                        {/* Sizes & Prices */}
                         <div className='size-price-container'>
-                            {Array.isArray(item.sizes) && item.sizes.length > 0 ? (
-                                item.sizes.map((sizeObj, i) => (
-                                    <p key={i} className='size-price'>
-                                        {sizeObj.size}: {currency} {sizeObj.price}
+                            {item.sizes?.length > 0 ? (
+                                item.sizes.map((s, i) => (
+                                    <p key={i}>
+                                        {s.size}: {currency} {s.price}
                                     </p>
                                 ))
                             ) : (
-                                <p className='single-price'> {currency} {item.price}</p>
+                                <p>{currency} {item.price}</p>
                             )}
                         </div>
 
-                        {/* Delete Button */}
-                        <p onClick={() => removeProduct(item._id)} className='delete-button'> X </p>
+                        <p
+                            className='delete-button'
+                            onClick={() => removeProduct(item._id)}
+                        >
+                            X
+                        </p>
                     </div>
                 ))}
             </div>

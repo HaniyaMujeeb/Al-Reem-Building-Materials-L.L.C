@@ -19,6 +19,8 @@ const InquiryProvider = ({ children }) => {
     return stored ? JSON.parse(stored) : [];
   });
 
+  const [loading, setLoading] = useState(false); // Loader state
+
   // Sync token
   useEffect(() => {
     if (shopToken) setToken(shopToken);
@@ -100,6 +102,7 @@ const InquiryProvider = ({ children }) => {
     }
 
     // rest of your code uses userToken
+    setLoading(true);
     try {
       const payload = {
         userName: name,
@@ -130,6 +133,8 @@ const InquiryProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
       toast.error("Server error. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -152,6 +157,7 @@ const InquiryProvider = ({ children }) => {
         clearInquiry,
         submitInquiry,
         getInquiryCount,
+        loading,
       }}
     >
       {children}

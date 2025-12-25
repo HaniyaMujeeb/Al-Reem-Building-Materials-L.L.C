@@ -11,6 +11,7 @@ const Inquiry = () => {
     removeInquiryItem,
     clearInquiry,
     submitInquiry,
+    loading, // consume loading state
   } = useContext(InquiryContext);
 
   const { token } = useContext(ShopContext); // get login token
@@ -41,6 +42,13 @@ const Inquiry = () => {
 
   return (
     <div className="inquiry-page" style={{ paddingTop: "190px" }}>
+      {/* Loader overlay */}
+      {loading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>
+      )}
+
       <h2>Inquiry Items:</h2>
 
       {inquiryItems.length === 0 && <h1>No inquiry items added</h1>}
@@ -117,8 +125,12 @@ const Inquiry = () => {
 
           {/* Button group */}
           <div className="button-group">
-            <button className="submit-button" onClick={handleSubmit}>
-              Submit Inquiry
+            <button
+              className="submit-button"
+              onClick={handleSubmit}
+              disabled={loading} // disable button while loading
+            >
+              {loading ? "Submitting..." : "Submit Inquiry"}
             </button>
             <button className="clear-button" onClick={clearInquiry}>
               Clear Inquiry
@@ -131,6 +143,7 @@ const Inquiry = () => {
 };
 
 export default Inquiry;
+
 
 
 

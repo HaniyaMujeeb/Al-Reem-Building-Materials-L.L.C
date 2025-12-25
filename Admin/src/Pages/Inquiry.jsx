@@ -20,8 +20,12 @@ const Inquiries = ({ token }) => {
     const [quantity, setQuantity] = useState(1);
     const [loadingProducts, setLoadingProducts] = useState(true);
 
+    // Loader state
+    const [loading, setLoading] = useState(false);
+
     // Fetch inquiries
     const fetchInquiries = async () => {
+        setLoading(true);
         try {
             const res = await axios.get(`${backendURL}/api/admin/inquiries`, {
                 headers: { token },
@@ -30,6 +34,8 @@ const Inquiries = ({ token }) => {
             else toast.error(res.data.message);
         } catch (err) {
             toast.error("Failed to fetch inquiries");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -41,6 +47,7 @@ const Inquiries = ({ token }) => {
     useEffect(() => {
         const fetchProducts = async () => {
             setLoadingProducts(true);
+            setLoading(true);
             try {
                 const res = await axios.get(`${backendURL}/api/product/list`);
                 if (res.data.success && Array.isArray(res.data.data)) {
@@ -54,6 +61,7 @@ const Inquiries = ({ token }) => {
                 toast.error("Failed to fetch products");
             } finally {
                 setLoadingProducts(false);
+                setLoading(false);
             }
         };
         fetchProducts();
@@ -62,6 +70,7 @@ const Inquiries = ({ token }) => {
     // Delete inquiry
     const deleteInquiry = async (id) => {
         if (!window.confirm("Are you sure?")) return;
+        setLoading(true);
         try {
             const res = await axios.delete(
                 `${backendURL}/api/admin/inquiries/${id}`,
@@ -73,12 +82,15 @@ const Inquiries = ({ token }) => {
             } else toast.error(res.data.message);
         } catch (err) {
             toast.error(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
     // Send reply
     const sendReply = async (inquiryId) => {
         if (!replyMessage.trim()) return toast.error("Reply cannot be empty");
+        setLoading(true);
         try {
             const res = await axios.post(
                 `${backendURL}/api/admin/inquiries/reply`,
@@ -93,6 +105,8 @@ const Inquiries = ({ token }) => {
             } else toast.error(res.data.message);
         } catch {
             toast.error("Failed to send reply");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -109,6 +123,7 @@ const Inquiries = ({ token }) => {
             image: Array.isArray(selectedProduct.image) ? selectedProduct.image[0] : selectedProduct.image || "",
         };
 
+        setLoading(true);
         try {
             const res = await axios.post(
                 `${backendURL}/api/admin/inquiries/add-product`,
@@ -117,7 +132,6 @@ const Inquiries = ({ token }) => {
             );
             if (res.data.success) {
                 toast.success("Product added");
-                // Reset states
                 setAddingProductInquiryId(null);
                 setSelectedProduct(null);
                 setSelectedSize("");
@@ -126,14 +140,15 @@ const Inquiries = ({ token }) => {
             } else toast.error(res.data.message);
         } catch {
             toast.error("Failed to add product");
+        } finally {
+            setLoading(false);
         }
     };
-
 
     // Remove product from inquiry
     const handleRemoveProduct = async (inquiryId, itemId) => {
         if (!window.confirm("Remove this product from inquiry?")) return;
-
+        setLoading(true);
         try {
             const res = await axios.post(
                 `${backendURL}/api/admin/inquiries/remove-product`,
@@ -149,14 +164,15 @@ const Inquiries = ({ token }) => {
             }
         } catch {
             toast.error("Failed to remove product");
+        } finally {
+            setLoading(false);
         }
     };
 
-
     // Update product quantity
     const updateQuantity = async (inquiryId, itemId, newQty) => {
-        if (newQty < 1) return; // Prevent quantity < 1
-
+        if (newQty < 1) return;
+        setLoading(true);
         try {
             const res = await axios.post(
                 `${backendURL}/api/admin/inquiries/update-quantity`,
@@ -166,16 +182,16 @@ const Inquiries = ({ token }) => {
 
             if (res.data.success) {
                 toast.success("Quantity updated");
-                fetchInquiries(); // Refresh the inquiries list
+                fetchInquiries();
             } else {
                 toast.error(res.data.message);
             }
         } catch {
             toast.error("Failed to update quantity");
+        } finally {
+            setLoading(false);
         }
     };
-
-
 
     const filteredInquiries = inquiries.filter(
         (i) =>
@@ -185,6 +201,13 @@ const Inquiries = ({ token }) => {
 
     return (
         <div className="inquiries-page">
+            {/* Loader */}
+            {loading && (
+                <div className="loader-overlay">
+                    <div className="loader"></div>
+                </div>
+            )}
+
             <h2>All Inquiries:</h2>
             <input
                 type="text"
@@ -235,7 +258,6 @@ const Inquiries = ({ token }) => {
                                         </button>
                                     </div>
 
-
                                     <p>Size: {item.size || "N/A"}</p>
 
                                     <button
@@ -244,7 +266,6 @@ const Inquiries = ({ token }) => {
                                     >
                                         Remove
                                     </button>
-
                                 </div>
                             ))}
                         </div>
@@ -341,8 +362,6 @@ const Inquiries = ({ token }) => {
                                 )}
 
                                 <button onClick={() => handleAddProduct(inq._id)}>Add Product</button>
-
-
                             </div>
                         )}
                     </div>
