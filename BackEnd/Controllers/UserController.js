@@ -86,23 +86,28 @@ const registerUser = async (req, res) => {
 
 
 // Admin Login Route
+
 const adminLogin = async (req, res) => {
   try {
+    const { email, password } = req.body;
 
-    const { email, password } = req.body
-
+    // Check against env vars
     if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-      const token = jwt.sign(email + password, process.env.JWT_SECRET);
-      res.json({ success: true, token })
-    } else {
-      res.json({ success: false, message: "Invalid Credentials, Please Enter Correct Email and Password" })
-    }
+      // Create a JWT token (payload can be email or a role flag)
+      const token = jwt.sign({ role: "admin", email }, process.env.JWT_SECRET, {
+        expiresIn: "7d",
+      });
 
+      res.json({ success: true, token });
+    } else {
+      res.json({ success: false, message: "Invalid Credentials, Please Enter Correct Email and Password" });
+    }
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: error.message })
+    console.error(error);
+    res.json({ success: false, message: error.message });
   }
-}
+};
+
 
 
 

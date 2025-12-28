@@ -12,29 +12,25 @@ const Login = ({ setToken }) => {
     const [password, setPassword] = useState('')
 
     const onSubmitHandler = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
-            const response = await axios.post(backendURL + "/api/user/admin", {
+            const response = await axios.post(`${backendURL}/api/user/admin`, {
                 email,
                 password,
             });
 
             if (response.data.success) {
                 setToken(response.data.token);
-
-
+                toast.success("Admin logged in successfully!");
             } else {
-                toast.error(response.data.message, {
-                    className: "custom-toast",
-                });
+                toast.error(response.data.message);
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.message, {
-                className: "custom-toast",
-            });
+            toast.error("Login failed");
         }
     };
+
 
     return (
         <div className="background-container">
