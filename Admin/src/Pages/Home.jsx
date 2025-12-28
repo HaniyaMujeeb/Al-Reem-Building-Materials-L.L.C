@@ -18,20 +18,26 @@ const AdminHome = ({ token }) => {
     useEffect(() => {
         const fetchInquiryStats = async () => {
             try {
-                const token = localStorage.getItem('token'); // get the admin token
-                const res = await axios.get(`${backendURL}/api/admin/inquiries/stats`, {
-                    headers: { token }  // matches your middleware expecting req.headers.token
-                });
+                const adminToken = localStorage.getItem('adminToken'); // ✅ correct key
+
+                const res = await axios.get(
+                    `${backendURL}/api/admin/inquiries/stats`,
+                    {
+                        headers: {
+                            token: adminToken // ✅ custom header (NO Bearer)
+                        }
+                    }
+                );
+
                 setRepliedCount(res.data.replied || 0);
                 setPendingCount(res.data.pending || 0);
             } catch (err) {
-                console.error(err);
+                console.error("Failed to fetch inquiry stats:", err);
             }
         };
 
         fetchInquiryStats();
-    }, []); // run on component mount
-
+    }, []);
 
     return (
         <div className="admin-home">

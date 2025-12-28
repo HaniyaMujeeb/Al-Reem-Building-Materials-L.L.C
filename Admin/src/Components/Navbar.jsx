@@ -5,6 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 const Navbar = ({ setToken }) => {
   const navigate = useNavigate();
 
+  const logoutHandler = () => {
+    localStorage.removeItem('adminToken'); // ✅ remove persisted token
+    setToken('');                           // ✅ clear state
+    navigate('/');                          // optional redirect
+  };
+
   return (
     <div className='navbar-container'>
       <Link to='/'>
@@ -16,14 +22,14 @@ const Navbar = ({ setToken }) => {
         <button onClick={() => navigate('/')} className="home-button">
           Home
         </button>
-        <button onClick={() => setToken('')} className="logout-button">
+        <button onClick={logoutHandler} className="logout-button">
           Log Out
         </button>
       </div>
-
     </div>
   );
 };
 
 export default Navbar;
+
 

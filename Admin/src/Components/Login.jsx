@@ -14,13 +14,18 @@ const Login = ({ setToken }) => {
     const onSubmitHandler = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${backendURL}/api/user/admin`, {
+            const response = await axios.post(backendURL + '/api/user/admin', {
                 email,
                 password,
             });
 
             if (response.data.success) {
+                // ✅ Save token permanently
+                localStorage.setItem("adminToken", response.data.token);
+
+                // ✅ Update state
                 setToken(response.data.token);
+
                 toast.success("Admin logged in successfully!");
             } else {
                 toast.error(response.data.message);
@@ -30,6 +35,7 @@ const Login = ({ setToken }) => {
             toast.error("Login failed");
         }
     };
+
 
 
     return (

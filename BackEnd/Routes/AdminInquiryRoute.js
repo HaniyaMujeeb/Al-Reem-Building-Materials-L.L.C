@@ -28,6 +28,7 @@ admininquiryRouter.get('/stats', adminAuth, async (req, res) => {
     const totalReplied = await Inquiry.countDocuments({ status: "replied" });
     const totalPending = await Inquiry.countDocuments({ status: "pending" });
 
+    console.log("Inquiry Stats -> Replied:", totalReplied, "Pending:", totalPending); // Debug log
 
     res.json({
       success: true,
@@ -40,7 +41,15 @@ admininquiryRouter.get('/stats', adminAuth, async (req, res) => {
   }
 });
 
-
+// Temporary debug route to inspect all inquiries
+admininquiryRouter.get('/debug', adminAuth, async (req, res) => {
+  try {
+    const all = await Inquiry.find({});
+    res.json({ success: true, inquiries: all.map(i => ({ id: i._id, status: i.status })) });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
 
 export default admininquiryRouter;
 

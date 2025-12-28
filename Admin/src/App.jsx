@@ -17,14 +17,21 @@ export const backendURL = import.meta.env.VITE_BACKEND_URL;
 export const currency = 'AED';
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [token, setToken] = useState(() => {
+    return localStorage.getItem("adminToken") || "";
+  });
   const { loading, setLoading } = useContext(LoaderContext);
   const location = useLocation();
 
   // Persist admin token
   useEffect(() => {
-    localStorage.setItem('admintoken', token);
+    if (token) {
+      localStorage.setItem("adminToken", token);
+    } else {
+      localStorage.removeItem("adminToken");
+    }
   }, [token]);
+
 
   // Loader for route changes
   useEffect(() => {
