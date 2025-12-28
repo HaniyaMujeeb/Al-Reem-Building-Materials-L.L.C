@@ -2,9 +2,13 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { backendURL, currency } from '../App'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const List = ({ token }) => {
     const [list, setList] = useState([])
+    const navigate = useNavigate()
 
     // Fetch Product List from Backend
     const fetchList = async () => {
@@ -84,7 +88,7 @@ const List = ({ token }) => {
                             {item.sizes?.length > 0 ? (
                                 item.sizes.map((s, i) => (
                                     <p key={i}>
-                                        {s.size}: {currency} {s.price}
+                                        {s.size} {/* : {currency} {s.price} */}
                                     </p>
                                 ))
                             ) : (
@@ -92,12 +96,16 @@ const List = ({ token }) => {
                             )}
                         </div>
 
-                        <p
-                            className='delete-button'
-                            onClick={() => removeProduct(item._id)}
-                        >
-                            X
-                        </p>
+                        {/* Product Edit & Delete Buttons */}
+                        <div className="action-buttons">
+                            <button className="edit-button" onClick={() => navigate(`/edit-product/${item._id}`)}>
+                                Edit
+                            </button>
+                            <button className="delete-button" onClick={() => removeProduct(item._id)}>
+                                X
+                            </button>
+                        </div>
+
                     </div>
                 ))}
             </div>

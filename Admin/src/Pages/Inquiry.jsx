@@ -30,8 +30,10 @@ const Inquiries = ({ token }) => {
             const res = await axios.get(`${backendURL}/api/admin/inquiries`, {
                 headers: { token },
             });
-            if (res.data.success) setInquiries(res.data.data);
-            else toast.error(res.data.message);
+            if (res.data.success) {
+
+                setInquiries(res.data.data);
+            } else toast.error(res.data.message);
         } catch (err) {
             toast.error("Failed to fetch inquiries");
         } finally {
@@ -223,9 +225,13 @@ const Inquiries = ({ token }) => {
                 {filteredInquiries.map((inq) => (
                     <div key={inq._id} className="inquiry-card">
                         <div className="inquiry-header">
-                            <h4> Name: {inq.userName}</h4>
-                            <span className={`badge ${inq.status}`}>{inq.status}</span>
+                            <div>
+                                <h4>Name: {inq.userName}</h4>
+                                <p className="inquiry-id">ID: {inq._id.slice(-6)}</p>
+                            </div>
+                            <span className={`badge-inquiry ${inq.status}`}>{inq.status}</span>
                         </div>
+
 
                         <p><strong>Email:</strong> {inq.userEmail}</p>
                         <p><strong>Phone:</strong> {inq.userPhone}</p>
@@ -347,7 +353,7 @@ const Inquiries = ({ token }) => {
                                         <option value="">Select Size</option>
                                         {selectedProduct.sizes.map((s) => (
                                             <option key={s._id} value={s.size}>
-                                                {s.size} 
+                                                {s.size}
                                             </option>
                                         ))}
                                     </select>

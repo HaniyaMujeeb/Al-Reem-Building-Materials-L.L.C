@@ -10,6 +10,8 @@ import Login from './Components/Login';
 import AdminHome from './Pages/Home';
 import { ToastContainer } from 'react-toastify';
 import { LoaderContext } from './Components/LoaderContext.jsx';
+import EditProduct from './Pages/EditProduct'
+
 
 export const backendURL = import.meta.env.VITE_BACKEND_URL;
 export const currency = 'AED';
@@ -57,6 +59,8 @@ const App = () => {
                 <Route path='/list' element={<List token={token} />} />
                 <Route path='/orders' element={<Orders token={token} />} />
                 <Route path="/inquiries" element={<Inquiries token={token} />} />
+                <Route path="/edit-product/:id" element={<EditProduct token={token} />} />
+
               </Routes>
             </div>
           </div>

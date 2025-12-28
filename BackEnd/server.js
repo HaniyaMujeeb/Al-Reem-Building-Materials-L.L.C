@@ -32,6 +32,8 @@ app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/inquiry', inquiryRouter); 
 app.use("/api/admin/inquiries", admininquiryRouter);
+//app.use('/api/inquiries', inquiryRouter);
+
 
 
 

@@ -37,6 +37,7 @@ const createInquiry = async (req, res) => {
 
     // 💾 Save inquiry to DB
     const inquiry = new Inquiry({
+      userId: req.user?.id || null,
       userName,
       userEmail,
       userPhone,
@@ -200,4 +201,16 @@ const getAllInquiries = async (req, res) => {
   }
 };
 
-export { createInquiry, getAllInquiries };
+
+// Get all inquiries of logged-in user
+const getUserInquiries = async (req, res) => {
+  try {
+    const inquiries = await Inquiry.find({ userId: req.user.id }).sort({ createdAt: -1 });
+    res.json({ success: true, inquiries });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+
+export { createInquiry, getAllInquiries, getUserInquiries };

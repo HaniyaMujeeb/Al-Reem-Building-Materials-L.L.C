@@ -17,7 +17,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import CardPayment from './Pages/CardPayment';
 import OrderConfirmation from './Pages/OrderConfirmation';
 import Inquiry from './Pages/Inquiry';
+import Profile from './Pages/Profile';
+import MyInquiries from './Pages/MyInquiry';
 
+export const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -50,6 +53,9 @@ const App = () => {
         <Route path = "/card-payment" element={<CardPayment />} />
         <Route path = "/order-confirmation" element={<OrderConfirmation />} />
         <Route path = "/inquiry" element = {<Inquiry />} />
+        <Route path = "/profile" element={<Profile />} />
+        <Route path = "/my-inquiries" element={<MyInquiries />} />
+
 
       </Routes>
       <Footer />

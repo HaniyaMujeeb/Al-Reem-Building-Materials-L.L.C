@@ -79,8 +79,13 @@ const Navbar = () => {
             {token &&
               <div className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
                 <div className="dropdown-content">
-                  <p className="dropdown-item">My Profile</p>
-                  <p onClick={() => navigate('/orders')} className="dropdown-item">Orders</p>
+                  <p onClick={() => navigate('/profile')} className="dropdown-item">
+                    My Profile
+                  </p>
+                  <p onClick={() => navigate('/my-inquiries')} className="dropdown-item">
+                    My Inquiries
+                  </p>
+
                   <p onClick={logout} className="dropdown-item">Logout</p>
                 </div>
               </div>
