@@ -28,8 +28,6 @@ admininquiryRouter.get('/stats', adminAuth, async (req, res) => {
     const totalReplied = await Inquiry.countDocuments({ status: "replied" });
     const totalPending = await Inquiry.countDocuments({ status: "pending" });
 
-    console.log("Inquiry Stats -> Replied:", totalReplied, "Pending:", totalPending); // Debug log
-
     res.json({
       success: true,
       replied: totalReplied,

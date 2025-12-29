@@ -9,6 +9,7 @@ import cartRouter from './Routes/CartRoute.js';
 import orderRouter from './Routes/OrderRoute.js';
 import inquiryRouter from './Routes/InquiryRoute.js';
 import admininquiryRouter from './Routes/AdminInquiryRoute.js';
+import adminemployeeRouter from './Routes/AdminEmployeeRoute.js';
 import serverless from 'serverless-http';
 
 
@@ -32,6 +33,7 @@ app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
 app.use('/api/inquiry', inquiryRouter); 
 app.use("/api/admin/inquiries", admininquiryRouter);
+app.use("/api/admin/employees", adminemployeeRouter)
 //app.use('/api/inquiries', inquiryRouter);
 
 

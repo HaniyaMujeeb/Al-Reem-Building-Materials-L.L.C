@@ -4,10 +4,9 @@ import { backendURL, currency } from '../App'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-
-
 const List = ({ token }) => {
     const [list, setList] = useState([])
+    const [search, setSearch] = useState("") // ✅ search state
     const navigate = useNavigate()
 
     // Fetch Product List from Backend
@@ -16,7 +15,6 @@ const List = ({ token }) => {
             const response = await axios.get(backendURL + '/api/product/list')
 
             if (response.data.success) {
-                // ✅ FIX IS HERE
                 setList(Array.isArray(response.data.data) ? response.data.data : [])
             } else {
                 setList([])
@@ -54,9 +52,31 @@ const List = ({ token }) => {
         fetchList()
     }, [])
 
+    // Filtered products based on search
+    const filteredList = list.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.category.toLowerCase().includes(search.toLowerCase())
+    )
+
     return (
         <>
             <p className='product-list-title'>All Products List :</p>
+
+            {/* Search Bar */}
+            <input
+                type="text"
+                placeholder="Search by name or category..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{
+                    width: "100%",
+                    padding: "8px",
+                    marginBottom: "12px",
+                    borderRadius: "4px",
+                    border: "1px solid #ccc",
+                    fontSize: "14px"
+                }}
+            />
 
             <div className='product-list-container'>
                 {/* Header */}
@@ -69,9 +89,9 @@ const List = ({ token }) => {
                 </div>
 
                 {/* Products */}
-                {list.length === 0 && <p>No products found</p>}
+                {filteredList.length === 0 && <p>No products found</p>}
 
-                {list.map((item) => (
+                {filteredList.map((item) => (
                     <div className='product-list-item' key={item._id}>
                         <img
                             className='product-image'

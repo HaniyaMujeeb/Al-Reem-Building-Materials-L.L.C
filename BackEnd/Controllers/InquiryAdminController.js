@@ -7,7 +7,7 @@ import baseImage64 from "../longbase64.js";
 ========================================================= */
 export const replyToInquiry = async (req, res) => {
   try {
-    const { inquiryId, replyMessage } = req.body;
+    const { inquiryId, replyMessage, repliedBy } = req.body;
 
     if (!inquiryId || !replyMessage) {
       return res.json({
@@ -25,10 +25,18 @@ export const replyToInquiry = async (req, res) => {
       });
     }
 
+    if (!repliedBy) {
+      return res.json({
+        success: false,
+        message: "Replied by (employee name) is required",
+      });
+    }
+
     // Save reply in DB
     inquiry.adminReply = {
       message: replyMessage,
       repliedAt: new Date(),
+      repliedBy: repliedBy,
     };
     inquiry.status = "replied";
 
@@ -57,6 +65,10 @@ export const replyToInquiry = async (req, res) => {
         <p>Dear <strong>${inquiry.userName}</strong>,</p>
 
         <p>${replyMessage}</p>
+
+        <p style="margin-top:10px;">
+          <strong>${repliedBy}</strong> 
+        </p>
 
         <hr />
 

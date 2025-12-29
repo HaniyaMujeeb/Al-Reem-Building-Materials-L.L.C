@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const LoginRegister = () => {
-  const { token, setToken, navigate, backendUrl, mergeGuestCart } = useContext(ShopContext);
+  const { token, setToken, navigate, backendUrl, mergeGuestCart, saveTokenWithExpiry } = useContext(ShopContext);
   const [currentState, setCurrentState] = useState("Login");
 
   const [name, setName] = useState("");
@@ -71,8 +71,8 @@ const LoginRegister = () => {
           await mergeGuestCart(userToken);
 
           // Set token in context + localStorage
-          setToken(userToken);
-          localStorage.setItem("token", userToken);
+          saveTokenWithExpiry(userToken);
+
 
           navigate("/");
         }

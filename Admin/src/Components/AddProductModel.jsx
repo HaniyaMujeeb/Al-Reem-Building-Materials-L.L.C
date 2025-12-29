@@ -4,11 +4,12 @@ import { backendURL } from "../App";
 import { toast } from "react-toastify";
 import { assets } from '../assets/assets';
 
-const AddProductModel = ({ inquiry, token, close, refresh }) => {
+const AddProductModel = ({ inquiry, token, close, refresh, employeeName }) => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState("");
+    const [search, setSearch] = useState("");
 
     // Fetch all products from backend
     useEffect(() => {
@@ -34,6 +35,7 @@ const AddProductModel = ({ inquiry, token, close, refresh }) => {
             quantity,
             size: selectedSize || null,
             image: selectedProduct.image || "",
+            addedBy: employeeName || "Unknown", // Store employee who added
         };
 
         try {
@@ -44,10 +46,11 @@ const AddProductModel = ({ inquiry, token, close, refresh }) => {
             );
 
             if (res.data.success) {
-                toast.success("Product added");
+                toast.success(`Product added by ${employeeName}`);
                 setSelectedProduct(null);
                 setSelectedSize("");
                 setQuantity(1);
+                setSearch(""); // reset search
                 refresh();
                 close();
             } else toast.error(res.data.message);
@@ -56,9 +59,23 @@ const AddProductModel = ({ inquiry, token, close, refresh }) => {
         }
     };
 
+    // Filter products based on search
+    const filteredProducts = products.filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <div className="modal">
             <h3>Add Product</h3>
+
+            {/* Search input */}
+            <input
+                type="text"
+                placeholder="Search product..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ width: "100%", marginBottom: "8px", padding: "6px" }}
+            />
 
             {/* Product dropdown */}
             <select
@@ -70,7 +87,7 @@ const AddProductModel = ({ inquiry, token, close, refresh }) => {
                 }}
             >
                 <option value="">Select Product</option>
-                {products.map((p) => (
+                {filteredProducts.map((p) => (
                     <option key={p._id} value={p._id}>{p.name}</option>
                 ))}
             </select>
@@ -107,7 +124,7 @@ const AddProductModel = ({ inquiry, token, close, refresh }) => {
             )}
 
             <div className="modal-actions">
-                <button onClick={addProduct}>Add</button>
+                <button onClick={addProduct}>Add Product</button>
                 <button onClick={close}>Cancel</button>
             </div>
         </div>

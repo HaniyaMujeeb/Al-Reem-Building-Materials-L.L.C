@@ -31,8 +31,8 @@ const Contact = () => {
               Sheikh Salem Bin Sultan Road <br /> Al Mamourah, Ras Al Khaimah
             </p>
             <p className="contact-text">
-              📞 Tel: (+971) 556795888 <br />
-              ✉️ Email: <a href="mailto:contact@alreembuildingmaterials.com">contact@alreembuildingmaterials.com</a>
+              📞 Tel: (+971) 556478562 - (07)2288872 <br />
+              ✉️ Email: <a href="mailto:reembuilding@gmail.com">reembuilding@gmail.com</a>
             </p>
           </div>
 
@@ -47,11 +47,11 @@ const Contact = () => {
 
       {/* Contact Button */}
       <div className="contact-btn-container">
-        <a href="mailto:contact@alreembuildingmaterials.com" className="contact-btn">
+        <a href="mailto:reembuilding@gmail.com" className="contact-btn">
           ✉️ Send Us an Email
         </a>
 
-        <a href="https://wa.me/971556795888" className="contact-btn" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/971556478562" className="contact-btn" target="_blank" rel="noopener noreferrer">
            Chat on WhatsApp
         </a>
 

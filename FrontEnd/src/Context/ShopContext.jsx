@@ -20,7 +20,16 @@ const ShopContextProvider = (props) => {
   const navigate = useNavigate();
 
 
-  // Fetch products
+  const saveTokenWithExpiry = (userToken) => {
+    const now = new Date();
+    const expiry = now.getTime() + 7 * 24 * 60 * 60 * 1000; // 7 days in ms
+    localStorage.setItem("token", userToken);
+    localStorage.setItem("tokenExpiry", expiry.toString());
+    setToken(userToken);
+  };
+
+
+
   // Fetch products
   const getProductData = async () => {
     try {
@@ -99,12 +108,24 @@ const ShopContextProvider = (props) => {
     const savedCart = JSON.parse(localStorage.getItem("cartItems") || "{}");
     setCartItems(savedCart);
 
+    // Check token expiry
     const savedToken = localStorage.getItem("token");
-    if (savedToken) {
-      setToken(savedToken);
-      mergeGuestCart(savedToken); // merge guest cart if logged in
+    const tokenExpiry = localStorage.getItem("tokenExpiry");
+    if (savedToken && tokenExpiry) {
+      const now = new Date().getTime();
+      if (now < parseInt(tokenExpiry)) {
+        // Token is still valid
+        setToken(savedToken);
+        mergeGuestCart(savedToken); // merge guest cart if logged in
+      } else {
+        // Token expired
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenExpiry");
+        setToken("");
+      }
     }
   }, []);
+
 
   const value = {
     products,
@@ -124,6 +145,7 @@ const ShopContextProvider = (props) => {
     navigate,
     token,
     setToken,
+    saveTokenWithExpiry,
   };
 
   return <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>;

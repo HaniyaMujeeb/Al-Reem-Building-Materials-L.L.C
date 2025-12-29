@@ -54,7 +54,8 @@
 /* Button Container */
 .navbar-buttons {
     display: flex;
-    gap: 10px; /* Adjust gap between buttons */
+    gap: 10px;
+    /* Adjust gap between buttons */
 }
 
 /* Home Button */
@@ -144,21 +145,28 @@
 }
 
 .counterbadge {
-  display: inline-block;
-  background-color: red;
-  color: white;
-  padding: 5px 8px;
-  border-radius: 50%;
-  font-size: 14px;
-  margin-left: 5px;
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+    margin-left: 5px;
 }
 
 
 
-.badge.pending { background: #e74c3c; }
-.badge.replied { background: #27ae60; }
+.badge.pending {
+    background: #e74c3c;
+}
 
-.actions button { margin-right: 8px; }
+.badge.replied {
+    background: #27ae60;
+}
+
+.actions button {
+    margin-right: 8px;
+}
 
 
 /* Login CSS */
@@ -816,7 +824,7 @@ textarea {
     background-color: #f9f9f9;
     padding: 25px 20px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 180px;
     text-align: center;
     cursor: default;
@@ -894,7 +902,8 @@ textarea {
 .inquiry-header div {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* ensures left alignment */
+    align-items: flex-start;
+    /* ensures left alignment */
 }
 
 .inquiry-header h4 {
@@ -924,6 +933,14 @@ textarea {
 .badge-inquiry.cancelled {
     background-color: black;
 }
+
+.employee-reply {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #2c7a7b;
+    font-weight: 500;
+}
+
 
 /* Inquiry Details */
 .inquiry-card p {
@@ -1011,73 +1028,99 @@ textarea {
 }
 
 .reply-box {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .reply-box textarea {
-  width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  resize: vertical;
-  font-family: Raleway, sans-serif;
-  font-size: 14px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-family: Raleway, sans-serif;
+    font-size: 14px;
 }
 
 .reply-box button {
-  align-self: flex-end;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
+    align-self: flex-end;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
 }
 
 .reply-box button:hover {
-  opacity: 0.9;
+    opacity: 0.9;
+}
+
+/* Employee dropdown styling */
+.reply-box select {
+  width: 100%;             /* Full width like textarea */
+  padding: 8px 12px;       /* Inner padding */
+  border: 1px solid #ccc;  /* Match textarea border */
+  border-radius: 5px;      /* Rounded corners */
+  font-family: Raleway, sans-serif; /* Match textarea font */
+  font-size: 14px;         /* Match textarea font size */
+  background-color: #fff;  /* White background */
+  color: #333;             /* Text color */
+  outline: none;           /* Remove default outline */
+  transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth hover/focus */
+}
+
+.reply-box select:focus {
+  border-color: #007bff;   /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Slight glow */
+}
+
+.reply-box select option {
+  padding: 8px;            /* Padding inside options */
+  font-size: 14px;         /* Match font size */
 }
 
 
+
+
 .add-product-box {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .add-product-box select,
 .add-product-box input {
-  padding: 6px 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-family: Raleway, sans-serif;
-  font-size: 14px;
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: Raleway, sans-serif;
+    font-size: 14px;
 }
 
 .add-product-box button {
-  align-self: flex-end;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
-  background-color: #28a745;
-  color: white;
-  cursor: pointer;
+    align-self: flex-end;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
 }
 
 .add-product-box button:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 .add-product-box img {
-  margin-top: 5px;
-  width: 80px;
-  height: auto;
-  border-radius: 5px;
-  object-fit: cover;
+    margin-top: 5px;
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .remove-product-btn {
@@ -1092,60 +1135,65 @@ textarea {
 }
 
 .qty-control {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .qty-control button {
-  padding: 4px 8px;
-  font-size: 14px;
-  cursor: pointer;
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .loader-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .loader {
-  width: 50px;
-  aspect-ratio: 1;
-  display: grid;
-  border-radius: 50%;
-  background:
-    linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
-    linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
-  background-repeat: no-repeat;
-  animation: l23 1s infinite steps(12);
+    width: 50px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+        linear-gradient(0deg, rgb(0 0 0/50%) 30%, #0000 0 70%, rgb(0 0 0/100%) 0) 50%/8% 100%,
+        linear-gradient(90deg, rgb(0 0 0/25%) 30%, #0000 0 70%, rgb(0 0 0/75%) 0) 50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: l23 1s infinite steps(12);
 }
+
 .loader::before,
 .loader::after {
-   content: "";
-   grid-area: 1/1;
-   border-radius: 50%;
-   background: inherit;
-   opacity: 0.915;
-   transform: rotate(30deg);
+    content: "";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.915;
+    transform: rotate(30deg);
 }
+
 .loader::after {
-   opacity: 0.83;
-   transform: rotate(60deg);
+    opacity: 0.83;
+    transform: rotate(60deg);
 }
+
 @keyframes l23 {
-  100% {transform: rotate(1turn)}
+    100% {
+        transform: rotate(1turn)
+    }
 }
 
 
 .edit-product-page input {
-  display: block;
-  margin: 10px 0;
-  padding: 8px;
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
 }
 
 
@@ -1156,7 +1204,7 @@ textarea {
     padding: 20px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
 }
 
@@ -1219,7 +1267,8 @@ textarea {
 
 .action-buttons {
     display: flex;
-    gap: 10px; /* space between buttons */
+    gap: 10px;
+    /* space between buttons */
     margin-right: -30px;
 }
 
@@ -1249,5 +1298,3 @@ textarea {
 .delete-button:hover {
     background-color: #e53935;
 }
-
-

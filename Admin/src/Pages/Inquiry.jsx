@@ -11,6 +11,7 @@ const Inquiries = ({ token }) => {
     // Reply states
     const [replyingInquiryId, setReplyingInquiryId] = useState(null);
     const [replyMessage, setReplyMessage] = useState("");
+    const [repliedBy, setRepliedBy] = useState("");
 
     // Add Product states
     const [addingProductInquiryId, setAddingProductInquiryId] = useState(null);
@@ -22,6 +23,29 @@ const Inquiries = ({ token }) => {
 
     // Loader state
     const [loading, setLoading] = useState(false);
+
+    // ✅ Static employee list (can be dynamic later)
+    const [employees, setEmployees] = useState([]);
+
+    useEffect(() => {
+        const fetchEmployees = async () => {
+            try {
+                const res = await axios.get(
+                    `${backendURL}/api/admin/employees`,
+                    { headers: { token } }
+                );
+                if (res.data.success) {
+                    setEmployees(res.data.data);
+                }
+            } catch {
+                toast.error("Failed to load employees");
+            }
+        };
+
+        fetchEmployees();
+    }, []);
+
+
 
     // Fetch inquiries
     const fetchInquiries = async () => {
@@ -91,18 +115,22 @@ const Inquiries = ({ token }) => {
 
     // Send reply
     const sendReply = async (inquiryId) => {
+        if (!repliedBy) return toast.error("Select employee name");
         if (!replyMessage.trim()) return toast.error("Reply cannot be empty");
+
         setLoading(true);
         try {
             const res = await axios.post(
                 `${backendURL}/api/admin/inquiries/reply`,
-                { inquiryId, replyMessage },
+                { inquiryId, replyMessage, repliedBy }, // ✅ added
                 { headers: { token } }
             );
+
             if (res.data.success) {
                 toast.success("Reply sent");
                 setReplyingInquiryId(null);
                 setReplyMessage("");
+                setRepliedBy("");
                 fetchInquiries();
             } else toast.error(res.data.message);
         } catch {
@@ -232,6 +260,12 @@ const Inquiries = ({ token }) => {
                             <span className={`badge-inquiry ${inq.status}`}>{inq.status}</span>
                         </div>
 
+                        {inq.status === "replied" && inq.adminReply?.repliedBy && (
+                            <p className="employee-reply">
+                                <strong>Replied by:</strong> {inq.adminReply.repliedBy}
+                            </p>
+                        )}
+
 
                         <p><strong>Email:</strong> {inq.userEmail}</p>
                         <p><strong>Phone:</strong> {inq.userPhone}</p>
@@ -301,26 +335,93 @@ const Inquiries = ({ token }) => {
                         {/* Inline Reply Box */}
                         {replyingInquiryId === inq._id && (
                             <div className="reply-box">
+                                {/* Employee dropdown */}
+                                <select
+                                    value={repliedBy}
+                                    onChange={(e) => {
+                                        const selectedEmployee = e.target.value;
+                                        setRepliedBy(selectedEmployee);
+
+                                        // Optional: Auto-fill initial message when employee selected
+                                        if (selectedEmployee && !replyMessage.trim()) {
+                                            const currentInquiry = inquiries.find(i => i._id === replyingInquiryId);
+                                            const initialMessage = `Hi, This is ${selectedEmployee} from our sales team regarding your inquiry about "${currentInquiry.items.map(item => item.productName).join(", ")}".\n\n`;
+                                            setReplyMessage(initialMessage);
+                                        }
+                                    }}
+                                >
+                                    <option value="">Select Employee</option>
+                                    {employees.map((emp) => (
+                                        <option key={emp._id} value={emp.name}>
+                                            {emp.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {/* Reply textarea */}
                                 <textarea
-                                    rows="3"
+                                    rows="6"
                                     placeholder="Type your reply..."
                                     value={replyMessage}
                                     onChange={(e) => setReplyMessage(e.target.value)}
                                 />
-                                <button onClick={() => sendReply(inq._id)}>Send Reply</button>
+
+                                {/* Send button */}
+                                <button
+                                    onClick={async () => {
+                                        if (!repliedBy) return toast.error("Select Employee Name");
+                                        if (!replyMessage.trim()) return toast.error("Reply cannot be empty");
+
+                                        setLoading(true);
+                                        try {
+                                            // Footer appended automatically
+                                            const footer = `
+<br><br>---
+<br>If you would like to purchase this product, please contact us on WhatsApp - +971556478562,
+<br>call us on this number - 072288872, or reply back to this email to confirm your order.
+<br>If you would like to pay by card, please visit our store.
+<br>If you prefer Cash on Delivery, please send us your address along with the reply and confirm your payment method.
+`;
+
+                                            const fullMessage = replyMessage + footer;
+
+                                            const res = await axios.post(
+                                                `${backendURL}/api/admin/inquiries/reply`,
+                                                { inquiryId: inq._id, replyMessage: fullMessage, repliedBy },
+                                                { headers: { token } }
+                                            );
+
+                                            if (res.data.success) {
+                                                toast.success("Reply sent");
+                                                setReplyingInquiryId(null);
+                                                setReplyMessage("");
+                                                setRepliedBy("");
+                                                fetchInquiries();
+                                            } else toast.error(res.data.message);
+                                        } catch {
+                                            toast.error("Failed to send reply");
+                                        } finally {
+                                            setLoading(false);
+                                        }
+                                    }}
+                                >
+                                    Send Reply
+                                </button>
                             </div>
                         )}
+
 
                         {/* Inline Add Product Box */}
                         {addingProductInquiryId === inq._id && (
                             <div className="add-product-box">
+                                {/* Product dropdown */}
                                 <select
                                     disabled={loadingProducts || !products?.length}
                                     value={selectedProduct?._id || ""}
                                     onChange={(e) => {
                                         const prod = products.find((p) => p._id === e.target.value);
                                         setSelectedProduct(prod);
-                                        setSelectedSize("");
+                                        setSelectedSize(""); // reset size
                                     }}
                                 >
                                     <option value="">Select Product</option>
@@ -335,6 +436,7 @@ const Inquiries = ({ token }) => {
                                     )}
                                 </select>
 
+                                {/* Quantity input */}
                                 <input
                                     type="number"
                                     min={1}
@@ -345,6 +447,7 @@ const Inquiries = ({ token }) => {
                                     placeholder="Quantity"
                                 />
 
+                                {/* Size dropdown only if product has sizes */}
                                 {selectedProduct?.sizes?.length > 0 && (
                                     <select
                                         value={selectedSize}
@@ -359,6 +462,7 @@ const Inquiries = ({ token }) => {
                                     </select>
                                 )}
 
+                                {/* Product image */}
                                 {selectedProduct && (
                                     <img
                                         src={selectedProduct.image || assets.no_image}
@@ -367,9 +471,17 @@ const Inquiries = ({ token }) => {
                                     />
                                 )}
 
+                                {/* Show which employee is adding */}
+                                {repliedBy && (
+                                    <p style={{ fontSize: "12px", color: "#555", marginTop: "5px" }}>
+                                        Adding as: <strong>{repliedBy}</strong>
+                                    </p>
+                                )}
+
                                 <button onClick={() => handleAddProduct(inq._id)}>Add Product</button>
                             </div>
                         )}
+
                     </div>
                 ))}
             </div>

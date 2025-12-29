@@ -23,6 +23,7 @@ const InquirySchema = new mongoose.Schema({
   adminReply: {
     message: String,
     repliedAt: Date,
+    repliedBy: String,
   },
 
   status: {
