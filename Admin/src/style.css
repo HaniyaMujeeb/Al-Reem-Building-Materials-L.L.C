@@ -46,7 +46,7 @@
     font-weight: bold;
     font-family: Raleway;
     color: black;
-    margin-left: -910px;
+    margin-left: -870px;
     margin-top: 10px;
     letter-spacing: 1px;
 }
@@ -66,7 +66,7 @@
     border-radius: 9999px;
     font-family: Raleway;
     border: none;
-    font-size: 17px;
+    font-size: 14px;
     letter-spacing: 0.8px;
 }
 
@@ -84,7 +84,7 @@
     border-radius: 9999px;
     font-family: Raleway;
     border: none;
-    font-size: 17px;
+    font-size: 14px;
     letter-spacing: 0.80px;
 }
 
@@ -853,7 +853,7 @@ textarea {
     margin-bottom: 20px;
     font-family: Raleway, sans-serif;
     color: #000;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
     margin-top: -5px;
 }
@@ -881,11 +881,26 @@ textarea {
     color: #777;
 }
 
+.inquiry-list p {
+    margin: 6px 0;              /* compact spacing */
+    font-size: 14px;            /* slightly smaller text */
+    color: #000;
+    line-height: 1.4;
+}
+
+.inquiry-list p strong {
+    color: #000;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+
+
 
 /* Individual Inquiry Card */
 .inquiry-card {
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 10px;
     border-radius: 8px;
     background-color: #f9f9f9;
     font-family: Raleway, sans-serif;
@@ -907,7 +922,7 @@ textarea {
 }
 
 .inquiry-header h4 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #000;
     margin: 0;
@@ -942,13 +957,6 @@ textarea {
 }
 
 
-/* Inquiry Details */
-.inquiry-card p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #000;
-}
-
 /* Inquiry Products Container */
 .inquiry-products {
     display: flex;
@@ -965,7 +973,7 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 120px;
+    width: 100px;
     background-color: #fff;
     gap: 5px;
 }
