@@ -24,10 +24,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    margin-top: -8px;
-    margin-left: -7px;
-    padding: 10px 32px;
+    gap: 8px;
+    padding: 10px 20px;   /* 🔽 reduced padding */
     font-family: Raleway;
     background-color: #D0D7C5;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,18 +33,19 @@
 }
 
 
+
 /* Logo Styling */
 .navbar-logo {
-    width: 200px;
+    width: 140px;
     height: auto;
 }
 
 .navbar-title {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: bold;
     font-family: Raleway;
     color: black;
-    margin-left: -980px;
+    margin-left: -990px;
     margin-top: 10px;
     letter-spacing: 1px;
 }
@@ -56,6 +55,11 @@
     display: flex;
     gap: 10px;
     /* Adjust gap between buttons */
+}
+
+.navbar-buttons button {
+    padding: 10px 12px;   /* 🔽 smaller buttons */
+    font-size: 14px;
 }
 
 /* Home Button */
