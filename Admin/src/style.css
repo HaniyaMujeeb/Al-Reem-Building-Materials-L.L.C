@@ -211,8 +211,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    max-width: 24rem;
+    width: 50%;
+    max-width: 20%;
     background: rgba(255, 255, 255, 1);
     border-radius: 30px;
     padding: 40px;
