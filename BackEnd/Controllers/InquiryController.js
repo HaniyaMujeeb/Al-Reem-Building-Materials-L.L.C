@@ -191,15 +191,18 @@ const createInquiry = async (req, res) => {
   }
 };
 
-// Get all inquiries
+
+// Get all inquiries (admin use)
 const getAllInquiries = async (req, res) => {
   try {
     const inquiries = await Inquiry.find().sort({ createdAt: -1 });
     res.json({ success: true, data: inquiries });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
+  } catch (err) {
+    console.error("Error fetching inquiries:", err);
+    res.status(500).json({ success: false, message: err.message });
   }
 };
+
 
 
 // Get all inquiries of logged-in user

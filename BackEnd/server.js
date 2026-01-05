@@ -7,10 +7,10 @@ import userRouter from './Routes/UserRoute.js';
 import productRouter from './Routes/ProductRoute.js';
 import cartRouter from './Routes/CartRoute.js';
 import orderRouter from './Routes/OrderRoute.js';
-import inquiryRouter from './Routes/InquiryRoute.js';
-import admininquiryRouter from './Routes/AdminInquiryRoute.js';
+import inquiryRouter from './Routes/AdminInquiryRoute.js';
 import adminemployeeRouter from './Routes/AdminEmployeeRoute.js';
 import serverless from 'serverless-http';
+import userinquiryrouter from './Routes/InquiryRoute.js';
 
 
 
@@ -31,11 +31,13 @@ app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/order', orderRouter)
-app.use('/api/inquiry', inquiryRouter); 
-app.use("/api/admin/inquiries", admininquiryRouter);
-app.use("/api/admin/employees", adminemployeeRouter)
-//app.use('/api/inquiries', inquiryRouter);
+app.use('/api/inquiry', userinquiryrouter);  // this is for user inquiries
 
+// and these three are for admin side so now say 
+app.use("/api/admin/inquiries", inquiryRouter);
+app.use("/api/admin/employees", adminemployeeRouter)
+//app.use('/api/admin/adminemployee', adminemployeeRouter);
+app.use('/api/employee/inquiries', inquiryRouter);
 
 
 

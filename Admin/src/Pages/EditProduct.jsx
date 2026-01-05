@@ -79,7 +79,7 @@ const EditProduct = ({ token }) => {
 
     return (
         <div className="edit-product-page">
-            <h2>Edit Product</h2>
+            <h2>Edit Product:</h2>
 
             <div className="form-group">
                 <label>Product Name:</label>

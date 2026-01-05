@@ -1,78 +1,109 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { backendURL } from '../App';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { decodeToken } from "../utils/Auth";
+import { backendURL } from "../App";
 
-const AdminHome = ({ token }) => {
-    const navigate = useNavigate();
-    const [repliedCount, setRepliedCount] = useState(0);
-    const [pendingCount, setPendingCount] = useState(0);
+const AdminHome = () => {
+  const navigate = useNavigate();
 
-    const quickLinks = [
-        { title: "Add / Update Products", path: "/add" },
-        { title: "View Orders", path: "/orders" },
-        { title: "View Products", path: "/list" },
-        { title: "View Inquiries", path: "/inquiries" }
-    ];
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    role: "",
+  });
 
-    useEffect(() => {
-        const fetchInquiryStats = async () => {
-            try {
-                const adminToken = localStorage.getItem('adminToken'); // ✅ correct key
+  const [pendingCount, setPendingCount] = useState(0);
 
-                const res = await axios.get(
-                    `${backendURL}/api/admin/inquiries/stats`,
-                    {
-                        headers: {
-                            token: adminToken // ✅ custom header (NO Bearer)
-                        }
-                    }
-                );
+  const quickLinks = [
+    { title: "Add / Update Products", path: "/add" },
+    { title: "Add Employee", path: "/add-employee", adminOnly: true },
+    { title: "User Actions", path: "/logs", adminOnly: true },
+    { title: "View Orders", path: "/orders" },
+    { title: "View Products", path: "/list" },
+    { title: "View Inquiries", path: "/inquiries" },
+    { title: "Update Profile", path: "/update-profile" },
+    { title: "Employee List", path: "/employee-list", adminOnly: true },
 
-                setRepliedCount(res.data.replied || 0);
-                setPendingCount(res.data.pending || 0);
-            } catch (err) {
-                console.error("Failed to fetch inquiry stats:", err);
-            }
-        };
+  ];
 
-        fetchInquiryStats();
-    }, []);
+  useEffect(() => {
+    const adminToken = localStorage.getItem("adminToken");
+    const employeeToken = localStorage.getItem("employeeToken");
+    const token = adminToken || employeeToken;
 
-    return (
-        <div className="admin-home">
-            <h1>👋 Welcome Back, Admin</h1>
-            <p>Manage your store effectively and stay updated.</p>
+    if (!token) {
+      navigate("/login");
+      return;
+    }
 
-            {/* ===== Inquiry Status Cards ===== */}
-            <div className="overview-cards">
-                <div className="card">
-                    <h3>📬 Replied Inquiries</h3>
-                    <h2>{repliedCount}</h2>
-                </div>
-                <div className="card">
-                    <h3>⏳ Pending Inquiries</h3>
-                    <h2>{pendingCount}</h2>
-                </div>
+    const decoded = decodeToken(token);
+
+    if (!decoded || !decoded.role) {
+      navigate("/login");
+      return;
+    }
+
+    const fetchProfile = async () => {
+      try {
+        const profileUrl =
+          decoded.role === "admin"
+            ? `${backendURL}/api/admin/employees/admin`
+            : `${backendURL}/api/admin/employees/employee/me`;
+
+        const res = await axios.get(profileUrl, {
+          headers: { token },
+        });
+
+        if (res.data.success) {
+          setUser({
+            name: res.data.user.name,
+            email: res.data.user.email,
+            role: decoded.role,
+          });
+        } else {
+          navigate("/login"); // redirect silently if profile not found
+        }
+      } catch (err) {
+        console.error("Failed to load profile", err);
+        navigate("/login"); // silent redirect
+      }
+    };
+
+    fetchProfile();
+  }, [navigate]);
+
+  const isAdmin = user.role === "admin";
+
+  return (
+    <div className="admin-home">
+      <h1>👋 Welcome Back, {user.name}</h1>
+
+      <p>
+        Role: <strong>{user.role}</strong> | Email:{" "}
+        <strong>{user.email}</strong>
+      </p>
+
+      <div className="quick-links">
+        {quickLinks.map((link, index) => {
+          if (link.adminOnly && !isAdmin) return null;
+
+          return (
+            <div
+              key={index}
+              className="link-card"
+              onClick={() => navigate(link.path)}
+            >
+              <h3>{link.title}</h3>
+              {link.path === "/inquiries" && pendingCount > 0 && (
+                <span className="badge">{pendingCount}</span>
+              )}
             </div>
-
-            {/* ===== Quick Links ===== */}
-            <div className="quick-links">
-                {quickLinks.map((link, index) => (
-                    <div
-                        key={index}
-                        className="link-card"
-                        onClick={() => navigate(link.path)}
-                    >
-                        <h3>{link.title}</h3>
-                        {link.path === "/inquiries" && pendingCount > 0 && (
-                            <span className="badge"> </span>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default AdminHome;

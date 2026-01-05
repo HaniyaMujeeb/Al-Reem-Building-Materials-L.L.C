@@ -6,6 +6,9 @@ import parcel_icon from './parcel_icon.png'
 import login_page from './login page.png'
 import no_image from './no_image.png'
 import inquiry_icon from './inquiry.png'
+import user_log from './log-in.png'
+import update_profile from './update-user.png'
+import employee_list from './customer.png'
 
 export const assets = {
     logo,
@@ -15,6 +18,9 @@ export const assets = {
     parcel_icon,
     login_page,
     no_image,
-    inquiry_icon
+    inquiry_icon,
+    user_log,
+    update_profile,
+    employee_list
 }
 

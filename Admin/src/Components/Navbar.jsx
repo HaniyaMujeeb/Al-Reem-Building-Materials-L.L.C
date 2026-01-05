@@ -2,19 +2,29 @@ import React from 'react';
 import { assets } from '../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = ({ setToken }) => {
+const Navbar = ({ setToken, setUser, setRole }) => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
-    localStorage.removeItem('adminToken'); // ✅ remove persisted token
-    setToken('');                           // ✅ clear state
-    navigate('/');                          // optional redirect
+    // Remove all persisted login info
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('employeeToken');
+    localStorage.removeItem('authUser');
+    localStorage.removeItem('authRole');
+
+    // Clear React state
+    if (setToken) setToken('');
+    if (setUser) setUser(null);
+    if (setRole) setRole('');
+
+    // Redirect to login page
+    navigate('/login');
   };
 
   return (
     <div className='navbar-container'>
       <Link to='/'>
-        <img className='navbar-logo' src={assets.logo} alt='' />
+        <img className='navbar-logo' src={assets.logo} alt='Logo' />
       </Link>
       <span className='navbar-title'>ADMIN PANEL</span>
 
@@ -31,5 +41,6 @@ const Navbar = ({ setToken }) => {
 };
 
 export default Navbar;
+
 
 

@@ -3,32 +3,28 @@ import axios from "axios";
 import { backendURL } from "../App";
 import { toast } from "react-toastify";
 
-const ReplyModel = ({ inquiry, token, close, refresh }) => {
+const ReplyModel = ({ inquiry, token, close, refresh, employees }) => {
   const [message, setMessage] = useState("");
-  const [repliedBy, setRepliedBy] = useState(""); // ✅ added
+  const [repliedBy, setRepliedBy] = useState("");
   const [loading, setLoading] = useState(false);
-
 
   const sendReply = async () => {
     if (!repliedBy) return toast.error("Please select employee name");
     if (!message.trim()) return toast.error("Reply cannot be empty");
 
+    setLoading(true);
     try {
-      setLoading(true);
+      // Send exactly what user typed — no footer
       const res = await axios.post(
-        `${backendURL}/api/admin/inquiries/reply`,
-        {
-          inquiryId: inquiry._id,
-          replyMessage: message,
-          repliedBy: repliedBy, // ✅ sent to backend
-        },
+        `${backendURL}/admin/inquiries/reply`,
+        { inquiryId: inquiry._id, replyMessage: message, repliedBy },
         { headers: { token } }
       );
 
       if (res.data.success) {
         toast.success("Reply sent successfully");
-        refresh();
-        close();
+        refresh(); // refresh inquiries
+        close();   // close modal
       } else {
         toast.error(res.data.message || "Reply failed");
       }
@@ -44,7 +40,7 @@ const ReplyModel = ({ inquiry, token, close, refresh }) => {
       <div className="modal">
         <h3>Reply to {inquiry.userName}</h3>
 
-        {/* ✅ Employee selection */}
+        {/* Employee selection */}
         <select
           value={repliedBy}
           onChange={(e) => setRepliedBy(e.target.value)}
@@ -52,12 +48,13 @@ const ReplyModel = ({ inquiry, token, close, refresh }) => {
         >
           <option value="">Select Employee</option>
           {employees.map((emp) => (
-            <option key={emp} value={emp}>
-              {emp}
+            <option key={emp._id} value={emp.name}>
+              {emp.name}
             </option>
           ))}
         </select>
 
+        {/* Reply message */}
         <textarea
           rows="5"
           placeholder="Type your reply..."

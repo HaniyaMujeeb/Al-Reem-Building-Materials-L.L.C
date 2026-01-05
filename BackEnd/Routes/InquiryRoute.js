@@ -3,15 +3,14 @@ import { createInquiry, getAllInquiries, getUserInquiries } from "../Controllers
 import adminAuth from '../Middleware/AdminAuth.js'
 import authUser from '../Middleware/Auth.js'
 
-const router = express.Router();
+const userinquiryrouter = express.Router();
 
 // Public route for submitting inquiry
-router.post("/create", authUser, createInquiry);
+userinquiryrouter.post("/create", authUser, createInquiry);
 
 // Admin route to see all inquiries
-router.get("/", adminAuth, getAllInquiries);
-router.get("/my-inquiries", authUser, getUserInquiries);
+userinquiryrouter.get("/my-inquiries", authUser, getUserInquiries);
 
 
 
-export default router;
+export default userinquiryrouter;

@@ -238,6 +238,7 @@
     color: black;
 }
 
+
 .form-divider {
     width: 2rem;
     height: 3px;
@@ -1305,4 +1306,520 @@ textarea {
 
 .delete-button:hover {
     background-color: #e53935;
+}
+
+
+/* Audit Page CSS */
+
+/* ===== Container ===== */
+.audit-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== Header ===== */
+.audit-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ===== Filters ===== */
+.filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.filters select,
+.filters input[type="text"],
+.filters input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  min-width: 180px;
+}
+
+/* ===== Export Buttons ===== */
+.export-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.export-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0077ff;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.export-buttons button:hover {
+  background-color: #005bbb;
+}
+
+/* ===== Table Wrapper ===== */
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.audit-table th,
+.audit-table td {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.audit-table th {
+  background-color: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+}
+
+.audit-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.audit-table tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+/* ===== Badges ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.badge.blue { background-color: #1e90ff; }
+.badge.green { background-color: #28a745; }
+.badge.yellow { background-color: #ffc107; color: #333; }
+.badge.red { background-color: #dc3545; }
+.badge.gray { background-color: #6c757d; }
+
+/* ===== No Data ===== */
+.audit-table .no-data {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+
+
+/* Add Employee Page CSS */
+
+/* ===== Container ===== */
+.add-employee-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* ===== Header ===== */
+.add-employee-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* ===== Form ===== */
+.add-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-employee-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-employee-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.add-employee-form input,
+.add-employee-form select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.add-employee-form input:focus,
+.add-employee-form select:focus {
+  border-color: #0077ff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 119, 255, 0.3);
+}
+
+/* ===== Submit Button ===== */
+.add-employee-form button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-employee-form button:disabled {
+  background-color: #636363;
+  cursor: not-allowed;
+}
+
+.add-employee-form button:hover:not(:disabled) {
+  background-color: #636363;
+}
+
+
+
+
+
+/* UpdateProfile.css */
+
+.update-profile {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Raleway";
+}
+
+.update-profile h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.update-profile p {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* 🔥 FORM FIX */
+.update-profile form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 🔥 INPUT FIX */
+.update-profile input {
+  width: 95%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.update-profile input:focus {
+  border-color: black;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔥 BUTTON FIX */
+.update-profile button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.update-profile button:hover {
+  background-color: grey;
+}
+
+/* 🔥 MESSAGE FIX */
+.message {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #e7f3fe;
+  color: red;
+  font-weight: 500;
+}
+
+/* ROLE COLOR */
+.update-profile strong {
+  color: #4a90e2;
+}
+
+
+
+/* Employee List CSS */
+.EmployeeList {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.EmployeeList h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Table styling */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.employee-table th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+
+.employee-table tbody tr:hover {
+  background-color: #e6f7ff;
+}
+
+
+
+/* Theme Toggle CSS */
+
+.theme-toggle-container {
+  position: fixed;
+  top: 140px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.theme-toggle-container button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: all 0.2s;
+}
+
+.theme-toggle-container button:hover {
+  transform: scale(1.05);
+}
+
+body.dark-mode .theme-toggle-container button {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
+/* Dark Mode for body */
+body.dark-mode {
+  background-color: black;
+  color: #f5f5f5;
+}
+
+/* Dark mode */
+body.dark-mode .sidebar-link {
+  color: black;
+  background-color: #DEE3D6; /* light text */
+}
+
+body.dark-mode .sidebar-link:hover {
+  background-color: grey; /* darker hover for dark mode */
+}
+
+/* Compact table/cards */
+body.compact-table table,
+body.compact-table .employee-card,
+body.compact-table .inquiry-card {
+  padding: 6px;
+  font-size: 0.9rem;
+}
+
+
+/* Dark mode */
+body.dark-mode .admin-home h1,
+body.dark-mode .admin-home p {
+  color: #f5f5f5; /* light text in dark mode */
+}
+
+
+
+
+
+
+/* Dark mode wrapper */
+body.dark-mode .add-form {
+  color: white; /* text color */
+}
+
+body.dark-mode .upload-title{
+    color: white;
+}
+
+/* Inputs, selects, textareas */
+body.dark-mode .add-form input,
+body.dark-mode .add-form textarea,
+body.dark-mode .add-form select {
+  background-color: #333;
+  color: #f5f5f5;
+  border: 1px solid #555;
+}
+
+/* Upload icons container */
+body.dark-mode .image-upload-container {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+
+/* Dark mode dropdown text */
+body.dark-mode select.product-category-select,
+body.dark-mode select.product-subcategory-select {
+  background-color: #333;  /* dark background */
+  color: #aaa;             /* grey text */
+  border: 1px solid #555;  /* optional border for contrast */
+}
+
+/* Optional: change dropdown arrow in dark mode */
+body.dark-mode select.product-category-select::-ms-expand,
+body.dark-mode select.product-subcategory-select::-ms-expand {
+  filter: invert(1); /* for IE/Edge arrow */
+}
+
+body.dark-mode select.product-category-select option,
+body.dark-mode select.product-subcategory-select option {
+  background-color: #333; /* dark option background */
+  color: #aaa;            /* grey option text */
+}
+
+
+
+/* Labels inside upload container */
+body.dark-mode .image-label {
+  background-color: #333;
+  border: 1px dashed white;
+}
+
+/* Image preview when uploaded */
+body.dark-mode .image-label.uploaded-label img {
+  border: 2px solid #f5f5f5;
+}
+
+/* Size boxes */
+body.dark-mode .size-box {
+  background-color: #333;
+  color: #f5f5f5;
+  border: 1px solid #555;
+}
+
+body.dark-mode .size-box.selected {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Size price input */
+body.dark-mode .size-price-input {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border: 1px solid #555;
+}
+
+/* Checkbox label */
+body.dark-mode .bestseller-label {
+  color: #f5f5f5;
+}
+
+/* Submit button */
+body.dark-mode .submit-button {
+  background-color: #444;
+  color: #f5f5f5;
+  border: 1px solid #666;
+}
+
+body.dark-mode .submit-button:hover {
+  background-color: #555;
+}
+
+
+/* ===== DARK MODE ===== */
+body.dark-mode .product-list-item  {
+  background-color: #2f2f2f;      /* grey */
+  color: #e0e0e0;
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .product-list-title {
+    color: white;
+}
+
+body.dark-mode .orders-page h3 .inquiries-page h2 {
+    color: white;
+}
+
+body.dark-mode .inquiries-page h2 {
+    color: white;
+}
+
+body.dark-mode .EmployeeList h2 {
+    color: white;
 }

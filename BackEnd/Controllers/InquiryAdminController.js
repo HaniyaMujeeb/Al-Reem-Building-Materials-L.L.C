@@ -1,6 +1,8 @@
 import Inquiry from "../Models/InquiryModel.js";
 import transporter from "../Config/Nodemailer.js";
 import baseImage64 from "../longbase64.js";
+import AuditLog from "../Models/AuditLogModel.js";
+
 
 /* =========================================================
    📌 REPLY TO INQUIRY (SAVE + SEND EMAIL)
@@ -8,39 +10,37 @@ import baseImage64 from "../longbase64.js";
 export const replyToInquiry = async (req, res) => {
   try {
     const { inquiryId, replyMessage, repliedBy } = req.body;
+    const employeeId = req.user?.id;
 
-    if (!inquiryId || !replyMessage) {
-      return res.json({
-        success: false,
-        message: "Inquiry ID and reply message are required",
-      });
-    }
+    if (!inquiryId || !replyMessage)
+      return res.status(400).json({ success: false, message: "Missing data" });
 
     const inquiry = await Inquiry.findById(inquiryId);
+    if (!inquiry)
+      return res.status(404).json({ success: false, message: "Inquiry not found" });
 
-    if (!inquiry) {
-      return res.json({
-        success: false,
-        message: "Inquiry not found",
-      });
+    // Make sure inquiry.userId exists
+    if (!inquiry.userId) {
+      return res.status(400).json({ success: false, message: "Inquiry missing userId" });
     }
 
-    if (!repliedBy) {
-      return res.json({
-        success: false,
-        message: "Replied by (employee name) is required",
-      });
-    }
 
-    // Save reply in DB
+    // Save reply
     inquiry.adminReply = {
       message: replyMessage,
       repliedAt: new Date(),
-      repliedBy: repliedBy,
+      repliedBy: req.user.name,
     };
     inquiry.status = "replied";
+    inquiry.lastModifiedBy = employeeId;
 
     await inquiry.save();
+
+    await AuditLog.create({
+      action: "REPLY_INQUIRY",
+      performedBy: employeeId,
+      details: `Replied to inquiry from ${inquiry.userEmail}`,
+    });
 
 
 
@@ -110,31 +110,23 @@ export const replyToInquiry = async (req, res) => {
 ========================================================= */
 export const deleteInquiry = async (req, res) => {
   try {
-    const { id } = req.params;
+    const inquiry = await Inquiry.findByIdAndDelete(req.params.id);
+    if (!inquiry) return res.status(404).json({ success: false, message: "Inquiry not found" });
 
-    const inquiry = await Inquiry.findById(id);
-
-    if (!inquiry) {
-      return res.json({
-        success: false,
-        message: "Inquiry not found",
-      });
-    }
-
-    await Inquiry.findByIdAndDelete(id);
-
-    res.json({
-      success: true,
-      message: "Inquiry deleted successfully",
+    // Create audit log
+    await AuditLog.create({
+      action: "DELETE_INQUIRY",
+      performedBy: req.user.id, // assuming your auth middleware sets req.user
+      targetInquiryId: inquiry._id,
+      details: `Inquiry from "${inquiry.userName}" was deleted`,
     });
 
-  } catch (error) {
-    res.json({
-      success: false,
-      message: error.message,
-    });
+    res.json({ success: true, message: "Inquiry deleted" });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
+
 
 
 /* =========================================================
@@ -143,6 +135,7 @@ export const deleteInquiry = async (req, res) => {
 export const addProductToInquiry = async (req, res) => {
   try {
     const { inquiryId, product } = req.body;
+    const employeeId = req.user?.id;
 
     if (!inquiryId || !product) {
       return res.json({
@@ -164,7 +157,15 @@ export const addProductToInquiry = async (req, res) => {
       image: product.image || "",
     });
 
+    inquiry.lastModifiedBy = employeeId;
     await inquiry.save();
+
+    await AuditLog.create({
+      action: "ADD_INQUIRY_PRODUCT",
+      performedBy: employeeId,
+      details: `Added product "${product.productName}" to inquiry (${inquiry.userEmail})`,
+    });
+
 
     /* ---------- EMAIL ---------- */
     const logoAttachment = {
@@ -242,6 +243,7 @@ export const addProductToInquiry = async (req, res) => {
 export const removeProductFromInquiry = async (req, res) => {
   try {
     const { inquiryId, itemId } = req.body;
+    const employeeId = req.user?.id;
 
     if (!inquiryId || !itemId) {
       return res.json({ success: false, message: "Missing data" });
@@ -258,7 +260,15 @@ export const removeProductFromInquiry = async (req, res) => {
     }
 
     inquiry.items.pull(itemId);
+    inquiry.lastModifiedBy = employeeId;
     await inquiry.save();
+
+    await AuditLog.create({
+      action: "REMOVE_INQUIRY_PRODUCT",
+      performedBy: employeeId,
+      details: `Removed product "${removedItem.productName}" from inquiry (${inquiry.userEmail})`,
+    });
+
 
     /* ---------- EMAIL ---------- */
     const logoAttachment = {
@@ -329,6 +339,7 @@ export const removeProductFromInquiry = async (req, res) => {
 export const updateInquiryProductQuantity = async (req, res) => {
   try {
     const { inquiryId, itemId, quantity } = req.body;
+    const employeeId = req.user?.id;
     if (!inquiryId || !itemId || quantity < 1) {
       return res.json({ success: false, message: "Invalid data" });
     }
@@ -340,7 +351,15 @@ export const updateInquiryProductQuantity = async (req, res) => {
     if (!item) return res.json({ success: false, message: "Product not found" });
 
     item.quantity = quantity;
+    inquiry.lastModifiedBy = employeeId;
     await inquiry.save();
+
+    await AuditLog.create({
+      action: "UPDATE_INQUIRY_PRODUCT_QTY",
+      performedBy: employeeId,
+      details: `Updated quantity for "${item.productName}" to ${quantity} (Inquiry: ${inquiry.userEmail})`,
+    });
+
 
     res.json({ success: true, message: "Quantity updated" });
   } catch (error) {
