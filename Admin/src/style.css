@@ -1194,6 +1194,9 @@ textarea {
 }
 
 
+
+/* Edit Product Page */
+
 .edit-product-page input {
     display: block;
     margin: 10px 0;
@@ -1201,9 +1204,8 @@ textarea {
 }
 
 
-
 .edit-product-page {
-    max-width: 900px;
+    max-width: 700px;
     margin: 30px auto;
     padding: 20px;
     background: #fff;
@@ -1235,7 +1237,7 @@ textarea {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .size-row {
@@ -1308,7 +1310,7 @@ textarea {
 
 /* ===== Container ===== */
 .audit-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -1373,7 +1375,7 @@ textarea {
 
 .audit-table th,
 .audit-table td {
-  padding: 10px 12px;
+  padding: 8px 12px;
   border: 1px solid #ddd;
   text-align: left;
   vertical-align: middle;
