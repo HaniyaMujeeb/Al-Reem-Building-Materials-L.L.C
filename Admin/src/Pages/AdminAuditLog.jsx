@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { backendURL } from "../App";
 
 const AdminAuditLogs = ({ role }) => {
   const [logs, setLogs] = useState([]);
@@ -26,11 +27,12 @@ const AdminAuditLogs = ({ role }) => {
     const fetchLogs = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:4000/api/admin/employees/logs",
+          `${backendURL}/api/admin/employees/logs`,
           {
             headers: { token },
           }
         );
+
         console.log("API response:", res.data);
 
         if (res.data.success) setLogs(res.data.data);
@@ -40,6 +42,7 @@ const AdminAuditLogs = ({ role }) => {
         setLoading(false);
       }
     };
+
 
     fetchLogs();
   }, [role]);
