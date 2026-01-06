@@ -426,7 +426,7 @@ html {
     font-size: 33px;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
-    margin-left: -290px;
+    margin-left: -160px;
     /* move left */
     text-align: left;
 }
@@ -553,7 +553,7 @@ html {
     /* main heading size */
     font-family: 'Raleway', sans-serif;
     letter-spacing: 1.1px;
-    margin-left: -160px;
+    margin-left: -10px;
     margin-bottom: 5px;
     /* move left */
     text-align: left;
@@ -772,7 +772,7 @@ html {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 20px;
-    margin-left: 100px;
+    margin-left: 80px;
     color: #000;
 }
 
