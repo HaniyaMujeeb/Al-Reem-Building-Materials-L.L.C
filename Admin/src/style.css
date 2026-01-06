@@ -1223,7 +1223,7 @@ textarea {
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .form-group label {
