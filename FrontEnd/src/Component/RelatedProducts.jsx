@@ -34,7 +34,7 @@ const RelatedProducts = ({ category, subCategory }) => {
     return (
         <div className='related-products-container'>
             <div className='"related-title'>
-                <Title text1={'RELATED'} text2={'PRODUCTS'} />
+                <Title text1={'RELATED'} text2={'PRODUCTS :'} />
             </div>
 
             <div className='related-products-grid'>

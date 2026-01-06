@@ -422,7 +422,7 @@ html {
     text-align: center;
 }
 
-.latestcollectiontitle-container .latest-title-text {
+.latestcollectiontitle-container .text-latest-title-text {
     font-size: 33px;
     font-family: 'Raleway', sans-serif;
     letter-spacing: 2px;
@@ -432,7 +432,7 @@ html {
 }
 
 /* Make highlight same as parent */
-.latestcollectiontitle-container .latest-title-text .highlight {
+.latestcollectiontitle-container .text-latest-title-text .highlight {
     font-size: 33px;
     /* same as parent */
     font-family: 'Raleway', sans-serif;
@@ -548,7 +548,7 @@ html {
 
 
 /* Text Section */
-.text-section .latest-title-text {
+.text-section .text-latest-title-text {
     font-size: 30px;
     /* main heading size */
     font-family: 'Raleway', sans-serif;
@@ -560,7 +560,7 @@ html {
 }
 
 /* Make highlight same as parent */
-.text-section .latest-title-text .highlight {
+.text-section .text-latest-title-text .highlight {
     font-size: 30px;
     /* same as parent */
     font-family: 'Raleway', sans-serif;
@@ -1068,7 +1068,7 @@ html {
 }
 
 /* Sort title */
-.sort-title-container .latest-title-text {
+.sort-title-container .text-latest-title-text {
     font-family: Raleway;
     font-size: 23px;
     /* reduced */
@@ -1624,7 +1624,7 @@ html {
 /* Product Content */
 .product-content {
     display: flex;
-    gap: 50px;
+    gap: 20px;
     flex-wrap: wrap;
     align-items: start;
     flex-wrap: nowrap;
@@ -1635,8 +1635,9 @@ html {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    width: 100%;
-    height: 650px;
+    width: 90%;
+    height: 600px;
+    margin-right: 20px;
 }
 
 .thumbnail-container {
@@ -1653,6 +1654,7 @@ html {
     padding: 4px;
     margin-top: 150px;
     border-radius: 5px;
+    margin-right: 20px;
 }
 
 .thumbnail:hover {
@@ -1665,8 +1667,8 @@ html {
 }
 
 .main-image {
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    height: 50%;
     border: 1px solid #eeeeee;
     border-radius: 10px;
 }
@@ -1682,7 +1684,7 @@ html {
 }
 
 .product-title {
-    font-size: 29px;
+    font-size: 25px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -1694,17 +1696,17 @@ html {
 }
 
 .rating-icon {
-    width: 20px;
+    width: 15px;
 }
 
 .review-count {
-    font-size: 14px;
+    font-size: 12px;
     color: gray;
 }
 
 /* Price and Description */
 .product-price {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: bold;
     margin-top: 10px;
     color: black;
@@ -1715,7 +1717,7 @@ html {
     color: black;
     line-height: 1.5;
     font-family: Trebuchet MS, sans-serif;
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 520;
     letter-spacing: 1px;
 }
@@ -1731,7 +1733,7 @@ html {
 }
 
 .size-button {
-    padding: 10px 15px;
+    padding: 5px 10px;
     border: 1px solid #ddd;
     background-color: #f5f5f5;
     cursor: pointer;
@@ -1764,7 +1766,7 @@ html {
 .inquire-button {
     background-color: black;
     color: white;
-    padding: 19px 32px;
+    padding: 17px 30px;
     margin-top: 25px;
     margin-left: 310px;
     font-size: 14.5px;
@@ -1787,7 +1789,7 @@ html {
 }
 
 .productinfo-text {
-    font-size: 14px;
+    font-size: 12px;
     color: #4a4a4a;
     margin-top: 20px;
     display: flex;
@@ -1815,7 +1817,7 @@ html {
 
 .tabs button {
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 12px;
     border: none;
     background: none;
     cursor: pointer;
@@ -1835,24 +1837,29 @@ html {
     border-radius: 8px;
     margin-top: 16px;
     line-height: 28px;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 
 
 .reviews-container {
-    padding: 20px;
+    padding: 15px;
 
+}
+
+.reviews-container h2 {
+    font-size: 14px;
 }
 
 .review {
     border-bottom: 1px solid #eee;
     padding: 10px 0;
+    font-size: 12px;
 }
 
 .star-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-right: 2px;
 }
 
@@ -1865,12 +1872,18 @@ html {
     margin: 96px 0;
 }
 
-.related-title {
-    text-align: center;
-    font-size: 24px;
-    padding: 8px 0;
-    text-decoration: none;
+.related-title .text-latest-title-text {
+    font-family: Raleway;
+    letter-spacing: 1px;
+    /* reduced */
+    margin-top: 100px;
+    /* reduced */
+    margin-left: -710px;
+}
 
+.related-title .text-highlight {
+    /* same as parent */
+    font-family: Raleway;
 }
 
 .title-container {
@@ -1878,11 +1891,13 @@ html {
     gap: 8px;
     align-items: center;
     position: relative;
-    font-size: 32px;
+    font-size: 25px;
+    font-family: Raleway;
     top: -10px;
     left: 700px;
     z-index: -10;
     border-top: none !important;
+    margin-bottom: 10px;
 }
 
 
@@ -1910,7 +1925,7 @@ html {
 }
 
 .related-product-item img {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     border-radius: 6px;
 }
@@ -1922,7 +1937,7 @@ html {
 }
 
 .related-product-item p {
-    font-size: 20px;
+    font-size: 16px;
     color: black;
 }
 
@@ -2606,6 +2621,7 @@ hr {
     align-items: center;
     width: 100%;
     max-width: 26rem; /* slightly wider */
+    max-height: 25rem;
     background: rgba(255, 255, 255, 0.95); /* a touch more opacity */
     border-radius: 25px;
     padding: 100px; /* slightly reduced padding */
@@ -2655,6 +2671,7 @@ hr {
     transition: border-color 0.3s ease-in-out;
     margin: 0;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .password-input-container {
