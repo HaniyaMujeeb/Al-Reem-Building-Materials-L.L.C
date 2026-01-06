@@ -1679,7 +1679,7 @@ html {
     text-align: left;
     max-width: 100%;
     line-height: 35px;
-    margin-left: -820px;
+    margin-left: -780px;
     margin-top: 130px;
 }
 
@@ -1877,8 +1877,6 @@ html {
     letter-spacing: 1px;
     /* reduced */
     margin-top: 100px;
-    /* reduced */
-    margin-left: -710px;
 }
 
 .related-title .text-highlight {
@@ -1894,7 +1892,7 @@ html {
     font-size: 25px;
     font-family: Raleway;
     top: -10px;
-    left: 700px;
+    left: 670px;
     z-index: -10;
     border-top: none !important;
     margin-bottom: 10px;
