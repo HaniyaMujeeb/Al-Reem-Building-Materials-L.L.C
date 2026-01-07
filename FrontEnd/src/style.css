@@ -1076,7 +1076,7 @@ html {
     /* reduced */
     margin-top: 100px;
     /* reduced */
-    margin-left: -710px;
+    margin-left: -580px;
 }
 
 .sort-title-container .highlight {
@@ -2784,6 +2784,7 @@ hr {
 }
 
 
+
 /* About Us CSS */
 .about-page {
     width: 100%;
@@ -2796,15 +2797,24 @@ hr {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-align: left;
+} 
+
+
+
+/* Sort title */
+.about-header .text-latest-title-text {
+    font-family: Raleway;
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-left: 20px;
+
 }
 
-.about-header-line {
-    width: 60px;
-    height: 5px;
-    background-color: #333;
-    margin-left: 925px;
-    margin-top: -65px;
+.about-header .highlight {
+    font-size: 28px;
+    /* same as parent */
+    font-family: Raleway;
 }
 
 
@@ -2841,7 +2851,7 @@ hr {
     margin-top: -50px;
     text-align: justify;
     margin-right: 50px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .about-text p {
@@ -2852,7 +2862,7 @@ hr {
 
 .mission-title {
     color: black;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bolder;
     margin-left: -180px;
     margin-top: -200px;

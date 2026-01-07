@@ -7,8 +7,7 @@ const About = () => {
     <div className="about-page">
       {/* Section Title */}
       <div className="about-header">
-        <Title text1={"ABOUT"} text2={"US"} />
-        <div className="about-header-line"></div>
+        <Title text1={"ABOUT"} text2={"US :"} />
       </div>
 
       {/* Content Section */}
