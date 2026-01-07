@@ -2807,7 +2807,7 @@ hr {
     font-family: Raleway;
     font-size: 28px;
     letter-spacing: 1px;
-    margin-left: 20px;
+    margin-left: 190px;
 
 }
 
@@ -2840,7 +2840,7 @@ hr {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-top: -70px;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
 .about-text {
@@ -2851,7 +2851,7 @@ hr {
     margin-top: -50px;
     text-align: justify;
     margin-right: 50px;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .about-text p {
@@ -2862,7 +2862,7 @@ hr {
 
 .mission-title {
     color: black;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: bolder;
     margin-left: -180px;
     margin-top: -200px;
@@ -2874,12 +2874,19 @@ hr {
     margin-top: 20px;
 }
 
-.why-choose-title .text {
+.why-choose-title .text-latest-title-text {
     text-align: left;
-    font-size: 26px;
-    margin-left: -700px;
+    font-size: 21px;
 
 }
+
+.why-choose-title .highlight {
+    text-align: left;
+    font-size: 22px;
+
+}
+
+
 
 
 .why-choose-features {
@@ -2891,11 +2898,11 @@ hr {
 
 .feature-box {
     border: 1px solid #ddd;
-    padding: 90px 30px;
+    padding: 50px 10px;
     flex: 1;
     text-align: center;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 
