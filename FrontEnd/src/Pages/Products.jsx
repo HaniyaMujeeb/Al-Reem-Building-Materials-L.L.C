@@ -5,7 +5,7 @@ import ProductItem from '../Component/ProductItem';
 
 const Products = () => {
   const { products = [], search, showSearch } = useContext(ShopContext);
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState({});
   const [category, setCategory] = useState([]);
@@ -95,13 +95,15 @@ const Products = () => {
 
   return (
     <div className="product-container">
+
       {/* Filter Sidebar */}
-      <div className="filter-container">
-        <p className="filter-title" onClick={() => setShowFilter(!showFilter)}>
+      <div className={`filter-container ${showFilter ? "open" : ""}`}>
+
+        <p className="filter-title">
           FILTER PRODUCTS :
         </p>
 
-        <div className={`filter-options ${showFilter ? 'show' : 'hide'}`}>
+        <div className="filter-options show">
           <p className="filter-section">CATEGORIES :</p>
           <div className="filter-list">
             {["MDF", "Plywood", "Aluminium Hardware", "Flooring", "Hardware"].map(cat => (
@@ -112,32 +114,49 @@ const Products = () => {
             ))}
           </div>
 
-          <div className={`filter-suboptions ${showFilter ? 'show' : 'hide'}`}>
-            <p className="filter-subsection">TYPE:</p>
-            <div className="filter-sublist">
-              {[
-                "MDF Sheets", "PVC Panel", "Melamine MDF Sheets", "Door Handles", "Door Accessories",
-                "Hinges", "Plywood Sheets", "Commercial Plywood", "PVC High Glossy MDF Panel",
-                "PVC Soft Touch MDF Panel", "Chevron Flooring", "Wooden Floor Tile", "Door Locks",
-                "Door Closer", "Glass Door Accessories", "Silicone & Adhesives", "Other Hardware Accessories"
-              ].map(subCat => (
-                <label key={subCat} className="filter-suboption">
-                  <input type="checkbox" value={subCat} onChange={toggleSubCategory} />
-                  {subCat}
-                </label>
-              ))}
-            </div>
+          <p className="filter-subsection">TYPE:</p>
+          <div className="filter-sublist">
+            {[
+              "MDF Sheets", "PVC Panel", "Melamine MDF Sheets", "Door Handles", "Door Accessories",
+              "Hinges", "Plywood Sheets", "Commercial Plywood", "PVC High Glossy MDF Panel",
+              "PVC Soft Touch MDF Panel", "Chevron Flooring", "Wooden Floor Tile", "Door Locks",
+              "Door Closer", "Glass Door Accessories", "Silicone & Adhesives", "Other Hardware Accessories"
+            ].map(subCat => (
+              <label key={subCat} className="filter-suboption">
+                <input type="checkbox" value={subCat} onChange={toggleSubCategory} />
+                {subCat}
+              </label>
+            ))}
           </div>
         </div>
       </div>
 
+      {/* ✅ OVERLAY — MUST BE HERE */}
+      {showFilter && (
+        <div
+          className="filter-overlay"
+          onClick={() => setShowFilter(false)}
+        />
+      )}
+
       {/* Product List */}
       <div className="content-container">
+
         <div className="sort-header-container">
+          {/* Sort Title */}
           <div className="sort-title-container">
             <Title text1="ALL" text2="PRODUCTS :" />
           </div>
-          <div className="sort-container">
+
+          {/* Row for Filter Button + Sort Dropdown */}
+          <div className="sort-buttons-row">
+            <button
+              className="mobile-filter-btn"
+              onClick={() => setShowFilter(true)}
+            >
+              ☰ Filter
+            </button>
+
             <select onChange={e => setSortType(e.target.value)} className="sort-dropdown">
               <option value="relevant">Sort by: Relevant</option>
               <option value="low-high">Sort by: Low to High</option>
@@ -146,48 +165,27 @@ const Products = () => {
           </div>
         </div>
 
+
         <div className="all-products-grid">
-          {filterProducts?.map((item) => {
-            // Determine the selected size
-            const defaultSize = item.sizes?.[0]?.size || null;
-            const selectedSize = selectedSizes[item._id] || defaultSize;
-
-            // Determine price
-            let price = 'N/A';
-            if (item.sizes?.length > 0 && selectedSize) {
-              const sizeObj = item.sizes.find((s) => s.size === selectedSize);
-              price = sizeObj?.price ?? 'N/A';
-            } else if (typeof item.price === 'number') {
-              price = item.price;
-            }
-
-            // Determine image URL
-            let imageUrl = '/placeholder.jpg'; // default
-            if (item.image && Array.isArray(item.image) && item.image.length > 0) {
-              imageUrl = item.image[0]; // first image
-            } else if (typeof item.image === 'string') {
-              imageUrl = item.image;
-            }
-
-
-
-            return (
-              <div key={item._id} className="all-products">
-                <ProductItem
-                  id={item._id}
-                  image={imageUrl}
-                  name={item.name}
-                  price={price}
-                />
-
-              </div>
-            );
-          })}
+          {filterProducts.map(item => (
+            <div key={item._id} className="all-products">
+              <ProductItem
+                id={item._id}
+                image={Array.isArray(item.image) ? item.image[0] : item.image}
+                name={item.name}
+                price={
+                  item.sizes?.length
+                    ? item.sizes[0].price
+                    : item.price
+                }
+              />
+            </div>
+          ))}
         </div>
 
-        
       </div>
     </div>
+
   );
 };
 

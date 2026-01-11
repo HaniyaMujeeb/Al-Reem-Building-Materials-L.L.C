@@ -1025,6 +1025,7 @@ html {
     gap: 10px;
     /* reduced */
     font-weight: 300;
+    font-family: Raleway;
     color: black;
     margin-left: -9px;
 }
@@ -1213,7 +1214,7 @@ html {
 
 
 
-
+/* till here */
 
 /* Inquiry Page */
 .inquiry-page {
