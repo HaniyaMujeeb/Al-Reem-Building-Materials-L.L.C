@@ -1240,6 +1240,17 @@ textarea {
     font-size: 13px;
 }
 
+.description-textarea {
+    width: 80%;
+    min-height: 50px;   /* default height */
+    resize: none;        /* prevents drag resizing */
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+
 .size-row {
     display: flex;
     gap: 10px;

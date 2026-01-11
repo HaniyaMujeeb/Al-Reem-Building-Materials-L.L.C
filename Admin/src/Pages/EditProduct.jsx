@@ -14,6 +14,8 @@ const EditProduct = ({ token }) => {
     const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [sizes, setSizes] = useState([])
+    const [description, setDescription] = useState("")
+
 
     // 🔹 Fetch product by ID
     useEffect(() => {
@@ -28,6 +30,7 @@ const EditProduct = ({ token }) => {
                     const p = res.data.product
                     setName(p.name)
                     setCategory(p.category)
+                    setDescription(p.description || "")
                     setPrice(p.price || "")
                     setSizes(p.sizes || [])
                 } else {
@@ -52,6 +55,7 @@ const EditProduct = ({ token }) => {
             const payload = {
                 name,
                 category,
+                description,
                 price,
                 sizes
             }
@@ -98,6 +102,20 @@ const EditProduct = ({ token }) => {
                     placeholder="Enter category"
                 />
             </div>
+
+
+            <div className="form-group">
+                <label>Description:</label>
+                <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Enter product description"
+                    rows={4}   // 👈 increase height
+                    className="description-textarea"
+                />
+
+            </div>
+
 
             {sizes.length > 0 ? (
                 sizes.map((s, i) => (
