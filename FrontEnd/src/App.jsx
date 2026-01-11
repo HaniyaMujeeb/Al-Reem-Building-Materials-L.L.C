@@ -19,6 +19,7 @@ import OrderConfirmation from './Pages/OrderConfirmation';
 import Inquiry from './Pages/Inquiry';
 import Profile from './Pages/Profile';
 import MyInquiries from './Pages/MyInquiry';
+import MobileBackButton from './Component/MobileBackButton';
 
 export const backendURL = import.meta.env.VITE_BACKEND_URL;
 

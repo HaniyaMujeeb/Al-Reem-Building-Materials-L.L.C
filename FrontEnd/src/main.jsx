@@ -4,6 +4,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import App from "./App.jsx";
 import ShopContextProvider from "./Context/ShopContext.jsx";
 import InquiryProvider from "./Context/InquiryContext.jsx";
+import MobileBackButton from "./Component/MobileBackButton.jsx";
 import "./style.css";
 import "./mobile.css";
 
@@ -25,7 +26,7 @@ const RouteChangeHandler = () => {
 
   useEffect(() => {
     setLoading(true); // Show loader when route changes
-    const timer = setTimeout(() => setLoading(false), 100); 
+    const timer = setTimeout(() => setLoading(false), 100);
     return () => clearTimeout(timer); // Cleanup
   }, [location.pathname]); // Trigger on pathname change
 
@@ -38,8 +39,9 @@ const RootComponent = () => {
     <BrowserRouter>
       <ShopContextProvider>
         <InquiryProvider>
+          <MobileBackButton />
           <RouteChangeHandler />
-        <App />
+          <App />
         </InquiryProvider>
       </ShopContextProvider>
     </BrowserRouter>

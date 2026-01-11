@@ -1090,9 +1090,13 @@ html {
 .sort-container {
     display: flex;
     align-items: flex-start;
-    margin-top: 150px;
-    /* reduced */
 }
+
+/* Mobile Filter Button */
+.mobile-filter-btn {
+  display: none; /* hidden on desktop */
+}
+
 
 /* Dropdown styles */
 .sort-dropdown {
@@ -1104,7 +1108,7 @@ html {
     padding: 10px 14px;
     /* reduced */
     font-size: 16px;
-    /* reduced */
+    margin-top: 130px;
     letter-spacing: 0.8px;
     /* reduced */
     font-family: Raleway, sans-serif;
@@ -3314,4 +3318,7 @@ hr {
 
 
 
-
+/* 📱 Mobile Back Button */
+.mobile-back-btn {
+  display: none;
+}
