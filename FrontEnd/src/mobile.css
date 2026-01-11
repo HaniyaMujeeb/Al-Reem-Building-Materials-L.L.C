@@ -720,7 +720,7 @@
   /* Images section */
   .product-images {
     flex-direction: column;
-    width: 60%;
+    width: 70%;
     height: auto;
     margin-top: 180px;
     gap: 10px;
@@ -738,7 +738,7 @@
   }
 
   .thumbnail {
-    width: 60px;
+    width: 150px;
     margin-top: 0;
     margin-right: 0;
   }
@@ -788,6 +788,7 @@
   .size-button {
     font-size: 12px;
     padding: 6px 10px;
+    color: black;
   }
 
   /* Inquiry button */
@@ -846,6 +847,64 @@
     height: 14px;
   }
 }
+
+
+
+/* ============================= */
+/* 📱 RELATED PRODUCTS – MOBILE */
+/* ============================= */
+@media (max-width: 768px) {
+
+  .related-products-container {
+    margin: 40px 0;
+    padding: 0 12px;
+  }
+
+  /* Center the title */
+  .title-container {
+    position: static;
+    left: 0;
+    top: 0;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    z-index: 1;
+  }
+
+  .related-title .text-latest-title-text {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Responsive grid */
+  .related-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    row-gap: 16px;
+  }
+
+  /* Product card */
+  .related-product-item {
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  .related-product-item img {
+    max-width: 100%;
+  }
+
+  .related-product-item h3 {
+    font-size: 14px;
+    margin: 6px 0;
+  }
+
+  .related-product-item p,
+  .related-product-item .price {
+    font-size: 14px;
+  }
+}
+
 
 
 
