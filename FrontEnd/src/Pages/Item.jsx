@@ -99,7 +99,7 @@ const Item = () => {
 
           {productData.sizes?.length > 0 && (
             <div className="size-container">
-              <p>Select Size</p>
+              <p>Select Size :</p>
               <div className="size-options">
                 {productData.sizes.map((item, index) => {
                   const sizeValue = item.size;
