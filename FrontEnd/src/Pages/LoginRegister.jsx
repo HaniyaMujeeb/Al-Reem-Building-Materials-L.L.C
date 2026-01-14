@@ -127,7 +127,6 @@ const LoginRegister = () => {
             src={showPassword ? assets.show_password_icon : assets.hide_passsword_icon}
             alt="Toggle Password"
             onClick={() => setShowPassword((prev) => !prev)}
-            style={{ position: "absolute", right: "-100px", top: "50%", transform: "translateY(-50%)", width: "22px", height: "22px", cursor: "pointer" }}
           />
         </div>
 

@@ -15,6 +15,8 @@ const EditProduct = ({ token }) => {
     const [price, setPrice] = useState("")
     const [sizes, setSizes] = useState([])
     const [description, setDescription] = useState("")
+    const [productCode, setProductCode] = useState("");
+
 
 
     // 🔹 Fetch product by ID
@@ -29,6 +31,7 @@ const EditProduct = ({ token }) => {
                 if (res.data.success) {
                     const p = res.data.product
                     setName(p.name)
+                    setProductCode(p.productCode || "");
                     setCategory(p.category)
                     setDescription(p.description || "")
                     setPrice(p.price || "")
@@ -58,6 +61,11 @@ const EditProduct = ({ token }) => {
                 description,
                 price,
                 sizes
+            }
+
+            // ✅ add productCode only if entered
+            if (productCode.trim() !== "") {
+                payload.productCode = productCode.trim()
             }
 
             const res = await axios.put(
@@ -93,6 +101,17 @@ const EditProduct = ({ token }) => {
                     placeholder="Enter product name"
                 />
             </div>
+
+
+            <div className="form-group">
+                <label>Product Code:</label>
+                <input
+                    value={productCode}
+                    onChange={(e) => setProductCode(e.target.value.toUpperCase())}
+                    placeholder="Enter product code (optional)"
+                />
+            </div>
+
 
             <div className="form-group">
                 <label>Category:</label>

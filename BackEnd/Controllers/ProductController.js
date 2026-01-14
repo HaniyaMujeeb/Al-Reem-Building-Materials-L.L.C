@@ -5,7 +5,26 @@ import productModel from "../Models/ProductModel.js";
 const addProduct = async (req, res) => {
 
     try {
-        const { name, description, price, category, subCategory, sizes, bestseller } = req.body;
+        const { name, description, price, category, subCategory, sizes, bestseller, productCode } = req.body;
+
+        // ✅ Enforce productCode ONLY when adding
+        if (!productCode || productCode.trim() === "") {
+            return res.json({
+                success: false,
+                message: "Product code is required"
+            });
+        }
+
+        // ✅ Check if product code already exists
+        const existingCode = await productModel.findOne({ productCode });
+        if (existingCode) {
+            return res.json({
+                success: false,
+                message: "Product code already exists"
+            });
+        }
+
+
         let parsedSizes = [];
         let finalPrice = null;
 
@@ -20,7 +39,7 @@ const addProduct = async (req, res) => {
             }
         }
         if (parsedSizes.length > 0) {
-            finalPrice = null; 
+            finalPrice = null;
         } else {
             finalPrice = Number(price);
         }
@@ -39,9 +58,10 @@ const addProduct = async (req, res) => {
         // ✅ Prepare product data
         const productData = {
             name,
+            productCode: productCode.toUpperCase().trim(),
             description,
             category,
-            price: finalPrice, 
+            price: finalPrice,
             subCategory,
             bestseller: bestseller === "true",
             sizes: parsedSizes,
@@ -85,40 +105,40 @@ const removeProduct = async (req, res) => {
 
 // 📌 Get Single Product Details
 const singleProduct = async (req, res) => {
-  try {
-    const productId = req.query.productId; // 👈 FIX HERE
+    try {
+        const productId = req.query.productId; // 👈 FIX HERE
 
-    if (!productId) {
-      return res.json({ success: false, message: "Product ID missing" });
+        if (!productId) {
+            return res.json({ success: false, message: "Product ID missing" });
+        }
+
+        const product = await productModel.findById(productId);
+
+        if (!product) {
+            return res.json({ success: false, message: "Product not found" });
+        }
+
+        res.json({ success: true, product });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: error.message });
     }
-
-    const product = await productModel.findById(productId);
-
-    if (!product) {
-      return res.json({ success: false, message: "Product not found" });
-    }
-
-    res.json({ success: true, product });
-  } catch (error) {
-    console.error(error);
-    res.json({ success: false, message: error.message });
-  }
 };
 
 
 
 // Update Product Details
 const updateProduct = async (req, res) => {
-  try {
-    const updated = await productModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json({ success: true, product: updated });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
+    try {
+        const updated = await productModel.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        res.json({ success: true, product: updated });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
+    }
 };
 
 

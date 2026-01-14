@@ -5,7 +5,7 @@ const MobileBackButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (location.pathname === "/") return null;
+  if (location.pathname === "/" || location.pathname === "/login-register") return null;
 
   return (
     <button className="mobile-back-btn" onClick={() => navigate(-1)}>

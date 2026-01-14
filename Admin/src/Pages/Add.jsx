@@ -18,6 +18,7 @@ const Add = ({ token }) => {
     const [category, setCategory] = useState("MDF");
     const [subCategory, setSubCategory] = useState("MDF Sheets");
     const [sizes, setSizes] = useState([]);
+    const [productCode, setProductCode] = useState('');
 
     const [bestseller, setBestseller] = useState(false);
 
@@ -30,6 +31,7 @@ const Add = ({ token }) => {
             const formData = new FormData()
 
             formData.append("name", name)
+            formData.append("productCode", productCode);
             formData.append("description", description)
             formData.append("price", price)
             formData.append("category", category)
@@ -47,6 +49,7 @@ const Add = ({ token }) => {
             if (response.data.message) {
                 toast.success(response.data.message)
                 setName('')
+                setProductCode('');
                 setDescription('')
                 setImage1(false)
                 setImage2(false)
@@ -104,6 +107,20 @@ const Add = ({ token }) => {
                 <input onChange={(e) => setName(e.target.value)} value={name} className='product-name-input' type='text' placeholder='Enter Product Name' required />
             </div>
 
+            {/* Product Code */}
+            <div className='input-group'>
+                <p className='input-label'>Product Code:</p>
+                <input
+                    onChange={(e) => setProductCode(e.target.value)}
+                    value={productCode}
+                    className='product-code-input'
+                    type='text'
+                    placeholder='e.g. MDF-SHT-001'
+                    required
+                />
+            </div>
+
+
             {/* Product Description */}
             <div className='input-group'>
                 <p className='input-label'>Product Description:</p>
@@ -158,7 +175,7 @@ const Add = ({ token }) => {
             </div>
 
             {/* Product Sizes */}
-            
+
             <div className="size-container">
                 <p className="input-label"> Product Sizes & Prices: </p>
                 <div className="size-options">

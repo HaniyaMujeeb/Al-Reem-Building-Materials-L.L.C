@@ -52,11 +52,13 @@ const List = ({ token }) => {
         fetchList()
     }, [])
 
-    // Filtered products based on search
+
     const filteredList = list.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.category.toLowerCase().includes(search.toLowerCase())
+        item.category.toLowerCase().includes(search.toLowerCase()) ||
+        (item.productCode && item.productCode.toLowerCase().includes(search.toLowerCase()))
     )
+
 
     return (
         <>
@@ -65,7 +67,7 @@ const List = ({ token }) => {
             {/* Search Bar */}
             <input
                 type="text"
-                placeholder="Search by name or category..."
+                placeholder="Search by name, category or code..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
@@ -83,6 +85,7 @@ const List = ({ token }) => {
                 <div className='product-list-header'>
                     <b>Image</b>
                     <b>Name</b>
+                    <b>Code</b>
                     <b>Category</b>
                     <b>Sizes & Prices</b>
                     <b>Action</b>
@@ -101,6 +104,13 @@ const List = ({ token }) => {
                         />
 
                         <p>{item.name}</p>
+
+
+                        <p>
+                            {item.productCode ? item.productCode : "—"}
+                        </p>
+
+
                         <p>{item.category}</p>
 
                         {/* Sizes & Prices */}
