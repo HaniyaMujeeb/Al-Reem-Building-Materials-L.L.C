@@ -103,25 +103,22 @@ const Inquiries = ({ token }) => {
     };
 
     const sendReply = async (inquiryId, senderName) => {
-        if (!senderName) return toast.error("Employee name missing");
-        if (!replyMessage.trim()) return toast.error("Reply cannot be empty");
+        if (!senderName || senderName.trim() === "") {
+            return toast.error("Please select an employee");
+        }
+
+        if (!replyMessage.trim()) {
+            return toast.error("Reply cannot be empty");
+        }
 
         setLoading(true);
         try {
-            const footer = `
-<br><br>---
-<br>If you would like to purchase this product, please contact us on WhatsApp - +971556478562,
-<br>call us on this number - 072288872, or reply back to this email to confirm your order.
-<br>If you would like to pay by card, please visit our store.
-<br>If you prefer Cash on Delivery, please send us your address along with the reply and confirm your payment method.
-`;
-            const fullMessage = replyMessage + footer;
-
+            
             const url = isAdmin
                 ? `${backendURL}/api/admin/inquiries/reply`
                 : `${backendURL}/api/employee/inquiries/reply`;
 
-            const res = await axios.post(url, { inquiryId, replyMessage: fullMessage, repliedBy: senderName }, { headers: { token } });
+            const res = await axios.post(url, { inquiryId, replyMessage, repliedBy: senderName }, { headers: { token } });
 
             if (res.data.success) {
                 toast.success("Reply sent");

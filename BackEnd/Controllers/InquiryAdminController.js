@@ -19,15 +19,13 @@ export const replyToInquiry = async (req, res) => {
     if (!inquiry)
       return res.status(404).json({ success: false, message: "Inquiry not found" });
 
-    // Make sure inquiry.userId exists
     if (!inquiry.userId) {
       return res.status(400).json({ success: false, message: "Inquiry missing userId" });
     }
 
-
-    // Save reply
+    // --- SAVE CLEAN REPLY IN DB ---
     inquiry.adminReply = {
-      message: replyMessage,
+      message: replyMessage, // no footer here
       repliedAt: new Date(),
       repliedBy: req.user.name,
     };
@@ -42,19 +40,16 @@ export const replyToInquiry = async (req, res) => {
       details: `Replied to inquiry from ${inquiry.userEmail}`,
     });
 
+    // --- Prepare email footer ---
+    const emailFooter = `
+<br><br>---
+<br>If you would like to purchase this product, please contact us on WhatsApp - +971556478562,
+<br>call us on this number - 072288872, or reply back to this email to confirm your order.
+<br>If you would like to pay by card, please visit our store.
+<br>If you prefer Cash on Delivery, please send us your address along with the reply and confirm your payment method.
+`;
 
-
-    // Logo attachment
-    const logoAttachment = {
-      filename: "logo.png",
-      content: Buffer.from(
-        baseImage64.replace(/^data:image\/\w+;base64,/, ""),
-        "base64"
-      ),
-      cid: "companylogo",
-    };
-
-    // Email HTML
+    // --- Email HTML (replyMessage + footer) ---
     const replyHTML = `
       <div style="font-family:Arial; max-width:700px; margin:auto; padding:20px; border:1px solid #ddd;">
         <div style="text-align:center;">
@@ -64,7 +59,7 @@ export const replyToInquiry = async (req, res) => {
 
         <p>Dear <strong>${inquiry.userName}</strong>,</p>
 
-        <p>${replyMessage}</p>
+        <p>${replyMessage}${emailFooter}</p>
 
         <p style="margin-top:10px;">
           <strong>${repliedBy}</strong> 
@@ -82,13 +77,19 @@ export const replyToInquiry = async (req, res) => {
       </div>
     `;
 
-    // Send email to customer
+    // --- Send email to customer ---
     await transporter.sendMail({
       from: `"Al Reem Building Materials" <${process.env.SENDER_EMAIL}>`,
       to: inquiry.userEmail,
       subject: "Replied to Your Inquiry",
       html: replyHTML,
-      attachments: [logoAttachment],
+      attachments: [
+        {
+          filename: "logo.png",
+          content: Buffer.from(baseImage64.replace(/^data:image\/\w+;base64,/, ""), "base64"),
+          cid: "companylogo",
+        },
+      ],
     });
 
     res.json({
