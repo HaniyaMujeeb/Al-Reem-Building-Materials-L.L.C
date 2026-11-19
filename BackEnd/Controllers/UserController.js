@@ -86,7 +86,7 @@ const registerUser = async (req, res) => {
 
 
 // Admin Login Route
-/*const adminLogin = async (req, res) => {
+const adminLogin = async (req, res) => {
   try {
 
     const { email, password } = req.body
@@ -102,7 +102,7 @@ const registerUser = async (req, res) => {
     console.log(error);
     res.json({ success: false, message: error.message })
   }
-} */
+}
 
 
 
@@ -221,4 +221,4 @@ const updateUserProfile = async (req, res) => {
 };
 
 
-export { loginUser, registerUser, getUserProfile, updateUserProfile }
+export { loginUser, registerUser, getUserProfile, updateUserProfile, adminLogin}
