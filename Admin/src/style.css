@@ -1897,13 +1897,11 @@ body.dark-mode .EmployeeList h2 {
 
 
 
+
 /* =========================================
    RESPONSIVE CSS — TABLETS & MOBILE PHONES
-   Add this at the VERY BOTTOM of your CSS
-   Original styling remains unchanged
-========================================= */
+   ========================================= */
 
-/* Tablets and phones */
 @media screen and (max-width: 768px) {
 
     /* Main layout */
@@ -1912,6 +1910,7 @@ body.dark-mode .EmployeeList h2 {
         padding: 10px;
         flex-direction: column;
         align-items: stretch;
+        box-sizing: border-box;
     }
 
     .main-content {
@@ -1919,6 +1918,7 @@ body.dark-mode .EmployeeList h2 {
         max-width: 100%;
         margin: 15px auto;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     /* Navbar */
@@ -1929,6 +1929,7 @@ body.dark-mode .EmployeeList h2 {
         flex-wrap: wrap;
         justify-content: center;
         gap: 12px;
+        box-sizing: border-box;
     }
 
     .navbar-logo {
@@ -1954,38 +1955,9 @@ body.dark-mode .EmployeeList h2 {
         font-size: 13px;
     }
 
-    /* Sidebar */
+    /* Hide sidebar on phones */
     .sidebar {
-        width: 100%;
-        min-height: auto;
-        margin: 0;
-        border-right: none;
-        border-bottom: 2px solid #d1d5db;
-    }
-
-    .sidebar-menu {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        padding: 12px 5px;
-        font-size: 14px;
-    }
-
-    .sidebar-link {
-        width: 100%;
-        min-width: 0;
-        padding: 10px;
-        border: 1px solid #d1d5db;
-        border-radius: 8px;
-        justify-content: flex-start;
-        gap: 8px;
-        overflow-wrap: anywhere;
-    }
-
-    .sidebar-link img {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
+        display: none !important;
     }
 
     /* Admin dashboard */
@@ -1994,6 +1966,7 @@ body.dark-mode .EmployeeList h2 {
         max-width: 100%;
         margin: 10px auto;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     .admin-home h1 {
@@ -2013,6 +1986,7 @@ body.dark-mode .EmployeeList h2 {
         width: calc(50% - 12px);
         max-width: 100%;
         padding: 20px 12px;
+        box-sizing: border-box;
     }
 
     .link-card h3 {
@@ -2028,6 +2002,7 @@ body.dark-mode .EmployeeList h2 {
         width: calc(50% - 12px);
         max-width: 100%;
         padding: 20px 12px;
+        box-sizing: border-box;
     }
 
     /* Login */
@@ -2036,6 +2011,7 @@ body.dark-mode .EmployeeList h2 {
         min-height: 100vh;
         height: auto;
         padding: 15px;
+        box-sizing: border-box;
     }
 
     .form-container {
@@ -2043,6 +2019,7 @@ body.dark-mode .EmployeeList h2 {
         max-width: 450px;
         padding: 25px;
         margin: 0 auto;
+        box-sizing: border-box;
     }
 
     .form-title-text {
@@ -2303,10 +2280,23 @@ body.dark-mode .EmployeeList h2 {
         font-size: 15px !important;
         padding: 15px !important;
     }
+
+    /* Theme toggle — move upward and resize */
+    .theme-toggle-container {
+        top: 90px;
+    }
+
+    .theme-toggle-container button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
 }
 
 
-/* Smaller phones */
+/* =========================================
+   SMALLER PHONES — 480px AND BELOW
+   ========================================= */
+
 @media screen and (max-width: 480px) {
 
     .navbar-container {
@@ -2326,25 +2316,6 @@ body.dark-mode .EmployeeList h2 {
     .logout-button {
         padding: 9px 12px;
         font-size: 12px;
-    }
-
-    .sidebar-menu {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        padding: 10px 2px;
-        font-size: 12px;
-    }
-
-    .sidebar-link {
-        padding: 9px 7px;
-        gap: 6px;
-        font-size: 12px;
-    }
-
-    .counterbadge {
-        padding: 3px 6px;
-        font-size: 11px;
-        margin-left: 2px;
     }
 
     .main-content {
@@ -2497,7 +2468,10 @@ body.dark-mode .EmployeeList h2 {
 }
 
 
-/* Very narrow phones */
+/* =========================================
+   VERY NARROW PHONES — 360px AND BELOW
+   ========================================= */
+
 @media screen and (max-width: 360px) {
 
     .navbar-logo {
@@ -2511,16 +2485,6 @@ body.dark-mode .EmployeeList h2 {
     .home-button,
     .logout-button {
         padding: 8px 10px;
-        font-size: 11px;
-    }
-
-    .sidebar-menu {
-        gap: 6px;
-        font-size: 11px;
-    }
-
-    .sidebar-link {
-        padding: 7px 5px;
         font-size: 11px;
     }
 
@@ -2557,27 +2521,49 @@ body.dark-mode .EmployeeList h2 {
     }
 }
 
-/* HIDE SIDEBAR ON PHONES ONLY */
+
+/* =========================================
+   FIXED MOBILE SCREEN
+   Stop the overall page from moving
+   Keep scrolling inside content if necessary
+   ========================================= */
+
 @media screen and (max-width: 768px) {
-    .sidebar {
-        display: none !important;
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+    }
+
+    #root {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .navbar-container {
+        flex-shrink: 0;
+    }
+
+    .app-content {
+        width: 100% !important;
+        height: calc(100dvh - 100px);
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 10px !important;
+        justify-content: center !important;
     }
 
     .main-content {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 20px auto !important;
-    }
-
-    .app-content {
-        width: 100% !important;
-        padding: 20px !important;
-        justify-content: center !important;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .theme-toggle-container {
-        top: 110px;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        margin: 10px auto !important;
     }
 }
