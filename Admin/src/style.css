@@ -2283,7 +2283,7 @@ body.dark-mode .EmployeeList h2 {
 
     /* Theme toggle — move upward and resize */
     .theme-toggle-container {
-        top: 110px;
+        top: 100px;
     }
 
     .theme-toggle-container button {
