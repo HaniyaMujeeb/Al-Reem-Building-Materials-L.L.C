@@ -2556,3 +2556,22 @@ body.dark-mode .EmployeeList h2 {
         font-size: 13px;
     }
 }
+
+/* HIDE SIDEBAR ON PHONES ONLY */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none !important;
+    }
+
+    .main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px auto !important;
+    }
+
+    .app-content {
+        width: 100% !important;
+        padding: 10px !important;
+        justify-content: center !important;
+    }
+}
