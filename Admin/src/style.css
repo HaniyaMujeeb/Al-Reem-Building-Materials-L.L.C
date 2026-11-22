@@ -2566,12 +2566,18 @@ body.dark-mode .EmployeeList h2 {
     .main-content {
         width: 100% !important;
         max-width: 100% !important;
-        margin: 10px auto !important;
+        margin: 20px auto !important;
     }
 
     .app-content {
         width: 100% !important;
-        padding: 10px !important;
+        padding: 20px !important;
         justify-content: center !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .theme-toggle-container {
+        top: 110px;
     }
 }
