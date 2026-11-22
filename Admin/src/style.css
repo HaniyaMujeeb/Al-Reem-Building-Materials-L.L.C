@@ -1964,7 +1964,7 @@ body.dark-mode .EmployeeList h2 {
     .admin-home {
         width: 100%;
         max-width: 100%;
-        margin: 10px auto;
+        margin: 30px auto;
         padding: 10px;
         box-sizing: border-box;
     }
@@ -2274,7 +2274,7 @@ body.dark-mode .EmployeeList h2 {
 
     /* Toast messages */
     .custom-toast {
-        width: calc(100% - 30px) !important;
+        width: calc(90% - 30px) !important;
         max-width: 400px;
         box-sizing: border-box;
         font-size: 15px !important;
@@ -2283,7 +2283,7 @@ body.dark-mode .EmployeeList h2 {
 
     /* Theme toggle — move upward and resize */
     .theme-toggle-container {
-        top: 90px;
+        top: 110px;
     }
 
     .theme-toggle-container button {
@@ -2592,7 +2592,6 @@ body.dark-mode .EmployeeList h2 {
         left: 0;
         width: 100%;
         height: 115px;
-        background-color: #D0D8C5;
         z-index: -1;
         pointer-events: none;
     }
