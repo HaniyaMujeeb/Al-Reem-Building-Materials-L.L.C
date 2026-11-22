@@ -1737,7 +1737,7 @@ body.dark-mode .theme-toggle-container button {
 
 /* Dark Mode for body */
 body.dark-mode {
-  background-color: black;
+  background-color: #202722;
   color: #f5f5f5;
 }
 
